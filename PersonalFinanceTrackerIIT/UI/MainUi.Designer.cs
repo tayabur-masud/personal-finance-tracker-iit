@@ -36,6 +36,7 @@
             budgetToolStripMenuItem = new ToolStripMenuItem();
             reportsToolStripMenuItem = new ToolStripMenuItem();
             label1 = new Label();
+            categoryAddUpdateDeleteToolStripMenuItem = new ToolStripMenuItem();
             mainMenuStrip.SuspendLayout();
             SuspendLayout();
             // 
@@ -45,7 +46,8 @@
             mainMenuStrip.Items.AddRange(new ToolStripItem[] { transactionToolStripMenuItem, categoryToolStripMenuItem, budgetToolStripMenuItem, reportsToolStripMenuItem });
             mainMenuStrip.Location = new Point(0, 0);
             mainMenuStrip.Name = "mainMenuStrip";
-            mainMenuStrip.Size = new Size(800, 33);
+            mainMenuStrip.Padding = new Padding(5, 2, 0, 2);
+            mainMenuStrip.Size = new Size(640, 28);
             mainMenuStrip.TabIndex = 1;
             mainMenuStrip.Text = "menuStrip1";
             // 
@@ -53,60 +55,70 @@
             // 
             transactionToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { incomeToolStripMenuItem, expenseToolStripMenuItem });
             transactionToolStripMenuItem.Name = "transactionToolStripMenuItem";
-            transactionToolStripMenuItem.Size = new Size(116, 29);
+            transactionToolStripMenuItem.Size = new Size(98, 24);
             transactionToolStripMenuItem.Text = "Transaction";
             // 
             // incomeToolStripMenuItem
             // 
             incomeToolStripMenuItem.Name = "incomeToolStripMenuItem";
-            incomeToolStripMenuItem.Size = new Size(178, 34);
+            incomeToolStripMenuItem.Size = new Size(146, 26);
             incomeToolStripMenuItem.Text = "Income";
             incomeToolStripMenuItem.Click += incomeToolStripMenuItem_Click;
             // 
             // expenseToolStripMenuItem
             // 
             expenseToolStripMenuItem.Name = "expenseToolStripMenuItem";
-            expenseToolStripMenuItem.Size = new Size(178, 34);
+            expenseToolStripMenuItem.Size = new Size(146, 26);
             expenseToolStripMenuItem.Text = "Expense";
             expenseToolStripMenuItem.Click += expenseToolStripMenuItem_Click;
             // 
             // categoryToolStripMenuItem
             // 
+            categoryToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { categoryAddUpdateDeleteToolStripMenuItem });
             categoryToolStripMenuItem.Name = "categoryToolStripMenuItem";
-            categoryToolStripMenuItem.Size = new Size(100, 29);
+            categoryToolStripMenuItem.Size = new Size(83, 24);
             categoryToolStripMenuItem.Text = "Category";
             // 
             // budgetToolStripMenuItem
             // 
             budgetToolStripMenuItem.Name = "budgetToolStripMenuItem";
-            budgetToolStripMenuItem.Size = new Size(85, 29);
+            budgetToolStripMenuItem.Size = new Size(71, 24);
             budgetToolStripMenuItem.Text = "Budget";
             // 
             // reportsToolStripMenuItem
             // 
             reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
-            reportsToolStripMenuItem.Size = new Size(89, 29);
+            reportsToolStripMenuItem.Size = new Size(74, 24);
             reportsToolStripMenuItem.Text = "Reports";
             // 
             // label1
             // 
             label1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             label1.AutoSize = true;
-            label1.Location = new Point(594, 341);
+            label1.Location = new Point(475, 273);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(194, 100);
+            label1.Size = new Size(160, 80);
             label1.TabIndex = 2;
             label1.Text = "Developed for\r\nAdvanced OOP Course\r\nExecutive MIT\r\nIIT, University of Dhaka";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // categoryAddUpdateDeleteToolStripMenuItem
+            // 
+            categoryAddUpdateDeleteToolStripMenuItem.Name = "categoryAddUpdateDeleteToolStripMenuItem";
+            categoryAddUpdateDeleteToolStripMenuItem.Size = new Size(225, 26);
+            categoryAddUpdateDeleteToolStripMenuItem.Text = "Add/Update/Delete";
+            categoryAddUpdateDeleteToolStripMenuItem.Click += categoryAddUpdateDeleteToolStripMenuItem_Click;
+            // 
             // MainUi
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(640, 360);
             Controls.Add(label1);
             Controls.Add(mainMenuStrip);
             MainMenuStrip = mainMenuStrip;
+            Margin = new Padding(2, 2, 2, 2);
             Name = "MainUi";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Personal Finance Tracker";
@@ -126,5 +138,6 @@
         private ToolStripMenuItem budgetToolStripMenuItem;
         private ToolStripMenuItem reportsToolStripMenuItem;
         private Label label1;
+        private ToolStripMenuItem categoryAddUpdateDeleteToolStripMenuItem;
     }
 }
