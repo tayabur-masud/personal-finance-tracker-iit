@@ -1,4 +1,5 @@
-﻿using PersonalFinanceTrackerIIT.UI.Transactions;
+﻿using PersonalFinanceTrackerIIT.UI.Categories;
+using PersonalFinanceTrackerIIT.UI.Transactions;
 
 namespace PersonalFinanceTrackerIIT.UI;
 
@@ -19,5 +20,11 @@ public partial class MainUi : Form
     {
         ExpenseUi expenseUi = new ExpenseUi();
         expenseUi.Show();
+    }
+
+    private void categoryAddUpdateDeleteToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        CategoryUi categoryUi = new CategoryUi();
+        categoryUi.Show();
     }
 }
