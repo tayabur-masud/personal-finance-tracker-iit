@@ -1,4 +1,5 @@
-﻿using PersonalFinanceTrackerIIT.Models;
+﻿using Mapster;
+using PersonalFinanceTrackerIIT.Models;
 using PersonalFinanceTrackerIIT.Persistence.Entities;
 using PersonalFinanceTrackerIIT.Persistence.Repositories;
 
@@ -15,18 +16,20 @@ public class CategoryService : ICategoryService
 
     public void AddCategory(CategoryModel model)
     {
-        var category = new Category
-        {
-            Name = model.Name,
-            Description = model.Description
-        };
+        var category = model.Adapt<Category>();
+        //var category = new Category
+        //{
+        //    Name = model.Name,
+        //    Description = model.Description
+        //};
 
         _categoryRepository.Add(category);
     }
 
     public IReadOnlyCollection<CategoryModel> GetCategories()
     {
-        _categoryRepository.GetAll();
-        throw new NotImplementedException();
+        var categories = _categoryRepository.GetAll();
+        var categoryModels = categories.Adapt<IReadOnlyCollection<CategoryModel>>();
+        return categoryModels;
     }
 }

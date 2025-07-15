@@ -21,26 +21,20 @@ internal static class Program
     [STAThread]
     static void Main()
     {
-        IConfiguration configuration = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-            .Build();
-
         var services = new ServiceCollection();
 
         // To customize application configuration such as set high DPI settings or default font,
         // see https://aka.ms/applicationconfiguration.
 
-        services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("PersonalFinanceTracker")));
+        services.AddApplicationDbContext();
 
-        services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddMappingConfigurations();
 
-        services.AddScoped<ICategoryService, CategoryService>();
+        services.AddRepositories();
 
-        services.AddScoped<MainUi>();
-        services.AddScoped<CategoryUi>();
-        services.AddScoped<IncomeUi>();
+        services.AddServices();
+
+        services.AddUiServices();
 
         var serviceProvider = services.BuildServiceProvider();
 
