@@ -1,6 +1,10 @@
-﻿namespace PersonalFinanceTrackerIIT.Services;
+﻿using PersonalFinanceTrackerIIT.Models;
+
+namespace PersonalFinanceTrackerIIT.Services;
 
 public interface ICategoryService
 {
-    void AddCategory(string name, string description);
+    void AddCategory(CategoryModel model);
+
+    IReadOnlyCollection<CategoryModel> GetCategories();
 }

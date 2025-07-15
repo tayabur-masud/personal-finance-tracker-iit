@@ -1,4 +1,5 @@
-﻿using PersonalFinanceTrackerIIT.Services;
+﻿using PersonalFinanceTrackerIIT.Models;
+using PersonalFinanceTrackerIIT.Services;
 
 namespace PersonalFinanceTrackerIIT.UI.Categories;
 public partial class CategoryUi : Form
@@ -24,9 +25,10 @@ public partial class CategoryUi : Form
 
     private void saveButton_Click(object sender, EventArgs e)
     {
-        var name = nameTextBox.Text.Trim();
-        var description = descriptionRichTextBox.Text.Trim();
+        CategoryModel category = new CategoryModel();
+        category.Name = nameTextBox.Text.Trim();
+        category.Description = descriptionRichTextBox.Text.Trim();
 
-        _categoryService.AddCategory(name, description);
+        _categoryService.AddCategory(category);
     }
 }

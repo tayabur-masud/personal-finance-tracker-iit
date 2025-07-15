@@ -16,7 +16,8 @@ public partial class MainUi : Form
 
     private void incomeToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        IncomeUi incomeUi = new IncomeUi();
+        //IncomeUi incomeUi = new IncomeUi();
+        var incomeUi = _serviceProvider.GetRequiredService<IncomeUi>();
         incomeUi.ShowDialog();
     }
 

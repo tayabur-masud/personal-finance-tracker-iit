@@ -7,6 +7,7 @@ using PersonalFinanceTrackerIIT.Persistence.Repositories;
 using PersonalFinanceTrackerIIT.Services;
 using PersonalFinanceTrackerIIT.UI;
 using PersonalFinanceTrackerIIT.UI.Categories;
+using PersonalFinanceTrackerIIT.UI.Transactions;
 
 namespace PersonalFinanceTrackerIIT;
 
@@ -39,6 +40,7 @@ internal static class Program
 
         services.AddScoped<MainUi>();
         services.AddScoped<CategoryUi>();
+        services.AddScoped<IncomeUi>();
 
         var serviceProvider = services.BuildServiceProvider();
 
