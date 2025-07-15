@@ -4,19 +4,19 @@ namespace PersonalFinanceTrackerIIT.Persistence.Repositories;
 
 public interface IRepositoryBase<T> where T : BaseEntity
 {
-    T Get(int id);
+    Task<T> Get(int id);
 
-    T GetWithIncludes(int id);
+    Task<T> GetWithIncludes(int id);
 
-    IReadOnlyCollection<T> GetList(IReadOnlyCollection<int> idList);
+    Task<IReadOnlyCollection<T>> GetList(IReadOnlyCollection<int> idList);
 
-    IReadOnlyCollection<T> GetAll();
+    Task<IReadOnlyCollection<T>> GetAll();
 
-    T Add(T entity);
+    Task<T> Add(T entity);
 
-    T Update(T entity);
+    Task<T> Update(T entity);
 
-    void Remove(int id);
+    Task Remove(int id);
 
-    void RemoveRange(IReadOnlyCollection<int> idList);
+    Task RemoveRange(IReadOnlyCollection<int> idList);
 }

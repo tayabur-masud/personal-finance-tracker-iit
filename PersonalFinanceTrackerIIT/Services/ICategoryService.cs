@@ -4,7 +4,7 @@ namespace PersonalFinanceTrackerIIT.Services;
 
 public interface ICategoryService
 {
-    void AddCategory(CategoryModel model);
+    Task AddCategory(CategoryModel model);
 
-    IReadOnlyCollection<CategoryModel> GetCategories();
+    Task<IReadOnlyCollection<CategoryModel>> GetCategories();
 }

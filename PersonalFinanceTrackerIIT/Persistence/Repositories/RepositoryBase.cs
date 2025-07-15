@@ -18,51 +18,51 @@ public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : BaseEntit
 
     protected virtual IQueryable<T> QueryWithIncludes => Query;
 
-    public T Get(int id)
+    public async Task<T> Get(int id)
     {
-        return Query.FirstOrDefault(x => x.Id == id);
+        return await Query.FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public T GetWithIncludes(int id)
+    public async Task<T> GetWithIncludes(int id)
     {
-        return QueryWithIncludes.FirstOrDefault(x => x.Id == id);
+        return await QueryWithIncludes.FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public IReadOnlyCollection<T> GetList(IReadOnlyCollection<int> idList)
+    public async Task<IReadOnlyCollection<T>> GetList(IReadOnlyCollection<int> idList)
     {
-        return Query.Where(x => idList.Contains(x.Id)).ToList();
+        return await Query.Where(x => idList.Contains(x.Id)).ToListAsync();
     }
 
-    public IReadOnlyCollection<T> GetAll()
+    public async Task<IReadOnlyCollection<T>> GetAll()
     {
-        return QueryWithIncludes.ToList();
+        return await QueryWithIncludes.ToListAsync();
     }
 
-    public T Add(T entity)
+    public async Task<T> Add(T entity)
     {
         entity.CreatedOn = DateTime.UtcNow;
-        Collections.Add(entity);
-        _context.SaveChanges();
+        await Collections.AddAsync(entity);
+        await _context.SaveChangesAsync();
         return entity;
     }
 
-    public T Update(T entity)
+    public async Task<T> Update(T entity)
     {
         entity.LastModifiedOn = DateTime.UtcNow;
         Collections.Update(entity);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
         return entity;
     }
 
-    public void Remove(int id)
+    public async Task Remove(int id)
     {
-        var entity = Get(id);
+        var entity = await Get(id);
         _context.Remove(entity);
     }
 
-    public void RemoveRange(IReadOnlyCollection<int> idList)
+    public async Task RemoveRange(IReadOnlyCollection<int> idList)
     {
-        var entities = GetList(idList);
+        var entities = await GetList(idList);
         _context.RemoveRange(entities);
     } 
 }

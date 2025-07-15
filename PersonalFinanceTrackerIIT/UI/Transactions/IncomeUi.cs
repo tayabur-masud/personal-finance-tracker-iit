@@ -14,9 +14,9 @@ namespace PersonalFinanceTrackerIIT.UI.Transactions
             _categoryService = categoryService;
         }
 
-        private void IncomeUi_Load(object sender, EventArgs e)
+        private async void IncomeUi_Load(object sender, EventArgs e)
         {
-            _categories = _categoryService.GetCategories();
+            _categories = await _categoryService.GetCategories();
             categoryComboBox.DisplayMember = nameof(CategoryModel.Name);
             categoryComboBox.ValueMember = nameof(CategoryModel.Id);
             categoryComboBox.DataSource = _categories.ToList();

@@ -14,21 +14,16 @@ public class CategoryService : ICategoryService
         _categoryRepository = categoryRepository;
     }
 
-    public void AddCategory(CategoryModel model)
+    public async Task AddCategory(CategoryModel model)
     {
         var category = model.Adapt<Category>();
-        //var category = new Category
-        //{
-        //    Name = model.Name,
-        //    Description = model.Description
-        //};
 
-        _categoryRepository.Add(category);
+        await _categoryRepository.Add(category);
     }
 
-    public IReadOnlyCollection<CategoryModel> GetCategories()
+    public async Task<IReadOnlyCollection<CategoryModel>> GetCategories()
     {
-        var categories = _categoryRepository.GetAll();
+        var categories = await _categoryRepository.GetAll();
         var categoryModels = categories.Adapt<IReadOnlyCollection<CategoryModel>>();
         return categoryModels;
     }
