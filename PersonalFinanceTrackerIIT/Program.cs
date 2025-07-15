@@ -1,13 +1,6 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceTrackerIIT.Handlers;
-using PersonalFinanceTrackerIIT.Persistence;
-using PersonalFinanceTrackerIIT.Persistence.Repositories;
-using PersonalFinanceTrackerIIT.Services;
 using PersonalFinanceTrackerIIT.UI;
-using PersonalFinanceTrackerIIT.UI.Categories;
-using PersonalFinanceTrackerIIT.UI.Transactions;
 
 namespace PersonalFinanceTrackerIIT;
 
