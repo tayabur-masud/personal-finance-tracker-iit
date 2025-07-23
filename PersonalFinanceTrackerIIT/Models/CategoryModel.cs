@@ -1,13 +1,12 @@
 ﻿namespace PersonalFinanceTrackerIIT.Models;
 
-public class CategoryModel
+public class CategoryModel : BaseModel
 {
-    public int Id { get; set; }
-
-    public DateTime CreatedOn { get; set; }
-
-    public DateTime? LastModifiedOn { get; set; }
     public string Name { get; set; }
 
     public string Description { get; set; }
+
+    public int TypeId { get; set; }
+
+    public string TypeName { get; set; }
 }

@@ -12,9 +12,15 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<Category> Categories { get; set; }
 
+    public DbSet<Budget> Budgets { get; set; }
+
+    public DbSet<Transaction> Transactions { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+        modelBuilder.ApplyConfiguration(new CategoryEntityConfiguration());
+        modelBuilder.ApplyConfiguration(new BudgetEntityConfiguration());
+        modelBuilder.ApplyConfiguration(new TransactionEntityConfiguration());
 
         base.OnModelCreating(modelBuilder);
     }

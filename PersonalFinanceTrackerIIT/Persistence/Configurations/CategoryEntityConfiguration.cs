@@ -3,7 +3,7 @@ using PersonalFinanceTrackerIIT.Persistence.Entities;
 
 namespace PersonalFinanceTrackerIIT.Persistence.Configurations;
 
-public class CategoryConfiguration : BaseEntityConfiguration<Category>
+public class CategoryEntityConfiguration : BaseEntityConfiguration<Category>
 {
     protected override string Table => "Categories";
 
@@ -17,5 +17,8 @@ public class CategoryConfiguration : BaseEntityConfiguration<Category>
 
         builder.Property(c => c.Description)
             .HasMaxLength(255);
+
+        builder.Property(c => c.Type)
+            .IsRequired();
     }
 }
