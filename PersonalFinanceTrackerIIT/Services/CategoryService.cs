@@ -27,4 +27,11 @@ public class CategoryService : ICategoryService
         var categoryModels = categories.Adapt<IReadOnlyCollection<CategoryModel>>();
         return categoryModels;
     }
+
+    public async Task<IReadOnlyCollection<CategoryModel>> GetCategoriesByType(CategoryType type)
+    {
+        var categories = await _categoryRepository.GetByType(type);
+        var categoryModels = categories.Adapt<IReadOnlyCollection<CategoryModel>>();
+        return categoryModels;
+    }
 }

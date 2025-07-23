@@ -7,8 +7,11 @@ using PersonalFinanceTrackerIIT.Persistence;
 using PersonalFinanceTrackerIIT.Persistence.Repositories;
 using PersonalFinanceTrackerIIT.Services;
 using PersonalFinanceTrackerIIT.UI;
+using PersonalFinanceTrackerIIT.UI.Budgets;
 using PersonalFinanceTrackerIIT.UI.Categories;
+using PersonalFinanceTrackerIIT.UI.Reports;
 using PersonalFinanceTrackerIIT.UI.Transactions;
+using PersonalFinanceTrackerIIT.Utilities;
 
 namespace PersonalFinanceTrackerIIT;
 
@@ -29,6 +32,8 @@ public static class ConfigureServices
         services.AddScoped<CategoryUi>();
         services.AddScoped<IncomeUi>();
         services.AddScoped<ExpenseUi>();
+        services.AddScoped<BudgetUi>();
+        services.AddScoped<MonthlyIncomeAndExpenseSummaryReportUi>();
         return services.BuildServiceProvider();
     }
 
