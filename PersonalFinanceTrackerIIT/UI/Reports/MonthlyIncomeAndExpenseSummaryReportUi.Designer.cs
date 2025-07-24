@@ -36,6 +36,11 @@ partial class MonthlyIncomeAndExpenseSummaryReportUi
         monthComboBox = new ComboBox();
         resultGroupBox = new GroupBox();
         resultListView = new ListView();
+        dateColumnHeader = new ColumnHeader();
+        categoryColumnHeader = new ColumnHeader();
+        incomeColumnHeader = new ColumnHeader();
+        expenseColumnHeader = new ColumnHeader();
+        descriptionColumnHeader = new ColumnHeader();
         filterGroupBox.SuspendLayout();
         resultGroupBox.SuspendLayout();
         SuspendLayout();
@@ -71,6 +76,7 @@ partial class MonthlyIncomeAndExpenseSummaryReportUi
         showButton.TabIndex = 4;
         showButton.Text = "Show";
         showButton.UseVisualStyleBackColor = true;
+        showButton.Click += showButton_Click;
         // 
         // categoryLabel
         // 
@@ -111,12 +117,43 @@ partial class MonthlyIncomeAndExpenseSummaryReportUi
         // 
         // resultListView
         // 
+        resultListView.Columns.AddRange(new ColumnHeader[] { dateColumnHeader, categoryColumnHeader, incomeColumnHeader, expenseColumnHeader, descriptionColumnHeader });
         resultListView.Dock = DockStyle.Fill;
+        resultListView.FullRowSelect = true;
+        resultListView.GridLines = true;
         resultListView.Location = new Point(3, 27);
         resultListView.Name = "resultListView";
         resultListView.Size = new Size(1527, 251);
         resultListView.TabIndex = 0;
         resultListView.UseCompatibleStateImageBehavior = false;
+        resultListView.View = View.Details;
+        // 
+        // dateColumnHeader
+        // 
+        dateColumnHeader.Text = "Date";
+        dateColumnHeader.Width = 200;
+        // 
+        // categoryColumnHeader
+        // 
+        categoryColumnHeader.Text = "Category";
+        categoryColumnHeader.Width = 300;
+        // 
+        // incomeColumnHeader
+        // 
+        incomeColumnHeader.Text = "Income";
+        incomeColumnHeader.TextAlign = HorizontalAlignment.Right;
+        incomeColumnHeader.Width = 200;
+        // 
+        // expenseColumnHeader
+        // 
+        expenseColumnHeader.Text = "Expense";
+        expenseColumnHeader.TextAlign = HorizontalAlignment.Right;
+        expenseColumnHeader.Width = 200;
+        // 
+        // descriptionColumnHeader
+        // 
+        descriptionColumnHeader.Text = "Description";
+        descriptionColumnHeader.Width = 600;
         // 
         // MonthlyIncomeAndExpenseSummaryReportUi
         // 
@@ -146,4 +183,9 @@ partial class MonthlyIncomeAndExpenseSummaryReportUi
     private CheckedListBox categoryCheckedListBox;
     private GroupBox resultGroupBox;
     private ListView resultListView;
+    private ColumnHeader dateColumnHeader;
+    private ColumnHeader incomeColumnHeader;
+    private ColumnHeader expenseColumnHeader;
+    private ColumnHeader categoryColumnHeader;
+    private ColumnHeader descriptionColumnHeader;
 }

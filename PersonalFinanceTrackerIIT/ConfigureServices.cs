@@ -11,7 +11,6 @@ using PersonalFinanceTrackerIIT.UI.Budgets;
 using PersonalFinanceTrackerIIT.UI.Categories;
 using PersonalFinanceTrackerIIT.UI.Reports;
 using PersonalFinanceTrackerIIT.UI.Transactions;
-using PersonalFinanceTrackerIIT.Utilities;
 
 namespace PersonalFinanceTrackerIIT;
 
@@ -40,12 +39,14 @@ public static class ConfigureServices
     public static IServiceCollection AddRepositories(this IServiceCollection services)
     {
         services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<ITransactionRepository, TransactionRepository>();
         return services;
     }
 
     public static IServiceCollection AddServices(this IServiceCollection services)
     {
         services.AddScoped<ICategoryService, CategoryService>();
+        services.AddScoped<IReportService, ReportService>();
         return services;
     }
 
