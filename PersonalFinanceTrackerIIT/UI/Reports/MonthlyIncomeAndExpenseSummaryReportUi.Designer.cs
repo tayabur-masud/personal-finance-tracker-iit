@@ -35,6 +35,7 @@ partial class MonthlyIncomeAndExpenseSummaryReportUi
         monthLabel = new Label();
         monthComboBox = new ComboBox();
         resultGroupBox = new GroupBox();
+        exportExcelButton = new Button();
         resultListView = new ListView();
         dateColumnHeader = new ColumnHeader();
         categoryColumnHeader = new ColumnHeader();
@@ -55,7 +56,7 @@ partial class MonthlyIncomeAndExpenseSummaryReportUi
         filterGroupBox.Controls.Add(monthComboBox);
         filterGroupBox.Location = new Point(12, 12);
         filterGroupBox.Name = "filterGroupBox";
-        filterGroupBox.Size = new Size(1533, 273);
+        filterGroupBox.Size = new Size(1646, 273);
         filterGroupBox.TabIndex = 0;
         filterGroupBox.TabStop = false;
         filterGroupBox.Text = "Filter";
@@ -107,23 +108,36 @@ partial class MonthlyIncomeAndExpenseSummaryReportUi
         // resultGroupBox
         // 
         resultGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+        resultGroupBox.Controls.Add(exportExcelButton);
         resultGroupBox.Controls.Add(resultListView);
         resultGroupBox.Location = new Point(12, 302);
         resultGroupBox.Name = "resultGroupBox";
-        resultGroupBox.Size = new Size(1533, 281);
+        resultGroupBox.Size = new Size(1646, 347);
         resultGroupBox.TabIndex = 1;
         resultGroupBox.TabStop = false;
         resultGroupBox.Text = "Result";
         // 
+        // exportExcelButton
+        // 
+        exportExcelButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+        exportExcelButton.Enabled = false;
+        exportExcelButton.Location = new Point(1472, 24);
+        exportExcelButton.Name = "exportExcelButton";
+        exportExcelButton.Size = new Size(168, 34);
+        exportExcelButton.TabIndex = 1;
+        exportExcelButton.Text = "Export Excel";
+        exportExcelButton.UseVisualStyleBackColor = true;
+        exportExcelButton.Click += exportExcelButton_Click;
+        // 
         // resultListView
         // 
+        resultListView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         resultListView.Columns.AddRange(new ColumnHeader[] { dateColumnHeader, categoryColumnHeader, incomeColumnHeader, expenseColumnHeader, descriptionColumnHeader });
-        resultListView.Dock = DockStyle.Fill;
         resultListView.FullRowSelect = true;
         resultListView.GridLines = true;
-        resultListView.Location = new Point(3, 27);
+        resultListView.Location = new Point(6, 64);
         resultListView.Name = "resultListView";
-        resultListView.Size = new Size(1527, 251);
+        resultListView.Size = new Size(1634, 277);
         resultListView.TabIndex = 0;
         resultListView.UseCompatibleStateImageBehavior = false;
         resultListView.View = View.Details;
@@ -159,7 +173,7 @@ partial class MonthlyIncomeAndExpenseSummaryReportUi
         // 
         AutoScaleDimensions = new SizeF(10F, 25F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(1557, 595);
+        ClientSize = new Size(1670, 661);
         Controls.Add(resultGroupBox);
         Controls.Add(filterGroupBox);
         Name = "MonthlyIncomeAndExpenseSummaryReportUi";
@@ -188,4 +202,5 @@ partial class MonthlyIncomeAndExpenseSummaryReportUi
     private ColumnHeader expenseColumnHeader;
     private ColumnHeader categoryColumnHeader;
     private ColumnHeader descriptionColumnHeader;
+    private Button exportExcelButton;
 }
