@@ -26,7 +26,7 @@ public static class MonthService
 
         while (current <= end)
         {
-            months.Add(new Month { Id = Convert.ToInt32(current.ToString("MMyyyy")), Name = current.ToString("MMM-yyyy") });
+            months.Add(new Month { Id = current.ToString("MMyyyy"), Name = current.ToString("MMM-yyyy") });
             current = current.AddMonths(1);
         }
 
@@ -35,12 +35,19 @@ public static class MonthService
 
     public static Month GetCurrentMonth()
     {
-        return new Month { Id =  Convert.ToInt32(DateTime.Now.ToString("MMyyyy")), Name = DateTime.Now.ToString("MMM-yyyy") };
+        return new Month { Id =  DateTime.Now.ToString("MMyyyy"), Name = DateTime.Now.ToString("MMM-yyyy") };
     }
 
     private static Tuple<int, int> GetMonthAndYear(string date)
     {
         DateTime tempDate = Convert.ToDateTime(date, CultureInfo.InvariantCulture);
         return new Tuple<int, int>(tempDate.Month, tempDate.Year);
+    }
+
+    public static Tuple<int, int> GetMonthAndYearFromMonthId(string monthId)
+    {
+        var month = monthId.Substring(0, 2);
+        var year = monthId.Substring(2, 4);
+        return new Tuple<int, int>(Convert.ToInt32(month), Convert.ToInt32(year));
     }
 }

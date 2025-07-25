@@ -1,10 +1,32 @@
-﻿using PersonalFinanceTrackerIIT.Persistence.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using PersonalFinanceTrackerIIT.Models.FilterModels;
+using PersonalFinanceTrackerIIT.Persistence.Entities;
+using PersonalFinanceTrackerIIT.Utilities;
 
 namespace PersonalFinanceTrackerIIT.Persistence.Repositories;
 
 public class TransactionRepository : RepositoryBase<Transaction>, ITransactionRepository
 {
+    protected override IQueryable<Transaction> QueryWithIncludes => base.QueryWithIncludes.Include(x => x.Category);
+
     public TransactionRepository(ApplicationDbContext context) : base(context)
     {
+    }
+
+    public async Task<IReadOnlyCollection<Transaction>> GetTransactionsBySummaryFilterAsync(MonthlyIncomeAndExpenseSummaryFilterModel filter)
+    {
+        var query = QueryWithIncludes;
+
+        if (filter.Categories != null && filter.Categories.Count > 0)
+        {
+            query = query.Where(t => filter.Categories.Contains(t.CategoryId));
+        }
+        if (!filter.MonthId.IsNullOrEmpty())
+        {
+            var monthYear = MonthService.GetMonthAndYearFromMonthId(filter.MonthId);
+            query = query.Where(t => t.Date.Year == monthYear.Item2 && t.Date.Month == monthYear.Item1);
+        }
+        return await query.ToListAsync();
     }
 }

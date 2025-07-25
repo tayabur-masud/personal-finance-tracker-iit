@@ -44,12 +44,12 @@ public partial class MonthlyIncomeAndExpenseSummaryReportUi : Form
         var selectedCategories = categoryCheckedListBox.CheckedItems.Cast<CategoryModel>().ToList();
         if (selectedCategories.Count == 0)
         {
-            MessageBox.Show("Please select at least one category.");
+            MessageBox.Show("Please select at least one category.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return;
         }
         if (monthComboBox.SelectedItem == null)
         {
-            MessageBox.Show("Please select a month.");
+            MessageBox.Show("Please select a month.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return;
         }
         var selectedMonth = (Month)monthComboBox.SelectedItem;
@@ -61,5 +61,23 @@ public partial class MonthlyIncomeAndExpenseSummaryReportUi : Form
         };
 
         var report = await _reportService.GetMonthlyIncomeAndExpenseSummaryReport(filterModel);
+
+        resultListView.Items.Clear();
+
+        if(report is not null && report.Count == 0)
+        {
+            MessageBox.Show("No data found for the selected criteria.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return;
+        }
+
+        foreach (var data in report)
+        {
+            ListViewItem item = new ListViewItem(data.DateString);
+            item.SubItems.Add(data.Category);
+            item.SubItems.Add(data.IncomeAmount.ToString());
+            item.SubItems.Add(data.ExpenseAmount.ToString());
+            item.SubItems.Add(data.Description);
+            resultListView.Items.Add(item);
+        }
     }
 }

@@ -20,6 +20,7 @@ public static class ConfigureServices
     {
         var config = new TypeAdapterConfig();
         CategoryMapsterConfig.Register(config);
+        TransactionMapsterConfig.Register(config);
         services.AddSingleton(config);
 
         return services;
