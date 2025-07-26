@@ -11,6 +11,6 @@ public class CategoryRepository : RepositoryBase<Category>, ICategoryRepository
 
     public async Task<IReadOnlyCollection<Category>> GetByType(CategoryType type)
     {
-        return await Query.Where(x => x.Type == type).ToListAsync();
+        return await Query.Where(x => x.Type == (int)type).ToListAsync();
     }
 }

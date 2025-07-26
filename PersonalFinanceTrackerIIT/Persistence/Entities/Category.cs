@@ -13,7 +13,7 @@ public class Category : BaseEntity
 
     public string Description { get; set; }
 
-    public CategoryType Type { get; set; }
+    public int Type { get; set; }
 
     public virtual ICollection<Transaction> Transactions { get; set; }
 

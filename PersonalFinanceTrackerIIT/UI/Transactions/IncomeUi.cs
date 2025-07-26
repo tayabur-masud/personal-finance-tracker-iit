@@ -7,20 +7,34 @@ namespace PersonalFinanceTrackerIIT.UI.Transactions
     public partial class IncomeUi : Form
     {
         private readonly ICategoryService _categoryService;
-        private IReadOnlyCollection<CategoryModel> _categories;
+        private readonly ITransactionService _transactionService;
 
-        public IncomeUi(ICategoryService categoryService)
+        public IncomeUi(
+            ICategoryService categoryService, 
+            ITransactionService transactionService)
         {
             InitializeComponent();
             _categoryService = categoryService;
+            _transactionService = transactionService;
         }
 
         private async void IncomeUi_Load(object sender, EventArgs e)
         {
-            _categories = await _categoryService.GetCategoriesByType(CategoryType.Income);
+            var categories = await _categoryService.GetCategoriesByType(CategoryType.Income);
             categoryComboBox.DisplayMember = nameof(CategoryModel.Name);
             categoryComboBox.ValueMember = nameof(CategoryModel.Id);
-            categoryComboBox.DataSource = _categories.ToList();
+            categoryComboBox.DataSource = categories.ToList();
+        }
+
+        private async void saveButton_Click(object sender, EventArgs e)
+        {
+            TransactionModel transaction = new TransactionModel();
+            transaction.Date = dateTimePicker.Value.Date;
+            transaction.Amount = Convert.ToDecimal(amountTextBox.Text);
+            transaction.CategoryId = Convert.ToInt32(categoryComboBox.SelectedValue);
+            transaction.Description = descriptionRichTextBox.Text.Trim();
+
+            await _transactionService.AddTransaction(transaction);
         }
     }
 }

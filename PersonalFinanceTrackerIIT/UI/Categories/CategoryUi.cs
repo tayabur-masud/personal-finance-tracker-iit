@@ -1,11 +1,11 @@
 ﻿using PersonalFinanceTrackerIIT.Models;
+using PersonalFinanceTrackerIIT.Persistence.Entities;
 using PersonalFinanceTrackerIIT.Services;
 
 namespace PersonalFinanceTrackerIIT.UI.Categories;
 public partial class CategoryUi : Form
 {
     private readonly ICategoryService _categoryService;
-    private IReadOnlyCollection<CategoryModel> _categories;
 
     public CategoryUi(ICategoryService categoryService)
     {
@@ -29,6 +29,14 @@ public partial class CategoryUi : Form
         CategoryModel category = new CategoryModel();
         category.Name = nameTextBox.Text.Trim();
         category.Description = descriptionRichTextBox.Text.Trim();
+        if (incomeRadioButton.Checked)
+        {
+            category.TypeId = (int)CategoryType.Income;
+        }
+        else if (expenseRadioButton.Checked)
+        {
+            category.TypeId = (int)CategoryType.Expense;
+        }
 
         await _categoryService.AddCategory(category);
 
@@ -37,11 +45,12 @@ public partial class CategoryUi : Form
 
     private async Task LoadCategories()
     {
-        _categories = await _categoryService.GetCategories();
+        var categories = await _categoryService.GetCategories();
         categoryListView.Items.Clear();
-        foreach (var category in _categories)
+        foreach (var category in categories)
         {
-            ListViewItem item = new ListViewItem(category.Name);
+            ListViewItem item = new ListViewItem(category.TypeName);
+            item.SubItems.Add(category.Name);
             item.SubItems.Add(category.Description);
             categoryListView.Items.Add(item);
         }

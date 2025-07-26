@@ -18,27 +18,27 @@ public class ReportService : IReportService
     {
         var transactions = await _transactionRepository.GetTransactionsBySummaryFilterAsync(filterModel);
 
-        var reportData = new List<MonthlyIncomeAndExpenseSummaryReportModel>();
+        //var reportData = new List<MonthlyIncomeAndExpenseSummaryReportModel>();
 
-        foreach (var transaction in transactions) 
-        {
-            var data = new MonthlyIncomeAndExpenseSummaryReportModel();
+        //foreach (var transaction in transactions) 
+        //{
+        //    var data = new MonthlyIncomeAndExpenseSummaryReportModel();
 
-            data.Date = transaction.Date;
-            data.Category = transaction.Category.Name;
-            data.Description = transaction.Description;
-            if (transaction.Category.Type == Persistence.Entities.CategoryType.Income)
-            {
-                data.IncomeAmount = transaction.Amount;
-            }
-            else
-            {
-                data.ExpenseAmount = transaction.Amount;
-            }
-            reportData.Add(data);
-        }
+        //    data.Date = transaction.Date;
+        //    data.Category = transaction.Category.Name;
+        //    data.Description = transaction.Description;
+        //    if (transaction.Category.Type == (int)Persistence.Entities.CategoryType.Income)
+        //    {
+        //        data.IncomeAmount = transaction.Amount;
+        //    }
+        //    else
+        //    {
+        //        data.ExpenseAmount = transaction.Amount;
+        //    }
+        //    reportData.Add(data);
+        //}
 
-        //var reportData = transactions.Adapt<IReadOnlyCollection<MonthlyIncomeAndExpenseSummaryReportModel>>();
+        var reportData = transactions.Adapt<IReadOnlyCollection<MonthlyIncomeAndExpenseSummaryReportModel>>();
         return reportData;
     }
 }

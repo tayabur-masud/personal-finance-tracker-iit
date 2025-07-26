@@ -2,7 +2,7 @@
 
 public class MonthlyIncomeAndExpenseSummaryReportModel
 {
-    public DateTime Date { private get; set; }
+    public DateTime Date { get; set; }
 
     public string DateString
     {
