@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using OfficeOpenXml;
+﻿using OfficeOpenXml;
 using PersonalFinanceTrackerIIT.Models;
 using PersonalFinanceTrackerIIT.Models.FilterModels;
 using PersonalFinanceTrackerIIT.Services;
@@ -74,23 +73,8 @@ public partial class MonthlyIncomeAndExpenseSummaryReportUi : Form
         }
 
         exportExcelButton.Enabled = true;
-        foreach (var data in report)
-        {
-            ListViewItem item = new ListViewItem(data.DateString);
-            item.SubItems.Add(data.Category);
-            if (data.IncomeAmount > 0)
-            {
-                item.SubItems.Add(data.IncomeAmount.ToString("#,#"));
-                item.SubItems.Add(string.Empty);
-            }
-            if (data.ExpenseAmount > 0)
-            {
-                item.SubItems.Add(string.Empty);
-                item.SubItems.Add(data.ExpenseAmount.ToString("#,#"));
-            }
-            item.SubItems.Add(data.Description);
-            resultListView.Items.Add(item);
-        }
+        
+        LoadResultListView(report);
     }
 
     private void exportExcelButton_Click(object sender, EventArgs e)
@@ -140,6 +124,27 @@ public partial class MonthlyIncomeAndExpenseSummaryReportUi : Form
                     MessageBox.Show("Excel file exported successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
+        }
+    }
+
+    private void LoadResultListView(IReadOnlyCollection<MonthlyIncomeAndExpenseSummaryReportModel> report)
+    {
+        foreach (var data in report)
+        {
+            ListViewItem item = new ListViewItem(data.DateString);
+            item.SubItems.Add(data.Category);
+            if (data.IncomeAmount > 0)
+            {
+                item.SubItems.Add(data.IncomeAmount.ToString("#,#"));
+                item.SubItems.Add(string.Empty);
+            }
+            if (data.ExpenseAmount > 0)
+            {
+                item.SubItems.Add(string.Empty);
+                item.SubItems.Add(data.ExpenseAmount.ToString("#,#"));
+            }
+            item.SubItems.Add(data.Description);
+            resultListView.Items.Add(item);
         }
     }
 }

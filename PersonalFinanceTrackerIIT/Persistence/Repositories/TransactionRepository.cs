@@ -29,4 +29,11 @@ public class TransactionRepository : RepositoryBase<Transaction>, ITransactionRe
         }
         return await query.ToListAsync();
     }
+
+    public async Task<IReadOnlyCollection<Transaction>> GetByCategory(int categoryId)
+    {
+        return await QueryWithIncludes
+            .Where(t => t.CategoryId == categoryId)
+            .ToListAsync();
+    }
 }

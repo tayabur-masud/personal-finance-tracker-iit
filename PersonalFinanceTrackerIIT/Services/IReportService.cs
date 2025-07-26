@@ -6,4 +6,6 @@ namespace PersonalFinanceTrackerIIT.Services;
 public interface IReportService
 {
     Task<IReadOnlyCollection<MonthlyIncomeAndExpenseSummaryReportModel>> GetMonthlyIncomeAndExpenseSummaryReport(MonthlyIncomeAndExpenseSummaryFilterModel filterModel);
+
+    Task<IReadOnlyCollection<CategoryWiseExpenseBreakdownModel>> GetCategoryWiseExpenseBreakdownAsync();
 }

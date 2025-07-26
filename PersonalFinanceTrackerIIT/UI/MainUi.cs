@@ -45,4 +45,10 @@ public partial class MainUi : Form
         var budgetUi = _serviceProvider.GetRequiredService<BudgetUi>();
         budgetUi.ShowDialog();
     }
+
+    private void categoryWiseExpenseBreakdownToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        var categoryWiseExpenseBreakdownUi = _serviceProvider.GetRequiredService<CategoryWiseExpenseBreakdownUi>();
+        categoryWiseExpenseBreakdownUi.ShowDialog();
+    }
 }

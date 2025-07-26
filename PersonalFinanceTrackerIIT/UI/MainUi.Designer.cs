@@ -35,10 +35,11 @@
             categoryToolStripMenuItem = new ToolStripMenuItem();
             categoryAddUpdateDeleteToolStripMenuItem = new ToolStripMenuItem();
             budgetToolStripMenuItem = new ToolStripMenuItem();
+            addUpdateDeleteToolStripMenuItem = new ToolStripMenuItem();
             reportsToolStripMenuItem = new ToolStripMenuItem();
             monthlyIncomeExpenseSummaryToolStripMenuItem = new ToolStripMenuItem();
             label1 = new Label();
-            addUpdateDeleteToolStripMenuItem = new ToolStripMenuItem();
+            categoryWiseExpenseBreakdownToolStripMenuItem = new ToolStripMenuItem();
             mainMenuStrip.SuspendLayout();
             SuspendLayout();
             // 
@@ -94,9 +95,16 @@
             budgetToolStripMenuItem.Size = new Size(85, 29);
             budgetToolStripMenuItem.Text = "Budget";
             // 
+            // addUpdateDeleteToolStripMenuItem
+            // 
+            addUpdateDeleteToolStripMenuItem.Name = "addUpdateDeleteToolStripMenuItem";
+            addUpdateDeleteToolStripMenuItem.Size = new Size(270, 34);
+            addUpdateDeleteToolStripMenuItem.Text = "Add/Update/Delete";
+            addUpdateDeleteToolStripMenuItem.Click += addUpdateDeleteToolStripMenuItem_Click;
+            // 
             // reportsToolStripMenuItem
             // 
-            reportsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { monthlyIncomeExpenseSummaryToolStripMenuItem });
+            reportsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { monthlyIncomeExpenseSummaryToolStripMenuItem, categoryWiseExpenseBreakdownToolStripMenuItem });
             reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             reportsToolStripMenuItem.Size = new Size(89, 29);
             reportsToolStripMenuItem.Text = "Reports";
@@ -120,12 +128,12 @@
             label1.Text = "Developed for\r\nAdvanced OOP Course\r\nExecutive MIT\r\nIIT, University of Dhaka";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // addUpdateDeleteToolStripMenuItem
+            // categoryWiseExpenseBreakdownToolStripMenuItem
             // 
-            addUpdateDeleteToolStripMenuItem.Name = "addUpdateDeleteToolStripMenuItem";
-            addUpdateDeleteToolStripMenuItem.Size = new Size(270, 34);
-            addUpdateDeleteToolStripMenuItem.Text = "Add/Update/Delete";
-            addUpdateDeleteToolStripMenuItem.Click += addUpdateDeleteToolStripMenuItem_Click;
+            categoryWiseExpenseBreakdownToolStripMenuItem.Name = "categoryWiseExpenseBreakdownToolStripMenuItem";
+            categoryWiseExpenseBreakdownToolStripMenuItem.Size = new Size(413, 34);
+            categoryWiseExpenseBreakdownToolStripMenuItem.Text = "Category-Wise Expense Breakdown";
+            categoryWiseExpenseBreakdownToolStripMenuItem.Click += categoryWiseExpenseBreakdownToolStripMenuItem_Click;
             // 
             // MainUi
             // 
@@ -158,5 +166,6 @@
         private ToolStripMenuItem categoryAddUpdateDeleteToolStripMenuItem;
         private ToolStripMenuItem monthlyIncomeExpenseSummaryToolStripMenuItem;
         private ToolStripMenuItem addUpdateDeleteToolStripMenuItem;
+        private ToolStripMenuItem categoryWiseExpenseBreakdownToolStripMenuItem;
     }
 }
