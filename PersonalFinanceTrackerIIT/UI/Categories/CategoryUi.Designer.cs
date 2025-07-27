@@ -28,63 +28,73 @@ partial class CategoryUi
     /// </summary>
     private void InitializeComponent()
     {
+        components = new System.ComponentModel.Container();
         nameLabel = new Label();
         nameTextBox = new TextBox();
         descriptionRichTextBox = new RichTextBox();
         descriptionLabel = new Label();
         saveButton = new Button();
         categoryListView = new ListView();
+        typeColumnHeader = new ColumnHeader();
         nameColumnHeader = new ColumnHeader();
         descriptionColumnHeader = new ColumnHeader();
+        categoryContextMenuStrip = new ContextMenuStrip(components);
+        editToolStripMenuItem = new ToolStripMenuItem();
+        deleteToolStripMenuItem = new ToolStripMenuItem();
         resetButton = new Button();
         incomeRadioButton = new RadioButton();
         expenseRadioButton = new RadioButton();
-        typeColumnHeader = new ColumnHeader();
+        categoryContextMenuStrip.SuspendLayout();
         SuspendLayout();
         // 
         // nameLabel
         // 
-        nameLabel.Anchor = AnchorStyles.None;
+        nameLabel.Anchor = AnchorStyles.Top;
         nameLabel.AutoSize = true;
-        nameLabel.Location = new Point(199, 62);
+        nameLabel.Location = new Point(249, 78);
+        nameLabel.Margin = new Padding(4, 0, 4, 0);
         nameLabel.Name = "nameLabel";
-        nameLabel.Size = new Size(49, 20);
+        nameLabel.Size = new Size(59, 25);
         nameLabel.TabIndex = 0;
         nameLabel.Text = "Name";
         // 
         // nameTextBox
         // 
-        nameTextBox.Anchor = AnchorStyles.None;
-        nameTextBox.Location = new Point(337, 58);
+        nameTextBox.Anchor = AnchorStyles.Top;
+        nameTextBox.Location = new Point(421, 72);
+        nameTextBox.Margin = new Padding(4);
         nameTextBox.Name = "nameTextBox";
-        nameTextBox.Size = new Size(270, 27);
+        nameTextBox.Size = new Size(336, 31);
         nameTextBox.TabIndex = 1;
         // 
         // descriptionRichTextBox
         // 
-        descriptionRichTextBox.Anchor = AnchorStyles.None;
-        descriptionRichTextBox.Location = new Point(337, 100);
+        descriptionRichTextBox.Anchor = AnchorStyles.Top;
+        descriptionRichTextBox.Location = new Point(421, 125);
+        descriptionRichTextBox.Margin = new Padding(4);
         descriptionRichTextBox.Name = "descriptionRichTextBox";
-        descriptionRichTextBox.Size = new Size(270, 120);
+        descriptionRichTextBox.Size = new Size(336, 149);
         descriptionRichTextBox.TabIndex = 2;
         descriptionRichTextBox.Text = "";
         // 
         // descriptionLabel
         // 
-        descriptionLabel.Anchor = AnchorStyles.None;
+        descriptionLabel.Anchor = AnchorStyles.Top;
         descriptionLabel.AutoSize = true;
-        descriptionLabel.Location = new Point(199, 103);
+        descriptionLabel.Location = new Point(249, 129);
+        descriptionLabel.Margin = new Padding(4, 0, 4, 0);
         descriptionLabel.Name = "descriptionLabel";
-        descriptionLabel.Size = new Size(85, 20);
+        descriptionLabel.Size = new Size(102, 25);
         descriptionLabel.TabIndex = 3;
         descriptionLabel.Text = "Description";
         // 
         // saveButton
         // 
-        saveButton.Anchor = AnchorStyles.None;
-        saveButton.Location = new Point(513, 227);
+        saveButton.Anchor = AnchorStyles.Top;
+        saveButton.Location = new Point(641, 284);
+        saveButton.Margin = new Padding(4);
         saveButton.Name = "saveButton";
-        saveButton.Size = new Size(94, 29);
+        saveButton.Size = new Size(118, 36);
         saveButton.TabIndex = 4;
         saveButton.Text = "Save";
         saveButton.UseVisualStyleBackColor = true;
@@ -92,17 +102,23 @@ partial class CategoryUi
         // 
         // categoryListView
         // 
-        categoryListView.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+        categoryListView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         categoryListView.Columns.AddRange(new ColumnHeader[] { typeColumnHeader, nameColumnHeader, descriptionColumnHeader });
+        categoryListView.ContextMenuStrip = categoryContextMenuStrip;
         categoryListView.FullRowSelect = true;
         categoryListView.GridLines = true;
-        categoryListView.Location = new Point(16, 271);
+        categoryListView.Location = new Point(20, 339);
         categoryListView.Margin = new Padding(2);
         categoryListView.Name = "categoryListView";
-        categoryListView.Size = new Size(794, 235);
+        categoryListView.Size = new Size(992, 293);
         categoryListView.TabIndex = 5;
         categoryListView.UseCompatibleStateImageBehavior = false;
         categoryListView.View = View.Details;
+        // 
+        // typeColumnHeader
+        // 
+        typeColumnHeader.Text = "Type";
+        typeColumnHeader.Width = 100;
         // 
         // nameColumnHeader
         // 
@@ -114,12 +130,34 @@ partial class CategoryUi
         descriptionColumnHeader.Text = "Description";
         descriptionColumnHeader.Width = 500;
         // 
+        // categoryContextMenuStrip
+        // 
+        categoryContextMenuStrip.ImageScalingSize = new Size(24, 24);
+        categoryContextMenuStrip.Items.AddRange(new ToolStripItem[] { editToolStripMenuItem, deleteToolStripMenuItem });
+        categoryContextMenuStrip.Name = "categoryContextMenuStrip";
+        categoryContextMenuStrip.Size = new Size(135, 68);
+        // 
+        // editToolStripMenuItem
+        // 
+        editToolStripMenuItem.Name = "editToolStripMenuItem";
+        editToolStripMenuItem.Size = new Size(134, 32);
+        editToolStripMenuItem.Text = "Edit";
+        editToolStripMenuItem.Click += editToolStripMenuItem_Click;
+        // 
+        // deleteToolStripMenuItem
+        // 
+        deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+        deleteToolStripMenuItem.Size = new Size(134, 32);
+        deleteToolStripMenuItem.Text = "Delete";
+        deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
+        // 
         // resetButton
         // 
-        resetButton.Anchor = AnchorStyles.None;
-        resetButton.Location = new Point(412, 227);
+        resetButton.Anchor = AnchorStyles.Top;
+        resetButton.Location = new Point(515, 284);
+        resetButton.Margin = new Padding(4);
         resetButton.Name = "resetButton";
-        resetButton.Size = new Size(94, 29);
+        resetButton.Size = new Size(118, 36);
         resetButton.TabIndex = 6;
         resetButton.Text = "Reset";
         resetButton.UseVisualStyleBackColor = true;
@@ -127,10 +165,12 @@ partial class CategoryUi
         // 
         // incomeRadioButton
         // 
+        incomeRadioButton.Anchor = AnchorStyles.Top;
         incomeRadioButton.AutoSize = true;
-        incomeRadioButton.Location = new Point(337, 28);
+        incomeRadioButton.Location = new Point(421, 35);
+        incomeRadioButton.Margin = new Padding(4);
         incomeRadioButton.Name = "incomeRadioButton";
-        incomeRadioButton.Size = new Size(79, 24);
+        incomeRadioButton.Size = new Size(96, 29);
         incomeRadioButton.TabIndex = 7;
         incomeRadioButton.TabStop = true;
         incomeRadioButton.Text = "Income";
@@ -138,25 +178,23 @@ partial class CategoryUi
         // 
         // expenseRadioButton
         // 
+        expenseRadioButton.Anchor = AnchorStyles.Top;
         expenseRadioButton.AutoSize = true;
-        expenseRadioButton.Location = new Point(490, 28);
+        expenseRadioButton.Location = new Point(612, 35);
+        expenseRadioButton.Margin = new Padding(4);
         expenseRadioButton.Name = "expenseRadioButton";
-        expenseRadioButton.Size = new Size(84, 24);
+        expenseRadioButton.Size = new Size(101, 29);
         expenseRadioButton.TabIndex = 8;
         expenseRadioButton.TabStop = true;
         expenseRadioButton.Text = "Expense";
         expenseRadioButton.UseVisualStyleBackColor = true;
         // 
-        // typeColumnHeader
-        // 
-        typeColumnHeader.Text = "Type";
-        typeColumnHeader.Width = 100;
-        // 
         // CategoryUi
         // 
-        AutoScaleDimensions = new SizeF(8F, 20F);
+        AcceptButton = saveButton;
+        AutoScaleDimensions = new SizeF(10F, 25F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(819, 598);
+        ClientSize = new Size(1024, 748);
         Controls.Add(expenseRadioButton);
         Controls.Add(incomeRadioButton);
         Controls.Add(resetButton);
@@ -166,10 +204,13 @@ partial class CategoryUi
         Controls.Add(descriptionRichTextBox);
         Controls.Add(nameTextBox);
         Controls.Add(nameLabel);
+        Margin = new Padding(4);
         Name = "CategoryUi";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Category";
+        FormClosed += CategoryUi_FormClosed;
         Load += CategoryUi_Load;
+        categoryContextMenuStrip.ResumeLayout(false);
         ResumeLayout(false);
         PerformLayout();
     }
@@ -188,4 +229,7 @@ partial class CategoryUi
     private RadioButton incomeRadioButton;
     private RadioButton expenseRadioButton;
     private ColumnHeader typeColumnHeader;
+    private ContextMenuStrip categoryContextMenuStrip;
+    private ToolStripMenuItem editToolStripMenuItem;
+    private ToolStripMenuItem deleteToolStripMenuItem;
 }

@@ -38,8 +38,9 @@
             addUpdateDeleteToolStripMenuItem = new ToolStripMenuItem();
             reportsToolStripMenuItem = new ToolStripMenuItem();
             monthlyIncomeExpenseSummaryToolStripMenuItem = new ToolStripMenuItem();
-            label1 = new Label();
             categoryWiseExpenseBreakdownToolStripMenuItem = new ToolStripMenuItem();
+            label1 = new Label();
+            budgetVsActualExpenseReportToolStripMenuItem = new ToolStripMenuItem();
             mainMenuStrip.SuspendLayout();
             SuspendLayout();
             // 
@@ -104,7 +105,7 @@
             // 
             // reportsToolStripMenuItem
             // 
-            reportsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { monthlyIncomeExpenseSummaryToolStripMenuItem, categoryWiseExpenseBreakdownToolStripMenuItem });
+            reportsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { monthlyIncomeExpenseSummaryToolStripMenuItem, categoryWiseExpenseBreakdownToolStripMenuItem, budgetVsActualExpenseReportToolStripMenuItem });
             reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             reportsToolStripMenuItem.Size = new Size(89, 29);
             reportsToolStripMenuItem.Text = "Reports";
@@ -115,6 +116,13 @@
             monthlyIncomeExpenseSummaryToolStripMenuItem.Size = new Size(413, 34);
             monthlyIncomeExpenseSummaryToolStripMenuItem.Text = "Monthly Income && Expense Summary";
             monthlyIncomeExpenseSummaryToolStripMenuItem.Click += monthlyIncomeExpenseSummaryToolStripMenuItem_Click;
+            // 
+            // categoryWiseExpenseBreakdownToolStripMenuItem
+            // 
+            categoryWiseExpenseBreakdownToolStripMenuItem.Name = "categoryWiseExpenseBreakdownToolStripMenuItem";
+            categoryWiseExpenseBreakdownToolStripMenuItem.Size = new Size(413, 34);
+            categoryWiseExpenseBreakdownToolStripMenuItem.Text = "Category-Wise Expense Breakdown";
+            categoryWiseExpenseBreakdownToolStripMenuItem.Click += categoryWiseExpenseBreakdownToolStripMenuItem_Click;
             // 
             // label1
             // 
@@ -128,12 +136,12 @@
             label1.Text = "Developed for\r\nAdvanced OOP Course\r\nExecutive MIT\r\nIIT, University of Dhaka";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // categoryWiseExpenseBreakdownToolStripMenuItem
+            // budgetVsActualExpenseReportToolStripMenuItem
             // 
-            categoryWiseExpenseBreakdownToolStripMenuItem.Name = "categoryWiseExpenseBreakdownToolStripMenuItem";
-            categoryWiseExpenseBreakdownToolStripMenuItem.Size = new Size(413, 34);
-            categoryWiseExpenseBreakdownToolStripMenuItem.Text = "Category-Wise Expense Breakdown";
-            categoryWiseExpenseBreakdownToolStripMenuItem.Click += categoryWiseExpenseBreakdownToolStripMenuItem_Click;
+            budgetVsActualExpenseReportToolStripMenuItem.Name = "budgetVsActualExpenseReportToolStripMenuItem";
+            budgetVsActualExpenseReportToolStripMenuItem.Size = new Size(413, 34);
+            budgetVsActualExpenseReportToolStripMenuItem.Text = "Budget vs Actual Expense Report";
+            budgetVsActualExpenseReportToolStripMenuItem.Click += budgetVsActualExpenseReportToolStripMenuItem_Click;
             // 
             // MainUi
             // 
@@ -167,5 +175,6 @@
         private ToolStripMenuItem monthlyIncomeExpenseSummaryToolStripMenuItem;
         private ToolStripMenuItem addUpdateDeleteToolStripMenuItem;
         private ToolStripMenuItem categoryWiseExpenseBreakdownToolStripMenuItem;
+        private ToolStripMenuItem budgetVsActualExpenseReportToolStripMenuItem;
     }
 }

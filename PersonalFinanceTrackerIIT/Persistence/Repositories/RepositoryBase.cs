@@ -51,6 +51,7 @@ public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : BaseEntit
         entity.LastModifiedOn = DateTime.UtcNow;
         Collections.Update(entity);
         await _context.SaveChangesAsync();
+        _context.Entry(entity).State = EntityState.Detached; // Detach to avoid tracking issues
         return entity;
     }
 

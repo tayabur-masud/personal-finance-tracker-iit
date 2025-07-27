@@ -10,8 +10,6 @@ public partial class MonthlyIncomeAndExpenseSummaryReportUi : Form
 {
     private readonly ICategoryService _categoryService;
     private readonly IReportService _reportService;
-    private IReadOnlyCollection<CategoryModel> _categories;
-    private IReadOnlyCollection<Month> _months;
 
     public MonthlyIncomeAndExpenseSummaryReportUi(
         ICategoryService categoryService,
@@ -24,7 +22,7 @@ public partial class MonthlyIncomeAndExpenseSummaryReportUi : Form
 
     private async void MonthlyIncomeAndExpenseSummaryReportUi_Load(object sender, EventArgs e)
     {
-        _categories = await _categoryService.GetCategories();
+        var _categories = await _categoryService.GetCategories();
         categoryCheckedListBox.Items.Clear();
         categoryCheckedListBox.DisplayMember = nameof(CategoryModel.Name);
         categoryCheckedListBox.ValueMember = nameof(CategoryModel.Id);
@@ -33,7 +31,8 @@ public partial class MonthlyIncomeAndExpenseSummaryReportUi : Form
             categoryCheckedListBox.Items.Add(category, true);
         }
 
-        _months = MonthService.GetMonths();
+        var _months = MonthService.GetMonths();
+        monthComboBox.Items.Clear();
         monthComboBox.DisplayMember = nameof(Month.Name);
         monthComboBox.ValueMember = nameof(Month.Id);
         monthComboBox.DataSource = _months.ToList();
@@ -62,8 +61,6 @@ public partial class MonthlyIncomeAndExpenseSummaryReportUi : Form
         };
 
         var report = await _reportService.GetMonthlyIncomeAndExpenseSummaryReport(filterModel);
-
-        resultListView.Items.Clear();
 
         if (report is not null && report.Count == 0)
         {
@@ -129,6 +126,8 @@ public partial class MonthlyIncomeAndExpenseSummaryReportUi : Form
 
     private void LoadResultListView(IReadOnlyCollection<MonthlyIncomeAndExpenseSummaryReportModel> report)
     {
+        resultListView.Items.Clear();
+
         foreach (var data in report)
         {
             ListViewItem item = new ListViewItem(data.DateString);

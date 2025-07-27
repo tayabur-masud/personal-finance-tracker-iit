@@ -1,5 +1,4 @@
 ﻿using Mapster;
-using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +11,6 @@ using PersonalFinanceTrackerIIT.UI.Budgets;
 using PersonalFinanceTrackerIIT.UI.Categories;
 using PersonalFinanceTrackerIIT.UI.Reports;
 using PersonalFinanceTrackerIIT.UI.Transactions;
-using System.Reflection;
 
 namespace PersonalFinanceTrackerIIT;
 
@@ -23,6 +21,7 @@ public static class ConfigureServices
         var config = TypeAdapterConfig.GlobalSettings;
         new CategoryMapper().Register(config);
         new TransactionMapper().Register(config);
+        new BudgetMapper().Register(config);
 
         return services;
     }
@@ -36,6 +35,7 @@ public static class ConfigureServices
         services.AddScoped<BudgetUi>();
         services.AddScoped<MonthlyIncomeAndExpenseSummaryReportUi>();
         services.AddScoped<CategoryWiseExpenseBreakdownUi>();
+        services.AddScoped<BudgetVsActualExpenseReportUi>();
         return services.BuildServiceProvider();
     }
 
@@ -43,6 +43,7 @@ public static class ConfigureServices
     {
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<ITransactionRepository, TransactionRepository>();
+        services.AddScoped<IBudgetRepository, BudgetRepository>();
         return services;
     }
 
@@ -51,6 +52,7 @@ public static class ConfigureServices
         services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<ITransactionService, TransactionService>();
         services.AddScoped<IReportService, ReportService>();
+        services.AddScoped<IBudgetService, BudgetService>();
         return services;
     }
 
@@ -61,7 +63,10 @@ public static class ConfigureServices
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
             .Build();
         services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("PersonalFinanceTracker")));
+            {
+                options.UseSqlServer(configuration.GetConnectionString("PersonalFinanceTracker"));
+                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+            });
         return services;
     }
 }

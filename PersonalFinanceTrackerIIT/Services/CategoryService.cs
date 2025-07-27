@@ -14,11 +14,22 @@ public class CategoryService : ICategoryService
         _categoryRepository = categoryRepository;
     }
 
-    public async Task AddCategory(CategoryModel model)
+    public async Task AddOrUpdateCategory(CategoryModel model)
     {
         var category = model.Adapt<Category>();
 
+        if(category.Id > 0)
+        {
+            await _categoryRepository.Update(category);
+            return;
+        }
+
         await _categoryRepository.Add(category);
+    }
+
+    public async Task DeleteCategory(int id)
+    {
+        await _categoryRepository.Remove(id);
     }
 
     public async Task<IReadOnlyCollection<CategoryModel>> GetCategories()
