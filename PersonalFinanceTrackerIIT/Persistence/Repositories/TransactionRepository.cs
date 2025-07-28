@@ -36,4 +36,11 @@ public class TransactionRepository : RepositoryBase<Transaction>, ITransactionRe
             .Where(t => t.CategoryId == categoryId)
             .ToListAsync();
     }
+
+    public async Task<IReadOnlyCollection<Transaction>> GetByCategoryType(CategoryType categoryType)
+    {
+        return await QueryWithIncludes
+            .Where(t => t.Category.Type == (int)categoryType)
+            .ToListAsync();
+    }
 }

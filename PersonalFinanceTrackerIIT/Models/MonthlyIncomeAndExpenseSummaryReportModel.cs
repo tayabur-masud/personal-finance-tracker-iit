@@ -1,4 +1,6 @@
-﻿namespace PersonalFinanceTrackerIIT.Models;
+﻿using PersonalFinanceTrackerIIT.Utilities;
+
+namespace PersonalFinanceTrackerIIT.Models;
 
 public class MonthlyIncomeAndExpenseSummaryReportModel
 {
@@ -8,7 +10,7 @@ public class MonthlyIncomeAndExpenseSummaryReportModel
     {
         get 
         {
-            return Date.ToString("dd-MMMM-yyyy"); 
+            return Date.ToString(Constants.DateFormat); 
         }
     }
 

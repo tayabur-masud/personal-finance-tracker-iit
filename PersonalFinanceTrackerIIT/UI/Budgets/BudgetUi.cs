@@ -67,9 +67,11 @@ public partial class BudgetUi : Form
             {
                 throw new ArgumentException("Please select a category.");
             }
-            if (string.IsNullOrWhiteSpace(amountTextBox.Text) || !decimal.TryParse(amountTextBox.Text, out decimal amount) || amount <= 0)
+            if (string.IsNullOrWhiteSpace(amountTextBox.Text) ||
+                !decimal.TryParse(amountTextBox.Text, out decimal amount) ||
+                amount <= 0)
             {
-                throw new ArgumentException("Please enter a valid budget amount greater than zero.");
+                throw new ArgumentException("Please enter a valid amount.");
             }
             var selectedMonth = (Month)monthComboBox.SelectedItem;
             var selectedCategory = (CategoryModel)categoryComboBox.SelectedItem;
@@ -87,7 +89,7 @@ public partial class BudgetUi : Form
 
             await LoadMonthWiseBudgets(selectedMonth.Id);
 
-            ResetForm();
+            ResetInput();
         }
         catch (ArgumentException ex)
         {
@@ -163,13 +165,13 @@ public partial class BudgetUi : Form
             }
             else
             {
-                MessageBox.Show("Please select a category to edit.", "No Category Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Please select a budget to edit.", "No Budget Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         catch (Exception ex)
         {
             MessageBox.Show($"An error occurred while editing the budget: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            ResetForm();
+            ResetInput();
             return;
         }
     }
@@ -219,12 +221,25 @@ public partial class BudgetUi : Form
     {
         try
         {
-            ResetForm();
+            ResetInput();
         }
 
         catch (Exception ex)
         {
             MessageBox.Show($"An error occurred while resetting the form: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+    }
+
+    private void BudgetUi_FormClosed(object sender, FormClosedEventArgs e)
+    {
+        try
+        {
+            ResetForm();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"An error occurred while closing the form: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
     }
@@ -254,9 +269,15 @@ public partial class BudgetUi : Form
         }
     }
 
-    private void ResetForm()
+    private void ResetInput()
     {
         selectedBudgetId = 0;
         amountTextBox.Clear();
+    }
+
+    private void ResetForm()
+    {
+        ResetInput();
+        budgetListView.Items.Clear();
     }
 }

@@ -12,7 +12,6 @@ public partial class CategoryUi : Form
     {
         InitializeComponent();
         _categoryService = categoryService;
-        MessageBox.Show("Category UI initialized successfully.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
     private async void CategoryUi_Load(object sender, EventArgs e)
@@ -32,7 +31,7 @@ public partial class CategoryUi : Form
     {
         try
         {
-            ResetForm();
+            ResetInput();
         }
         catch (Exception ex)
         {
@@ -69,7 +68,7 @@ public partial class CategoryUi : Form
 
             await LoadCategories();
 
-            ResetForm();
+            ResetInput();
         }
         catch (ArgumentException ex)
         {
@@ -143,7 +142,7 @@ public partial class CategoryUi : Form
         catch (Exception ex)
         {
             MessageBox.Show($"An error occurred while editing the category: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            ResetForm();
+            ResetInput();
             return;
         }
     }
@@ -164,24 +163,29 @@ public partial class CategoryUi : Form
 
     private void ResetForm()
     {
-        selectedCategoryId = 0;
-        incomeRadioButton.Checked = false;
-        expenseRadioButton.Checked = false;
-        nameTextBox.Text = string.Empty;
-        descriptionRichTextBox.Text = string.Empty;
+        ResetInput();
+        categoryListView.Items.Clear();
     }
 
     private void CategoryUi_FormClosed(object sender, FormClosedEventArgs e)
     {
         try
         {
-            //Close();
-            //Dispose(true);
+            ResetForm();
         }
         catch (Exception ex)
         {
             MessageBox.Show($"An error occurred while closing the form: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
+    }
+
+    private void ResetInput()
+    {
+        selectedCategoryId = 0;
+        incomeRadioButton.Checked = false;
+        expenseRadioButton.Checked = false;
+        nameTextBox.Text = string.Empty;
+        descriptionRichTextBox.Text = string.Empty;
     }
 }

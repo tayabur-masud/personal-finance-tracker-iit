@@ -4,7 +4,9 @@ namespace PersonalFinanceTrackerIIT.Services;
 
 public interface ITransactionService
 {
-    Task AddTransaction(TransactionModel model);
+    Task AddOrUpdateTransaction(TransactionModel model);
+
+    Task DeleteTransaction(int id);
 
     Task<IReadOnlyCollection<TransactionModel>> GetIncomeTransactions();
 

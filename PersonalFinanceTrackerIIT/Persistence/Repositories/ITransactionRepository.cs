@@ -8,4 +8,6 @@ public interface ITransactionRepository : IRepositoryBase<Transaction>
     Task<IReadOnlyCollection<Transaction>> GetTransactionsBySummaryFilterAsync(MonthlyIncomeAndExpenseSummaryFilterModel filter);
 
     Task<IReadOnlyCollection<Transaction>> GetByCategory(int categoryId);
+
+    Task<IReadOnlyCollection<Transaction>> GetByCategoryType(CategoryType categoryType);
 }

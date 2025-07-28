@@ -213,6 +213,7 @@ partial class BudgetUi
         Name = "BudgetUi";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Budget";
+        FormClosed += BudgetUi_FormClosed;
         Load += BudgetUi_Load;
         budgetFormGroupBox.ResumeLayout(false);
         budgetFormGroupBox.PerformLayout();

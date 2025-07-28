@@ -14,20 +14,35 @@ public class TransactionService : ITransactionService
         _transactionRepository = transactionRepository;
     }
 
-    public async Task AddTransaction(TransactionModel model)
+    public async Task AddOrUpdateTransaction(TransactionModel model)
     {
         var transaction = model.Adapt<Transaction>();
+
+        if (transaction.Id > 0)
+        {
+            await _transactionRepository.Update(transaction);
+            return;
+        }
 
         await _transactionRepository.Add(transaction);
     }
 
-    public Task<IReadOnlyCollection<TransactionModel>> GetExpenseTransactions()
+    public async Task DeleteTransaction(int id)
     {
-        throw new NotImplementedException();
+        await _transactionRepository.Remove(id);
     }
 
-    public Task<IReadOnlyCollection<TransactionModel>> GetIncomeTransactions()
+    public async Task<IReadOnlyCollection<TransactionModel>> GetExpenseTransactions()
     {
-        throw new NotImplementedException();
+        var transactions = await _transactionRepository.GetByCategoryType(CategoryType.Expense);
+        var transactionModels = transactions.Adapt<IReadOnlyCollection<TransactionModel>>();
+        return transactionModels.OrderByDescending(x => x.Date).ToList();
+    }
+
+    public async Task<IReadOnlyCollection<TransactionModel>> GetIncomeTransactions()
+    {
+        var transactions = await _transactionRepository.GetByCategoryType(CategoryType.Income);
+        var transactionModels = transactions.Adapt<IReadOnlyCollection<TransactionModel>>();
+        return transactionModels.OrderByDescending(x => x.Date).ToList();
     }
 }

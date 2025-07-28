@@ -59,11 +59,13 @@ public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : BaseEntit
     {
         var entity = await Get(id);
         _context.Remove(entity);
+        await _context.SaveChangesAsync();
     }
 
     public async Task RemoveRange(IReadOnlyCollection<int> idList)
     {
         var entities = await GetList(idList);
         _context.RemoveRange(entities);
+        await _context.SaveChangesAsync();
     } 
 }
