@@ -30,14 +30,16 @@ public class ReportService : IReportService
         return reportData;
     }
 
-    public async Task<IReadOnlyCollection<CategoryWiseExpenseBreakdownModel>> GetCategoryWiseExpenseBreakdownAsync()
+    public async Task<IReadOnlyCollection<CategoryWiseExpenseBreakdownModel>> GetCategoryWiseExpenseBreakdownAsync(string monthId)
     {
+        var monthYear = MonthService.GetMonthAndYearFromMonthId(monthId);
+
         var reportData = new List<CategoryWiseExpenseBreakdownModel>();
         var categories = await _categoryRepository.GetByType(CategoryType.Expense);
         foreach (var category in categories)
         {
-            var transactions = await _transactionRepository.GetByCategory(category.Id);
-            
+            var transactions = await _transactionRepository.GetByMonthYearCategory(monthYear.Item1, monthYear.Item2, category.Id);
+
             var data = new CategoryWiseExpenseBreakdownModel
             {
                 CategoryName = category.Name,
@@ -70,6 +72,44 @@ public class ReportService : IReportService
             };
             reportData.Add(data);
         }
+
+        return reportData;
+    }
+
+    public async Task<IReadOnlyCollection<ExpenseOverTimeModel>> GetExpenseOverTimeReport(ExpenseOverTimeFilterModel filterModel)
+    {
+        var transactions = await _transactionRepository.GetExpenseBySummaryFilterAsync(filterModel);
+
+        //var grouped = filterModel.GroupBy switch
+        //{
+        //    GroupByPeriod.Daily => transactions.GroupBy(e => e.Date.Date),
+        //    GroupByPeriod.Weekly => transactions.GroupBy(e => ISOWeek.GetWeekOfYear(e.Date)),
+        //    GroupByPeriod.Monthly => transactions.GroupBy(e => new { e.Date.Year, e.Date.Month }),
+        //    _ => throw new ArgumentOutOfRangeException()
+        //};
+
+        var grouped = filterModel.GroupBy switch
+        {
+            GroupByPeriod.Daily => transactions
+                                    .GroupBy(e => e.Date.ToString(Constants.DateFormat)),
+            //GroupByPeriod.Weekly => transactions
+            //                        .GroupBy(e => $"Week {ISOWeek.GetWeekOfYear(e.Date)} of {e.Date.Year}"),
+            GroupByPeriod.Weekly => transactions.GroupBy(e =>
+            {
+                var diff = e.Date.DayOfWeek - DayOfWeek.Monday;
+                var weekStart = e.Date.AddDays(-diff);
+                return weekStart.Date.ToString(Constants.DateFormat);
+            }),
+            GroupByPeriod.Monthly => transactions
+                                    .GroupBy(e => e.Date.ToString(Constants.MonthNameFormat)),
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
+        List<ExpenseOverTimeModel> reportData = grouped.Select(g => new ExpenseOverTimeModel
+        {
+            PeriodLabel = g.Key,
+            TotalExpense = (double)g.Sum(x => x.Amount)
+        }).ToList();
 
         return reportData;
     }

@@ -39,8 +39,9 @@
             reportsToolStripMenuItem = new ToolStripMenuItem();
             monthlyIncomeExpenseSummaryToolStripMenuItem = new ToolStripMenuItem();
             categoryWiseExpenseBreakdownToolStripMenuItem = new ToolStripMenuItem();
-            label1 = new Label();
             budgetVsActualExpenseReportToolStripMenuItem = new ToolStripMenuItem();
+            label1 = new Label();
+            expenseOverTimeReportToolStripMenuItem = new ToolStripMenuItem();
             mainMenuStrip.SuspendLayout();
             SuspendLayout();
             // 
@@ -105,7 +106,7 @@
             // 
             // reportsToolStripMenuItem
             // 
-            reportsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { monthlyIncomeExpenseSummaryToolStripMenuItem, categoryWiseExpenseBreakdownToolStripMenuItem, budgetVsActualExpenseReportToolStripMenuItem });
+            reportsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { monthlyIncomeExpenseSummaryToolStripMenuItem, categoryWiseExpenseBreakdownToolStripMenuItem, budgetVsActualExpenseReportToolStripMenuItem, expenseOverTimeReportToolStripMenuItem });
             reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             reportsToolStripMenuItem.Size = new Size(89, 29);
             reportsToolStripMenuItem.Text = "Reports";
@@ -124,6 +125,13 @@
             categoryWiseExpenseBreakdownToolStripMenuItem.Text = "Category-Wise Expense Breakdown";
             categoryWiseExpenseBreakdownToolStripMenuItem.Click += categoryWiseExpenseBreakdownToolStripMenuItem_Click;
             // 
+            // budgetVsActualExpenseReportToolStripMenuItem
+            // 
+            budgetVsActualExpenseReportToolStripMenuItem.Name = "budgetVsActualExpenseReportToolStripMenuItem";
+            budgetVsActualExpenseReportToolStripMenuItem.Size = new Size(413, 34);
+            budgetVsActualExpenseReportToolStripMenuItem.Text = "Budget vs Actual Expense Report";
+            budgetVsActualExpenseReportToolStripMenuItem.Click += budgetVsActualExpenseReportToolStripMenuItem_Click;
+            // 
             // label1
             // 
             label1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
@@ -136,12 +144,12 @@
             label1.Text = "Developed for\r\nAdvanced OOP Course\r\nExecutive MIT\r\nIIT, University of Dhaka";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // budgetVsActualExpenseReportToolStripMenuItem
+            // expenseOverTimeReportToolStripMenuItem
             // 
-            budgetVsActualExpenseReportToolStripMenuItem.Name = "budgetVsActualExpenseReportToolStripMenuItem";
-            budgetVsActualExpenseReportToolStripMenuItem.Size = new Size(413, 34);
-            budgetVsActualExpenseReportToolStripMenuItem.Text = "Budget vs Actual Expense Report";
-            budgetVsActualExpenseReportToolStripMenuItem.Click += budgetVsActualExpenseReportToolStripMenuItem_Click;
+            expenseOverTimeReportToolStripMenuItem.Name = "expenseOverTimeReportToolStripMenuItem";
+            expenseOverTimeReportToolStripMenuItem.Size = new Size(413, 34);
+            expenseOverTimeReportToolStripMenuItem.Text = "Expense Over Time Report";
+            expenseOverTimeReportToolStripMenuItem.Click += expenseOverTimeReportToolStripMenuItem_Click;
             // 
             // MainUi
             // 
@@ -176,5 +184,6 @@
         private ToolStripMenuItem addUpdateDeleteToolStripMenuItem;
         private ToolStripMenuItem categoryWiseExpenseBreakdownToolStripMenuItem;
         private ToolStripMenuItem budgetVsActualExpenseReportToolStripMenuItem;
+        private ToolStripMenuItem expenseOverTimeReportToolStripMenuItem;
     }
 }

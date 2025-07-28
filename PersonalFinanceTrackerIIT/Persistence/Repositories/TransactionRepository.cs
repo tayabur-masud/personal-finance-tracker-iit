@@ -52,7 +52,7 @@ public class TransactionRepository : RepositoryBase<Transaction>, ITransactionRe
 
         return await QueryWithIncludes
             .Where(t => t.CategoryId == categoryId
-                    && t.Date.Date >= fromDate.Date 
+                    && t.Date.Date >= fromDate.Date
                     && t.Date.Date <= toDate.Date)
             .ToListAsync();
     }
@@ -62,5 +62,19 @@ public class TransactionRepository : RepositoryBase<Transaction>, ITransactionRe
         return await QueryWithIncludes
             .Where(t => t.Category.Type == (int)categoryType)
             .ToListAsync();
+    }
+
+    public async Task<IReadOnlyCollection<Transaction>> GetExpenseBySummaryFilterAsync(ExpenseOverTimeFilterModel filter)
+    {
+        var query = QueryWithIncludes.Where(x => x.Category.Type == (int)CategoryType.Expense
+            && x.Date.Date >= filter.From.Date
+            && x.Date.Date <= filter.To.Date);
+
+        if (filter.Categories != null && filter.Categories.Count > 0)
+        {
+            query = query.Where(t => filter.Categories.Contains(t.CategoryId));
+        }
+
+        return await query.OrderBy(x => x.Date).ToListAsync();
     }
 }

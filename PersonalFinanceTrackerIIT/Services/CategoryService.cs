@@ -18,7 +18,14 @@ public class CategoryService : ICategoryService
     {
         var category = model.Adapt<Category>();
 
-        if(category.Id > 0)
+        var existingCategory = await _categoryRepository.GetByTypeAndName((CategoryType)category.Type, category.Name);
+
+        if (existingCategory is not null && existingCategory.Id != category.Id)
+        {
+            throw new InvalidOperationException("Category with the same name and type already exists.");
+        }
+
+        if (category.Id > 0)
         {
             await _categoryRepository.Update(category);
             return;

@@ -3,6 +3,7 @@ using PersonalFinanceTrackerIIT.Persistence.Entities;
 using PersonalFinanceTrackerIIT.Services;
 
 namespace PersonalFinanceTrackerIIT.UI.Categories;
+
 public partial class CategoryUi : Form
 {
     private readonly ICategoryService _categoryService;
@@ -73,6 +74,11 @@ public partial class CategoryUi : Form
         catch (ArgumentException ex)
         {
             MessageBox.Show(ex.Message, "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+        catch (InvalidOperationException ex)
+        {
+            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
         catch (Exception ex)

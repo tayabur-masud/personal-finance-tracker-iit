@@ -101,6 +101,7 @@ partial class BudgetUi
         // amountTextBox
         // 
         amountTextBox.Location = new Point(318, 143);
+        amountTextBox.MaxLength = 10;
         amountTextBox.Name = "amountTextBox";
         amountTextBox.Size = new Size(336, 31);
         amountTextBox.TabIndex = 4;

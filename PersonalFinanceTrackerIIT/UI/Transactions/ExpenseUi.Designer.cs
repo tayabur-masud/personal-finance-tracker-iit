@@ -116,6 +116,7 @@
             descriptionRichTextBox.Anchor = AnchorStyles.Top;
             descriptionRichTextBox.Location = new Point(326, 182);
             descriptionRichTextBox.Margin = new Padding(4);
+            descriptionRichTextBox.MaxLength = 500;
             descriptionRichTextBox.Name = "descriptionRichTextBox";
             descriptionRichTextBox.Size = new Size(312, 149);
             descriptionRichTextBox.TabIndex = 6;
@@ -147,6 +148,7 @@
             amountTextBox.Anchor = AnchorStyles.Top;
             amountTextBox.Location = new Point(326, 77);
             amountTextBox.Margin = new Padding(4);
+            amountTextBox.MaxLength = 10;
             amountTextBox.Name = "amountTextBox";
             amountTextBox.Size = new Size(312, 31);
             amountTextBox.TabIndex = 3;

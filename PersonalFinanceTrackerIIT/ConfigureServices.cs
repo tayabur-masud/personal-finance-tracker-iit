@@ -36,6 +36,7 @@ public static class ConfigureServices
         services.AddScoped<MonthlyIncomeAndExpenseSummaryUi>();
         services.AddScoped<CategoryWiseExpenseBreakdownUi>();
         services.AddScoped<BudgetVsActualExpenseUi>();
+        services.AddScoped<ExpenseOverTimeUi>();
         return services.BuildServiceProvider();
     }
 

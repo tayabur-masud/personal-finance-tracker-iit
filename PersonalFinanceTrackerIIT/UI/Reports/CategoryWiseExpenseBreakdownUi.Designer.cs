@@ -29,30 +29,57 @@ partial class CategoryWiseExpenseBreakdownUi
     private void InitializeComponent()
     {
         piePanel = new Panel();
+        monthLabel = new Label();
+        monthComboBox = new ComboBox();
         SuspendLayout();
         // 
         // piePanel
         // 
-        piePanel.Dock = DockStyle.Fill;
-        piePanel.Location = new Point(0, 0);
+        piePanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+        piePanel.Location = new Point(0, 57);
         piePanel.Name = "piePanel";
-        piePanel.Size = new Size(837, 491);
+        piePanel.Size = new Size(837, 434);
         piePanel.TabIndex = 0;
+        // 
+        // monthLabel
+        // 
+        monthLabel.Anchor = AnchorStyles.Top;
+        monthLabel.AutoSize = true;
+        monthLabel.Location = new Point(227, 14);
+        monthLabel.Name = "monthLabel";
+        monthLabel.Size = new Size(65, 25);
+        monthLabel.TabIndex = 5;
+        monthLabel.Text = "Month";
+        // 
+        // monthComboBox
+        // 
+        monthComboBox.Anchor = AnchorStyles.Top;
+        monthComboBox.FormattingEnabled = true;
+        monthComboBox.Location = new Point(332, 11);
+        monthComboBox.Name = "monthComboBox";
+        monthComboBox.Size = new Size(282, 33);
+        monthComboBox.TabIndex = 4;
+        monthComboBox.SelectionChangeCommitted += monthComboBox_SelectionChangeCommitted;
         // 
         // CategoryWiseExpenseBreakdownUi
         // 
         AutoScaleDimensions = new SizeF(10F, 25F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(837, 491);
+        Controls.Add(monthLabel);
+        Controls.Add(monthComboBox);
         Controls.Add(piePanel);
         Name = "CategoryWiseExpenseBreakdownUi";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Category-Wise Expense Breakdown";
         Load += CategoryWiseExpenseBreakdownUi_Load;
         ResumeLayout(false);
+        PerformLayout();
     }
 
     #endregion
 
     private Panel piePanel;
+    private Label monthLabel;
+    private ComboBox monthComboBox;
 }
