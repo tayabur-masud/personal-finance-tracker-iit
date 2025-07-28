@@ -37,6 +37,26 @@ public class TransactionRepository : RepositoryBase<Transaction>, ITransactionRe
             .ToListAsync();
     }
 
+    public async Task<IReadOnlyCollection<Transaction>> GetByMonthYearCategory(int month, int year, int categoryId)
+    {
+        var fromDate = MonthService.GetFirstDayOfMonth(year, month);
+        var toDate = MonthService.GetLastDayOfMonth(year, month);
+        if (fromDate == DateTime.MinValue || toDate == DateTime.MinValue)
+        {
+            throw new ArgumentException("Invalid month or year provided.");
+        }
+        if (categoryId <= 0)
+        {
+            throw new ArgumentException("Invalid category ID provided.");
+        }
+
+        return await QueryWithIncludes
+            .Where(t => t.CategoryId == categoryId
+                    && t.Date.Date >= fromDate.Date 
+                    && t.Date.Date <= toDate.Date)
+            .ToListAsync();
+    }
+
     public async Task<IReadOnlyCollection<Transaction>> GetByCategoryType(CategoryType categoryType)
     {
         return await QueryWithIncludes

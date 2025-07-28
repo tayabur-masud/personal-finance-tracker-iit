@@ -1,6 +1,6 @@
 ﻿namespace PersonalFinanceTrackerIIT.UI.Reports;
 
-partial class MonthlyIncomeAndExpenseSummaryReportUi
+partial class MonthlyIncomeAndExpenseSummaryUi
 {
     /// <summary>
     /// Required designer variable.
@@ -93,9 +93,9 @@ partial class MonthlyIncomeAndExpenseSummaryReportUi
         monthLabel.AutoSize = true;
         monthLabel.Location = new Point(636, 33);
         monthLabel.Name = "monthLabel";
-        monthLabel.Size = new Size(73, 25);
+        monthLabel.Size = new Size(65, 25);
         monthLabel.TabIndex = 1;
-        monthLabel.Text = "Month*";
+        monthLabel.Text = "Month";
         // 
         // monthComboBox
         // 
@@ -169,14 +169,14 @@ partial class MonthlyIncomeAndExpenseSummaryReportUi
         descriptionColumnHeader.Text = "Description";
         descriptionColumnHeader.Width = 600;
         // 
-        // MonthlyIncomeAndExpenseSummaryReportUi
+        // MonthlyIncomeAndExpenseSummaryUi
         // 
         AutoScaleDimensions = new SizeF(10F, 25F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(1670, 661);
         Controls.Add(resultGroupBox);
         Controls.Add(filterGroupBox);
-        Name = "MonthlyIncomeAndExpenseSummaryReportUi";
+        Name = "MonthlyIncomeAndExpenseSummaryUi";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Monthly Income & Expense Summary Report";
         WindowState = FormWindowState.Maximized;

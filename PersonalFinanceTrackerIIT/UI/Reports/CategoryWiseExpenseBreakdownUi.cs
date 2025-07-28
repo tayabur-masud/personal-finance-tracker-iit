@@ -3,6 +3,7 @@ using LiveChartsCore.SkiaSharpView.WinForms;
 using PersonalFinanceTrackerIIT.Services;
 
 namespace PersonalFinanceTrackerIIT.UI.Reports;
+
 public partial class CategoryWiseExpenseBreakdownUi : Form
 {
     private readonly IReportService _reportService;

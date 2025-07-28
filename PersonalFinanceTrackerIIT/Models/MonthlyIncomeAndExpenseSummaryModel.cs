@@ -2,7 +2,7 @@
 
 namespace PersonalFinanceTrackerIIT.Models;
 
-public class MonthlyIncomeAndExpenseSummaryReportModel
+public class MonthlyIncomeAndExpenseSummaryModel
 {
     public DateTime Date { get; set; }
 

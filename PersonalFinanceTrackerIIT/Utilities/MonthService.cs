@@ -50,4 +50,17 @@ public static class MonthService
         var year = monthId.Substring(2, 4);
         return new Tuple<int, int>(Convert.ToInt32(month), Convert.ToInt32(year));
     }
+
+    public static DateTime GetFirstDayOfMonth(int year, int month)
+    {
+        return new DateTime(year, month, 1);
+    }
+
+    public static DateTime GetLastDayOfMonth(int year, int month)
+    {
+        // Get the first day of the next month
+        DateTime firstDayOfNextMonth = new DateTime(year, month, 1).AddMonths(1);
+        // Subtract one day to get the last day of the current month
+        return firstDayOfNextMonth.AddDays(-1);
+    }
 }

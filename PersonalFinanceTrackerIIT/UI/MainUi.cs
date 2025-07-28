@@ -36,7 +36,7 @@ public partial class MainUi : Form
 
     private void monthlyIncomeExpenseSummaryToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var monthlyIncomeAndExpenseSummaryReportUi = _serviceProvider.GetRequiredService<MonthlyIncomeAndExpenseSummaryReportUi>();
+        var monthlyIncomeAndExpenseSummaryReportUi = _serviceProvider.GetRequiredService<MonthlyIncomeAndExpenseSummaryUi>();
         monthlyIncomeAndExpenseSummaryReportUi.ShowDialog();
     }
 
@@ -54,7 +54,7 @@ public partial class MainUi : Form
 
     private void budgetVsActualExpenseReportToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var budgetVsActualExpenseReportUi = _serviceProvider.GetRequiredService<BudgetVsActualExpenseReportUi>();
+        var budgetVsActualExpenseReportUi = _serviceProvider.GetRequiredService<BudgetVsActualExpenseUi>();
         budgetVsActualExpenseReportUi.ShowDialog();
     }
 }

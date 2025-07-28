@@ -13,7 +13,7 @@ public class TransactionMapper : IRegister
 
         config.NewConfig<TransactionModel, Transaction>();
 
-        config.NewConfig<Transaction, MonthlyIncomeAndExpenseSummaryReportModel>()
+        config.NewConfig<Transaction, MonthlyIncomeAndExpenseSummaryModel>()
             .Map(dest => dest.IncomeAmount, src => src.Amount, src => src.Category.Type == (int)CategoryType.Income)
             .Map(dest => dest.ExpenseAmount, src => src.Amount, src => src.Category.Type == (int)CategoryType.Expense)
             .Map(dest => dest.Category, src => src.Category.Name);

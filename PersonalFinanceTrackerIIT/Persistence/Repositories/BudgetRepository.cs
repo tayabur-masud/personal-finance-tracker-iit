@@ -15,4 +15,9 @@ public class BudgetRepository : RepositoryBase<Budget>, IBudgetRepository
     {
         return await QueryWithIncludes.Where(x => x.Month == month && x.Year == year).ToListAsync();
     }
+
+    public async Task<Budget> GetByMonthYearCategory(int month, int year, int categoryId)
+    {
+        return await QueryWithIncludes.FirstOrDefaultAsync(x => x.Month == month && x.Year == year && x.CategoryId == categoryId);
+    }
 }

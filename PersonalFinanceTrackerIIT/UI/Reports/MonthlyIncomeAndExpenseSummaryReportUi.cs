@@ -6,12 +6,12 @@ using PersonalFinanceTrackerIIT.Utilities;
 
 namespace PersonalFinanceTrackerIIT.UI.Reports;
 
-public partial class MonthlyIncomeAndExpenseSummaryReportUi : Form
+public partial class MonthlyIncomeAndExpenseSummaryUi : Form
 {
     private readonly ICategoryService _categoryService;
     private readonly IReportService _reportService;
 
-    public MonthlyIncomeAndExpenseSummaryReportUi(
+    public MonthlyIncomeAndExpenseSummaryUi(
         ICategoryService categoryService,
         IReportService reportService)
     {
@@ -124,7 +124,7 @@ public partial class MonthlyIncomeAndExpenseSummaryReportUi : Form
         }
     }
 
-    private void LoadResultListView(IReadOnlyCollection<MonthlyIncomeAndExpenseSummaryReportModel> report)
+    private void LoadResultListView(IReadOnlyCollection<MonthlyIncomeAndExpenseSummaryModel> report)
     {
         resultListView.Items.Clear();
 

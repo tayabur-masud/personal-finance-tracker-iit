@@ -3,6 +3,7 @@ using PersonalFinanceTrackerIIT.Models;
 using PersonalFinanceTrackerIIT.Models.FilterModels;
 using PersonalFinanceTrackerIIT.Persistence.Entities;
 using PersonalFinanceTrackerIIT.Persistence.Repositories;
+using PersonalFinanceTrackerIIT.Utilities;
 
 namespace PersonalFinanceTrackerIIT.Services;
 
@@ -10,19 +11,22 @@ public class ReportService : IReportService
 {
     private readonly ICategoryRepository _categoryRepository;
     private readonly ITransactionRepository _transactionRepository;
+    private readonly IBudgetRepository _budgetRepository;
 
     public ReportService(
         ICategoryRepository categoryRepository, 
-        ITransactionRepository transactionRepository)
+        ITransactionRepository transactionRepository,
+        IBudgetRepository budgetRepository)
     {
         _categoryRepository = categoryRepository;
         _transactionRepository = transactionRepository;
+        _budgetRepository=budgetRepository;
     }
 
-    public async Task<IReadOnlyCollection<MonthlyIncomeAndExpenseSummaryReportModel>> GetMonthlyIncomeAndExpenseSummaryReport(MonthlyIncomeAndExpenseSummaryFilterModel filterModel)
+    public async Task<IReadOnlyCollection<MonthlyIncomeAndExpenseSummaryModel>> GetMonthlyIncomeAndExpenseSummaryReport(MonthlyIncomeAndExpenseSummaryFilterModel filterModel)
     {
         var transactions = await _transactionRepository.GetTransactionsBySummaryFilterAsync(filterModel);
-        var reportData = transactions.Adapt<IReadOnlyCollection<MonthlyIncomeAndExpenseSummaryReportModel>>();
+        var reportData = transactions.Adapt<IReadOnlyCollection<MonthlyIncomeAndExpenseSummaryModel>>();
         return reportData;
     }
 
@@ -32,17 +36,41 @@ public class ReportService : IReportService
         var categories = await _categoryRepository.GetByType(CategoryType.Expense);
         foreach (var category in categories)
         {
-            var totalExpense = await _transactionRepository.GetByCategory(category.Id);
+            var transactions = await _transactionRepository.GetByCategory(category.Id);
             
             var data = new CategoryWiseExpenseBreakdownModel
             {
                 CategoryName = category.Name,
-                TotalExpense = totalExpense.Sum(x => x.Amount),
-                TransactionCount = totalExpense.Count,
+                TotalExpense = transactions.Sum(x => x.Amount),
+                TransactionCount = transactions.Count,
             };
             reportData.Add(data);
         }
         
+        return reportData;
+    }
+
+    public async Task<IReadOnlyCollection<BudgetVsActualExpenseReportModel>> GetBudgetVsActualExpenseAsync(string monthId)
+    {
+        var monthYear = MonthService.GetMonthAndYearFromMonthId(monthId);
+
+        var reportData = new List<BudgetVsActualExpenseReportModel>();
+        var categories = await _categoryRepository.GetByType(CategoryType.Expense);
+
+        foreach (var category in categories)
+        {
+            var transactions = await _transactionRepository.GetByMonthYearCategory(monthYear.Item1, monthYear.Item2, category.Id);
+            var budget = await _budgetRepository.GetByMonthYearCategory(monthYear.Item1, monthYear.Item2, category.Id);
+
+            var data = new BudgetVsActualExpenseReportModel
+            {
+                CategoryName = category.Name,
+                ActualExpense = transactions is not null ? (double)transactions.Sum(x => x.Amount) : 0,
+                BudgetAmount = budget is not null ? (double)budget.Amount : 0,
+            };
+            reportData.Add(data);
+        }
+
         return reportData;
     }
 }

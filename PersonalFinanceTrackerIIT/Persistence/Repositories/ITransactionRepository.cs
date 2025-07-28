@@ -9,5 +9,7 @@ public interface ITransactionRepository : IRepositoryBase<Transaction>
 
     Task<IReadOnlyCollection<Transaction>> GetByCategory(int categoryId);
 
+    Task<IReadOnlyCollection<Transaction>> GetByMonthYearCategory(int month, int year, int categoryId);
+
     Task<IReadOnlyCollection<Transaction>> GetByCategoryType(CategoryType categoryType);
 }

@@ -1,6 +1,6 @@
 ﻿namespace PersonalFinanceTrackerIIT.UI.Reports;
 
-partial class BudgetVsActualExpenseReportUi
+partial class BudgetVsActualExpenseUi
 {
     /// <summary>
     /// Required designer variable.
@@ -28,18 +28,58 @@ partial class BudgetVsActualExpenseReportUi
     /// </summary>
     private void InitializeComponent()
     {
+        barPanel = new Panel();
+        monthLabel = new Label();
+        monthComboBox = new ComboBox();
         SuspendLayout();
         // 
-        // BudgetVsActualExpenseReportUi
+        // barPanel
+        // 
+        barPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+        barPanel.Location = new Point(0, 57);
+        barPanel.Name = "barPanel";
+        barPanel.Size = new Size(837, 434);
+        barPanel.TabIndex = 0;
+        // 
+        // monthLabel
+        // 
+        monthLabel.Anchor = AnchorStyles.Top;
+        monthLabel.AutoSize = true;
+        monthLabel.Location = new Point(227, 14);
+        monthLabel.Name = "monthLabel";
+        monthLabel.Size = new Size(65, 25);
+        monthLabel.TabIndex = 3;
+        monthLabel.Text = "Month";
+        // 
+        // monthComboBox
+        // 
+        monthComboBox.Anchor = AnchorStyles.Top;
+        monthComboBox.FormattingEnabled = true;
+        monthComboBox.Location = new Point(332, 11);
+        monthComboBox.Name = "monthComboBox";
+        monthComboBox.Size = new Size(282, 33);
+        monthComboBox.TabIndex = 2;
+        monthComboBox.SelectionChangeCommitted += monthComboBox_SelectionChangeCommitted;
+        // 
+        // BudgetVsActualExpenseUi
         // 
         AutoScaleDimensions = new SizeF(10F, 25F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(800, 450);
-        Name = "BudgetVsActualExpenseReportUi";
+        ClientSize = new Size(837, 491);
+        Controls.Add(monthLabel);
+        Controls.Add(monthComboBox);
+        Controls.Add(barPanel);
+        Name = "BudgetVsActualExpenseUi";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Budget vs Actual Expense Report";
+        Load += BudgetVsActualExpenseUi_Load;
         ResumeLayout(false);
+        PerformLayout();
     }
 
     #endregion
+
+    private Panel barPanel;
+    private Label monthLabel;
+    private ComboBox monthComboBox;
 }
