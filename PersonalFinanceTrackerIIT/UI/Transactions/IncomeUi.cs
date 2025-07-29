@@ -23,6 +23,8 @@ public partial class IncomeUi : Form
     {
         try
         {
+            categoryComboBox.DataSource = null;
+            categoryComboBox.Items.Clear();
             var categories = await _categoryService.GetCategoriesByType(CategoryType.Income);
             categoryComboBox.DisplayMember = nameof(CategoryModel.Name);
             categoryComboBox.ValueMember = nameof(CategoryModel.Id);

@@ -23,15 +23,17 @@ public partial class BudgetUi : Form
     {
         try
         {
-            var _months = MonthService.GetMonths();
+            monthComboBox.DataSource = null;
             monthComboBox.Items.Clear();
+            var _months = MonthService.GetMonths();            
             monthComboBox.DisplayMember = nameof(Month.Name);
             monthComboBox.ValueMember = nameof(Month.Id);
             monthComboBox.DataSource = _months.ToList();
             monthComboBox.Text = MonthService.GetCurrentMonth().Name;
 
-            var _categories = await _categoryService.GetCategoriesByType(CategoryType.Expense);
+            categoryComboBox.DataSource = null;
             categoryComboBox.Items.Clear();
+            var _categories = await _categoryService.GetCategoriesByType(CategoryType.Expense);
             categoryComboBox.DisplayMember = nameof(CategoryModel.Name);
             categoryComboBox.ValueMember = nameof(CategoryModel.Id);
             categoryComboBox.DataSource = _categories;

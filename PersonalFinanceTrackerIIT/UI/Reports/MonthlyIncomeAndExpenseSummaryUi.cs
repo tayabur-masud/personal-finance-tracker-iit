@@ -33,8 +33,9 @@ public partial class MonthlyIncomeAndExpenseSummaryUi : Form
                 categoryCheckedListBox.Items.Add(category, true);
             }
 
-            var _months = MonthService.GetMonths();
+            monthComboBox.DataSource = null;
             monthComboBox.Items.Clear();
+            var _months = MonthService.GetMonths();
             monthComboBox.DisplayMember = nameof(Month.Name);
             monthComboBox.ValueMember = nameof(Month.Id);
             monthComboBox.DataSource = _months.ToList();
