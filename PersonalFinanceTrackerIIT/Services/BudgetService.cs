@@ -48,4 +48,9 @@ public class BudgetService : IBudgetService
         var budgetModels = budgets.Adapt<IReadOnlyCollection<BudgetModel>>();
         return budgetModels;
     }
+
+    public void Dispose()
+    {
+        _budgetRepository.Dispose();
+    }
 }

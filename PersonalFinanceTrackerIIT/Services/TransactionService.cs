@@ -45,4 +45,9 @@ public class TransactionService : ITransactionService
         var transactionModels = transactions.Adapt<IReadOnlyCollection<TransactionModel>>();
         return transactionModels.OrderByDescending(x => x.Date).ToList();
     }
+
+    public void Dispose()
+    {
+        _transactionRepository.Dispose();
+    }
 }

@@ -2,7 +2,7 @@
 
 namespace PersonalFinanceTrackerIIT.Services;
 
-public interface ITransactionService
+public interface ITransactionService : IDisposable
 {
     Task AddOrUpdateTransaction(TransactionModel model);
 

@@ -2,7 +2,7 @@
 
 namespace PersonalFinanceTrackerIIT.Services;
 
-public interface IBudgetService
+public interface IBudgetService : IDisposable
 {
     Task AddOrUpdateBudget(BudgetModel model);
 

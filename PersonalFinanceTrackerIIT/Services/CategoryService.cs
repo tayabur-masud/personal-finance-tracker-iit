@@ -45,4 +45,9 @@ public class CategoryService : ICategoryService
         var categoryModels = categories.Adapt<IReadOnlyCollection<CategoryModel>>();
         return categoryModels;
     }
+
+    public void Dispose()
+    {
+        _categoryRepository.Dispose();
+    }
 }

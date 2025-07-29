@@ -73,4 +73,11 @@ public class ReportService : IReportService
 
         return reportData;
     }
+
+    public void Dispose()
+    {
+        _categoryRepository.Dispose();
+        _transactionRepository.Dispose();
+        _budgetRepository.Dispose();
+    }
 }
