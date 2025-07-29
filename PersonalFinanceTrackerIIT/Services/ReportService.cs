@@ -80,14 +80,6 @@ public class ReportService : IReportService
     {
         var transactions = await _transactionRepository.GetExpenseBySummaryFilterAsync(filterModel);
 
-        //var grouped = filterModel.GroupBy switch
-        //{
-        //    GroupByPeriod.Daily => transactions.GroupBy(e => e.Date.Date),
-        //    GroupByPeriod.Weekly => transactions.GroupBy(e => ISOWeek.GetWeekOfYear(e.Date)),
-        //    GroupByPeriod.Monthly => transactions.GroupBy(e => new { e.Date.Year, e.Date.Month }),
-        //    _ => throw new ArgumentOutOfRangeException()
-        //};
-
         var grouped = filterModel.GroupBy switch
         {
             GroupByPeriod.Daily => transactions
@@ -112,5 +104,12 @@ public class ReportService : IReportService
         }).ToList();
 
         return reportData;
+    }
+
+    public void Dispose()
+    {
+        _categoryRepository.Dispose();
+        _transactionRepository.Dispose();
+        _budgetRepository.Dispose();
     }
 }

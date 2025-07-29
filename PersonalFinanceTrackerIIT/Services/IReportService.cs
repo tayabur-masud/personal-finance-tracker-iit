@@ -3,7 +3,7 @@ using PersonalFinanceTrackerIIT.Models.FilterModels;
 
 namespace PersonalFinanceTrackerIIT.Services;
 
-public interface IReportService
+public interface IReportService : IDisposable
 {
     Task<IReadOnlyCollection<MonthlyIncomeAndExpenseSummaryModel>> GetMonthlyIncomeAndExpenseSummaryReport(MonthlyIncomeAndExpenseSummaryFilterModel filterModel);
 

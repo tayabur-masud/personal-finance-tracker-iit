@@ -23,6 +23,8 @@ public partial class ExpenseUi : Form
     {
         try
         {
+            categoryComboBox.DataSource = null;
+            categoryComboBox.Items.Clear();
             var categories = await _categoryService.GetCategoriesByType(CategoryType.Expense);
             categoryComboBox.DisplayMember = nameof(CategoryModel.Name);
             categoryComboBox.ValueMember = nameof(CategoryModel.Id);

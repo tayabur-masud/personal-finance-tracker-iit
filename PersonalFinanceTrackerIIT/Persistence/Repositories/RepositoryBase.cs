@@ -67,5 +67,10 @@ public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : BaseEntit
         var entities = await GetList(idList);
         _context.RemoveRange(entities);
         await _context.SaveChangesAsync();
-    } 
+    }
+
+    public void Dispose()
+    {
+        _context.Dispose();
+    }
 }

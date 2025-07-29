@@ -2,7 +2,7 @@
 
 namespace PersonalFinanceTrackerIIT.Persistence.Repositories;
 
-public interface IRepositoryBase<T> where T : BaseEntity
+public interface IRepositoryBase<T> : IDisposable where T : BaseEntity
 {
     Task<T> Get(int id);
 

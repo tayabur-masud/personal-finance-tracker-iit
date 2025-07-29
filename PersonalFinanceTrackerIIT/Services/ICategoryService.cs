@@ -3,7 +3,7 @@ using PersonalFinanceTrackerIIT.Persistence.Entities;
 
 namespace PersonalFinanceTrackerIIT.Services;
 
-public interface ICategoryService
+public interface ICategoryService : IDisposable
 {
     Task AddOrUpdateCategory(CategoryModel model);
 
