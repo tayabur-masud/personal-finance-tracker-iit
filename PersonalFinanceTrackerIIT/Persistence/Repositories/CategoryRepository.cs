@@ -13,4 +13,10 @@ public class CategoryRepository : RepositoryBase<Category>, ICategoryRepository
     {
         return await Query.Where(x => x.Type == (int)type).ToListAsync();
     }
+
+    public async Task<Category> GetByTypeAndName(CategoryType type, string name)
+    {
+        return await Query.FirstOrDefaultAsync(x => x.Type == (int)type 
+            && x.Name.ToLower().Equals(name.ToLower()));
+    }
 }

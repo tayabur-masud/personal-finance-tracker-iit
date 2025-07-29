@@ -96,6 +96,11 @@ public partial class BudgetUi : Form
             MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
+        catch (InvalidOperationException ex)
+        {
+            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
         catch (Exception ex)
         {
             MessageBox.Show($"An error occurred while saving the budget: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

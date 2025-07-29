@@ -72,7 +72,6 @@ public partial class BudgetVsActualExpenseUi : Form
             Name = "Budget",
             Values = reportData.Select(x => x.BudgetAmount).ToList(),
             Stroke = null,
-
         };
 
         var actualSeries = new ColumnSeries<double>()
@@ -112,6 +111,4 @@ public partial class BudgetVsActualExpenseUi : Form
         barPanel.Controls.Clear();
         barPanel.Controls.Add(cartesianChart);
     }
-
-    
 }

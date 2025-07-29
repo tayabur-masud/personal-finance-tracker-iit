@@ -12,4 +12,6 @@ public interface ITransactionRepository : IRepositoryBase<Transaction>
     Task<IReadOnlyCollection<Transaction>> GetByMonthYearCategory(int month, int year, int categoryId);
 
     Task<IReadOnlyCollection<Transaction>> GetByCategoryType(CategoryType categoryType);
+
+    Task<IReadOnlyCollection<Transaction>> GetExpenseBySummaryFilterAsync(ExpenseOverTimeFilterModel filter);
 }

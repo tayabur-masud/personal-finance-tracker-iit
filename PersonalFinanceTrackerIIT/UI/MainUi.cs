@@ -36,8 +36,8 @@ public partial class MainUi : Form
 
     private void monthlyIncomeExpenseSummaryToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var monthlyIncomeAndExpenseSummaryReportUi = _serviceProvider.GetRequiredService<MonthlyIncomeAndExpenseSummaryUi>();
-        monthlyIncomeAndExpenseSummaryReportUi.ShowDialog();
+        var monthlyIncomeAndExpenseSummaryUi = _serviceProvider.GetRequiredService<MonthlyIncomeAndExpenseSummaryUi>();
+        monthlyIncomeAndExpenseSummaryUi.ShowDialog();
     }
 
     private void addUpdateDeleteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -54,7 +54,13 @@ public partial class MainUi : Form
 
     private void budgetVsActualExpenseReportToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var budgetVsActualExpenseReportUi = _serviceProvider.GetRequiredService<BudgetVsActualExpenseUi>();
-        budgetVsActualExpenseReportUi.ShowDialog();
+        var budgetVsActualExpenseUi = _serviceProvider.GetRequiredService<BudgetVsActualExpenseUi>();
+        budgetVsActualExpenseUi.ShowDialog();
+    }
+
+    private void expenseOverTimeReportToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        var expenseOverTimeUi = _serviceProvider.GetRequiredService<ExpenseOverTimeUi>();
+        expenseOverTimeUi.ShowDialog();
     }
 }

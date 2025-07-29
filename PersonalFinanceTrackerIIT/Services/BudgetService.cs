@@ -18,6 +18,13 @@ public class BudgetService : IBudgetService
     {
         var budget = model.Adapt<Budget>();
 
+        var existingBudget = await _budgetRepository.GetByMonthYearCategory(budget.Month, budget.Year, budget.CategoryId);
+
+        if (existingBudget is not null)
+        {
+            throw new InvalidOperationException("Budget for the specified month and category already exists.");
+        }
+
         if (budget.Id > 0)
         {
             await _budgetRepository.Update(budget);

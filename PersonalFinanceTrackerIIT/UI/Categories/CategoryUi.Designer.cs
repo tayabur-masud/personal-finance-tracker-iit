@@ -63,6 +63,7 @@ partial class CategoryUi
         nameTextBox.Anchor = AnchorStyles.Top;
         nameTextBox.Location = new Point(421, 72);
         nameTextBox.Margin = new Padding(4);
+        nameTextBox.MaxLength = 200;
         nameTextBox.Name = "nameTextBox";
         nameTextBox.Size = new Size(336, 31);
         nameTextBox.TabIndex = 1;
@@ -72,6 +73,7 @@ partial class CategoryUi
         descriptionRichTextBox.Anchor = AnchorStyles.Top;
         descriptionRichTextBox.Location = new Point(421, 125);
         descriptionRichTextBox.Margin = new Padding(4);
+        descriptionRichTextBox.MaxLength = 500;
         descriptionRichTextBox.Name = "descriptionRichTextBox";
         descriptionRichTextBox.Size = new Size(336, 149);
         descriptionRichTextBox.TabIndex = 2;
