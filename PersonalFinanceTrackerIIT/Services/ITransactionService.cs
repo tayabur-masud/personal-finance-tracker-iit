@@ -11,4 +11,6 @@ public interface ITransactionService : IDisposable
     Task<IReadOnlyCollection<TransactionModel>> GetIncomeTransactions();
 
     Task<IReadOnlyCollection<TransactionModel>> GetExpenseTransactions();
+
+    Task<decimal> GetCurrentBalance();
 }

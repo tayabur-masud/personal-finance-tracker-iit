@@ -1,8 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using PersonalFinanceTrackerIIT.Services;
 using PersonalFinanceTrackerIIT.UI.Budgets;
 using PersonalFinanceTrackerIIT.UI.Categories;
 using PersonalFinanceTrackerIIT.UI.Reports;
 using PersonalFinanceTrackerIIT.UI.Transactions;
+using System.Threading.Tasks;
 
 namespace PersonalFinanceTrackerIIT.UI;
 
@@ -13,7 +15,7 @@ public partial class MainUi : Form
     public MainUi(IServiceProvider serviceProvider)
     {
         InitializeComponent();
-        _serviceProvider=serviceProvider;
+        _serviceProvider = serviceProvider;
     }
 
     private void incomeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -62,5 +64,21 @@ public partial class MainUi : Form
     {
         var expenseOverTimeUi = _serviceProvider.GetRequiredService<ExpenseOverTimeUi>();
         expenseOverTimeUi.ShowDialog();
+    }
+
+    private async void MainUi_Load(object sender, EventArgs e)
+    {
+        var transactionService = _serviceProvider.GetRequiredService<ITransactionService>();
+        var balance = await transactionService.GetCurrentBalance();
+
+        currentBalanceLabel.Text = "Current Balance: BDT " + balance.ToString("#,#");
+        if (balance > 0)
+        {
+            currentBalanceLabel.ForeColor = Color.Green;
+        }
+        else
+        {
+            currentBalanceLabel.ForeColor = Color.Red;
+        }
     }
 }

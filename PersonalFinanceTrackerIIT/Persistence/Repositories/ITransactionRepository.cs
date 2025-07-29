@@ -14,4 +14,6 @@ public interface ITransactionRepository : IRepositoryBase<Transaction>
     Task<IReadOnlyCollection<Transaction>> GetByCategoryType(CategoryType categoryType);
 
     Task<IReadOnlyCollection<Transaction>> GetExpenseBySummaryFilterAsync(ExpenseOverTimeFilterModel filter);
+
+    Task<decimal> GetCurrentBalance();
 }

@@ -77,4 +77,11 @@ public class TransactionRepository : RepositoryBase<Transaction>, ITransactionRe
 
         return await query.OrderBy(x => x.Date).ToListAsync();
     }
+
+    public async Task<decimal> GetCurrentBalance()
+    {
+        var income = await QueryWithIncludes.Where(x => x.Category.Type == (int)CategoryType.Income).SumAsync(x => x.Amount);
+        var expense = await QueryWithIncludes.Where(x => x.Category.Type == (int)CategoryType.Expense).SumAsync(x => x.Amount);
+        return income - expense;
+    }
 }

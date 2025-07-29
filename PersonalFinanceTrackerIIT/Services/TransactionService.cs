@@ -46,6 +46,11 @@ public class TransactionService : ITransactionService
         return transactionModels.OrderByDescending(x => x.Date).ToList();
     }
 
+    public async Task<decimal> GetCurrentBalance()
+    {
+        return await _transactionRepository.GetCurrentBalance();
+    }
+
     public void Dispose()
     {
         _transactionRepository.Dispose();
