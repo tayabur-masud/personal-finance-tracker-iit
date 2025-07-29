@@ -29,6 +29,7 @@ partial class CategoryUi
     private void InitializeComponent()
     {
         components = new System.ComponentModel.Container();
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CategoryUi));
         nameLabel = new Label();
         nameTextBox = new TextBox();
         descriptionRichTextBox = new RichTextBox();
@@ -206,6 +207,7 @@ partial class CategoryUi
         Controls.Add(descriptionRichTextBox);
         Controls.Add(nameTextBox);
         Controls.Add(nameLabel);
+        Icon = (Icon)resources.GetObject("$this.Icon");
         Margin = new Padding(4);
         Name = "CategoryUi";
         StartPosition = FormStartPosition.CenterScreen;

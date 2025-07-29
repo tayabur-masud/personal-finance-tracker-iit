@@ -1,4 +1,5 @@
 ﻿using LiveChartsCore;
+using LiveChartsCore.Measure;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.WinForms;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,6 +8,8 @@ using PersonalFinanceTrackerIIT.UI.Budgets;
 using PersonalFinanceTrackerIIT.UI.Categories;
 using PersonalFinanceTrackerIIT.UI.Reports;
 using PersonalFinanceTrackerIIT.UI.Transactions;
+using SkiaSharp;
+using System.Threading.Tasks;
 
 namespace PersonalFinanceTrackerIIT.UI;
 
@@ -142,6 +145,8 @@ public partial class MainUi : Form
             await LoadRecentTransactions();
 
             await LoadExpenseTrendChart(30);
+
+            InitializeProgressBarChart();
         }
         catch (Exception ex)
         {
@@ -176,6 +181,25 @@ public partial class MainUi : Form
         catch (Exception ex)
         {
             MessageBox.Show($"An error occurred while processing the mouse move: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+    }
+
+    private async void refreshButton_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            await ShowCurrentBalance();
+
+            await LoadRecentTransactions();
+
+            await LoadExpenseTrendChart(30);
+
+            InitializeProgressBarChart();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"An error occurred while refreshing the dashboard: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
     }
@@ -249,20 +273,57 @@ public partial class MainUi : Form
         expenseTrendLineChartPanel.Controls.Add(cartesianChart);
     }
 
-    private async void refreshButton_Click(object sender, EventArgs e)
+    private void InitializeProgressBarChart()
     {
-        try
+        var cartesianChart = new CartesianChart
         {
-            await ShowCurrentBalance();
+            Dock = DockStyle.Fill
+        };
 
-            await LoadRecentTransactions();
+        var taskProgress = new double[] { 70, 45, 85, 30 };
 
-            await LoadExpenseTrendChart(30);
-        }
-        catch (Exception ex)
+        var seriesList = new List<ISeries>();
+
+        for (int i = 0; i < taskProgress.Length; i++)
         {
-            MessageBox.Show($"An error occurred while refreshing the dashboard: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return;
+            var progressBar = new RowSeries<double>
+            {
+                Values = new double[] { taskProgress[i] },
+                MaxBarWidth = 30,
+                Name = $"Task {i + 1}",
+                DataLabelsSize = 14,
+                DataLabelsPosition = LiveChartsCore.Measure.DataLabelsPosition.Middle,
+                DataLabelsFormatter = value => $"{value}%" // Formatter is the key!
+            };
+
+            seriesList.Add(progressBar);
         }
+
+        cartesianChart.Series = seriesList;
+
+        cartesianChart.XAxes = new[]
+        {
+            new Axis
+            {
+                MinLimit = 0,
+                MaxLimit = 100,
+                Name = "Progress (%)"
+            }
+        };
+
+        cartesianChart.YAxes = new[]
+        {
+            new Axis
+            {
+                Labels = new[] { "Task 1", "Task 2", "Task 3", "Task 4" }
+            }
+        };
+
+        // Tooltip will automatically show the series name and value on hover.
+        // You can position it as needed:
+        cartesianChart.TooltipPosition = TooltipPosition.Right;
+
+        // Add Chart to Form
+        budgetUtilizationBarChartPanel.Controls.Add(cartesianChart);
     }
 }

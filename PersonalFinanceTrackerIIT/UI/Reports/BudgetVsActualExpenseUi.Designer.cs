@@ -28,6 +28,7 @@ partial class BudgetVsActualExpenseUi
     /// </summary>
     private void InitializeComponent()
     {
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BudgetVsActualExpenseUi));
         barPanel = new Panel();
         monthLabel = new Label();
         monthComboBox = new ComboBox();
@@ -69,6 +70,7 @@ partial class BudgetVsActualExpenseUi
         Controls.Add(monthLabel);
         Controls.Add(monthComboBox);
         Controls.Add(barPanel);
+        Icon = (Icon)resources.GetObject("$this.Icon");
         Name = "BudgetVsActualExpenseUi";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Budget vs Actual Expense Report";

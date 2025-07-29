@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IncomeUi));
             groupBox1 = new GroupBox();
             resetButton = new Button();
             label4 = new Label();
@@ -161,9 +162,9 @@
             label2.Location = new Point(162, 81);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(77, 25);
+            label2.Size = new Size(123, 25);
             label2.TabIndex = 2;
-            label2.Text = "Amount";
+            label2.Text = "Amount (BDT)";
             // 
             // dateTimePicker
             // 
@@ -217,7 +218,7 @@
             // 
             // amountColumnHeader
             // 
-            amountColumnHeader.Text = "Amount";
+            amountColumnHeader.Text = "Amount (BDT)";
             amountColumnHeader.TextAlign = HorizontalAlignment.Right;
             amountColumnHeader.Width = 200;
             // 
@@ -260,6 +261,7 @@
             ClientSize = new Size(962, 747);
             Controls.Add(incomeHistoryGroupBox);
             Controls.Add(groupBox1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(2);
             Name = "IncomeUi";
             StartPosition = FormStartPosition.CenterScreen;

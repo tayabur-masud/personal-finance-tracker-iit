@@ -29,6 +29,7 @@ partial class BudgetUi
     private void InitializeComponent()
     {
         components = new System.ComponentModel.Container();
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BudgetUi));
         budgetFormGroupBox = new GroupBox();
         resetButton = new Button();
         saveButton = new Button();
@@ -42,7 +43,7 @@ partial class BudgetUi
         budgetListView = new ListView();
         monthColumnHeader = new ColumnHeader();
         categoryColumnHeader = new ColumnHeader();
-        amoutnColumnHeader = new ColumnHeader();
+        amountColumnHeader = new ColumnHeader();
         budgetContextMenuStrip = new ContextMenuStrip(components);
         editToolStripMenuItem = new ToolStripMenuItem();
         deleteToolStripMenuItem = new ToolStripMenuItem();
@@ -71,7 +72,7 @@ partial class BudgetUi
         // 
         // resetButton
         // 
-        resetButton.Location = new Point(424, 189);
+        resetButton.Location = new Point(437, 193);
         resetButton.Name = "resetButton";
         resetButton.Size = new Size(112, 34);
         resetButton.TabIndex = 7;
@@ -81,7 +82,7 @@ partial class BudgetUi
         // 
         // saveButton
         // 
-        saveButton.Location = new Point(542, 189);
+        saveButton.Location = new Point(555, 193);
         saveButton.Name = "saveButton";
         saveButton.Size = new Size(112, 34);
         saveButton.TabIndex = 6;
@@ -92,15 +93,15 @@ partial class BudgetUi
         // amountLabel
         // 
         amountLabel.AutoSize = true;
-        amountLabel.Location = new Point(209, 146);
+        amountLabel.Location = new Point(189, 150);
         amountLabel.Name = "amountLabel";
-        amountLabel.Size = new Size(77, 25);
+        amountLabel.Size = new Size(123, 25);
         amountLabel.TabIndex = 5;
-        amountLabel.Text = "Amount";
+        amountLabel.Text = "Amount (BDT)";
         // 
         // amountTextBox
         // 
-        amountTextBox.Location = new Point(318, 143);
+        amountTextBox.Location = new Point(331, 147);
         amountTextBox.MaxLength = 10;
         amountTextBox.Name = "amountTextBox";
         amountTextBox.Size = new Size(336, 31);
@@ -110,7 +111,7 @@ partial class BudgetUi
         // categoryLabel
         // 
         categoryLabel.AutoSize = true;
-        categoryLabel.Location = new Point(209, 96);
+        categoryLabel.Location = new Point(189, 100);
         categoryLabel.Name = "categoryLabel";
         categoryLabel.Size = new Size(84, 25);
         categoryLabel.TabIndex = 3;
@@ -119,7 +120,7 @@ partial class BudgetUi
         // categoryComboBox
         // 
         categoryComboBox.FormattingEnabled = true;
-        categoryComboBox.Location = new Point(318, 93);
+        categoryComboBox.Location = new Point(331, 97);
         categoryComboBox.Name = "categoryComboBox";
         categoryComboBox.Size = new Size(336, 33);
         categoryComboBox.TabIndex = 2;
@@ -127,7 +128,7 @@ partial class BudgetUi
         // monthLabel
         // 
         monthLabel.AutoSize = true;
-        monthLabel.Location = new Point(209, 48);
+        monthLabel.Location = new Point(189, 52);
         monthLabel.Name = "monthLabel";
         monthLabel.Size = new Size(65, 25);
         monthLabel.TabIndex = 1;
@@ -136,7 +137,7 @@ partial class BudgetUi
         // monthComboBox
         // 
         monthComboBox.FormattingEnabled = true;
-        monthComboBox.Location = new Point(318, 45);
+        monthComboBox.Location = new Point(331, 49);
         monthComboBox.Name = "monthComboBox";
         monthComboBox.Size = new Size(336, 33);
         monthComboBox.TabIndex = 0;
@@ -155,7 +156,7 @@ partial class BudgetUi
         // 
         // budgetListView
         // 
-        budgetListView.Columns.AddRange(new ColumnHeader[] { monthColumnHeader, categoryColumnHeader, amoutnColumnHeader });
+        budgetListView.Columns.AddRange(new ColumnHeader[] { monthColumnHeader, categoryColumnHeader, amountColumnHeader });
         budgetListView.Dock = DockStyle.Fill;
         budgetListView.FullRowSelect = true;
         budgetListView.GridLines = true;
@@ -176,11 +177,11 @@ partial class BudgetUi
         categoryColumnHeader.Text = "Category";
         categoryColumnHeader.Width = 200;
         // 
-        // amoutnColumnHeader
+        // amountColumnHeader
         // 
-        amoutnColumnHeader.Text = "Amount";
-        amoutnColumnHeader.TextAlign = HorizontalAlignment.Right;
-        amoutnColumnHeader.Width = 200;
+        amountColumnHeader.Text = "Amount (BDT)";
+        amountColumnHeader.TextAlign = HorizontalAlignment.Right;
+        amountColumnHeader.Width = 200;
         // 
         // budgetContextMenuStrip
         // 
@@ -211,6 +212,7 @@ partial class BudgetUi
         ClientSize = new Size(900, 579);
         Controls.Add(budgetListGroupBox);
         Controls.Add(budgetFormGroupBox);
+        Icon = (Icon)resources.GetObject("$this.Icon");
         Name = "BudgetUi";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Budget";
@@ -238,7 +240,7 @@ partial class BudgetUi
     private ListView budgetListView;
     private ColumnHeader monthColumnHeader;
     private ColumnHeader categoryColumnHeader;
-    private ColumnHeader amoutnColumnHeader;
+    private ColumnHeader amountColumnHeader;
     private ContextMenuStrip budgetContextMenuStrip;
     private ToolStripMenuItem editToolStripMenuItem;
     private ToolStripMenuItem deleteToolStripMenuItem;

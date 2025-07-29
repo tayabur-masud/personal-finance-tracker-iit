@@ -28,6 +28,7 @@ partial class ExpenseOverTimeUi
     /// </summary>
     private void InitializeComponent()
     {
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExpenseOverTimeUi));
         filterGroupBox = new GroupBox();
         showButton = new Button();
         categoryCheckedListBox = new CheckedListBox();
@@ -218,6 +219,7 @@ partial class ExpenseOverTimeUi
         Controls.Add(panel2);
         Controls.Add(barChartPanel);
         Controls.Add(filterGroupBox);
+        Icon = (Icon)resources.GetObject("$this.Icon");
         Name = "ExpenseOverTimeUi";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Expense Over Time Report";

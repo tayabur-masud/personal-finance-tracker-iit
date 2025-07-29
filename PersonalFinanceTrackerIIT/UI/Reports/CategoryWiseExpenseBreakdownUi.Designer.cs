@@ -28,6 +28,7 @@ partial class CategoryWiseExpenseBreakdownUi
     /// </summary>
     private void InitializeComponent()
     {
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CategoryWiseExpenseBreakdownUi));
         piePanel = new Panel();
         monthLabel = new Label();
         monthComboBox = new ComboBox();
@@ -69,6 +70,7 @@ partial class CategoryWiseExpenseBreakdownUi
         Controls.Add(monthLabel);
         Controls.Add(monthComboBox);
         Controls.Add(piePanel);
+        Icon = (Icon)resources.GetObject("$this.Icon");
         Name = "CategoryWiseExpenseBreakdownUi";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Category-Wise Expense Breakdown";

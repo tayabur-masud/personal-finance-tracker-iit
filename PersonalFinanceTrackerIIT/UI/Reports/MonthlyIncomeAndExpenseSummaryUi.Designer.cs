@@ -28,6 +28,7 @@ partial class MonthlyIncomeAndExpenseSummaryUi
     /// </summary>
     private void InitializeComponent()
     {
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MonthlyIncomeAndExpenseSummaryUi));
         filterGroupBox = new GroupBox();
         categoryCheckedListBox = new CheckedListBox();
         showButton = new Button();
@@ -159,13 +160,13 @@ partial class MonthlyIncomeAndExpenseSummaryUi
         // 
         // incomeColumnHeader
         // 
-        incomeColumnHeader.Text = "Income";
+        incomeColumnHeader.Text = "Income (BDT)";
         incomeColumnHeader.TextAlign = HorizontalAlignment.Right;
         incomeColumnHeader.Width = 200;
         // 
         // expenseColumnHeader
         // 
-        expenseColumnHeader.Text = "Expense";
+        expenseColumnHeader.Text = "Expense (BDT)";
         expenseColumnHeader.TextAlign = HorizontalAlignment.Right;
         expenseColumnHeader.Width = 200;
         // 
@@ -181,6 +182,7 @@ partial class MonthlyIncomeAndExpenseSummaryUi
         ClientSize = new Size(1670, 661);
         Controls.Add(resultGroupBox);
         Controls.Add(filterGroupBox);
+        Icon = (Icon)resources.GetObject("$this.Icon");
         Name = "MonthlyIncomeAndExpenseSummaryUi";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Monthly Income & Expense Summary Report";
