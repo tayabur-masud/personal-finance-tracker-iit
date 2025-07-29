@@ -211,12 +211,12 @@ public partial class ExpenseUi : Form
         selectedTransactionId = 0;
         amountTextBox.Clear();
         descriptionRichTextBox.Clear();
-        dateTimePicker.Value = DateTime.Now;
     }
 
     private void ResetForm()
     {
         ResetInput();
         expenseListView.Items.Clear();
+        dateTimePicker.Value = DateTime.Now;
     }
 }
