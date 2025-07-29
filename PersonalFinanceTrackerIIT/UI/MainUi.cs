@@ -23,50 +23,114 @@ public partial class MainUi : Form
 
     private void incomeToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var incomeUi = _serviceProvider.GetRequiredService<IncomeUi>();
-        incomeUi.ShowDialog();
+        try
+        {
+            var incomeUi = _serviceProvider.GetRequiredService<IncomeUi>();
+            incomeUi.ShowDialog();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"An error occurred while opening the Income UI: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
     }
 
     private void expenseToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var expenseUi = _serviceProvider.GetRequiredService<ExpenseUi>();
-        expenseUi.ShowDialog();
+        try
+        {
+            var expenseUi = _serviceProvider.GetRequiredService<ExpenseUi>();
+            expenseUi.ShowDialog();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"An error occurred while opening the Expense UI: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
     }
 
     private void categoryAddUpdateDeleteToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var categoryUi = _serviceProvider.GetRequiredService<CategoryUi>();
-        categoryUi.ShowDialog();
+        try
+        {
+            var categoryUi = _serviceProvider.GetRequiredService<CategoryUi>();
+            categoryUi.ShowDialog();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"An error occurred while opening the Category UI: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
     }
 
     private void monthlyIncomeExpenseSummaryToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var monthlyIncomeAndExpenseSummaryUi = _serviceProvider.GetRequiredService<MonthlyIncomeAndExpenseSummaryUi>();
-        monthlyIncomeAndExpenseSummaryUi.ShowDialog();
+        try
+        {
+            var monthlyIncomeAndExpenseSummaryUi = _serviceProvider.GetRequiredService<MonthlyIncomeAndExpenseSummaryUi>();
+            monthlyIncomeAndExpenseSummaryUi.ShowDialog();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"An error occurred while opening the Monthly Income and Expense Summary UI: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
     }
 
-    private void addUpdateDeleteToolStripMenuItem_Click(object sender, EventArgs e)
+    private void budgetAddUpdateDeleteToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var budgetUi = _serviceProvider.GetRequiredService<BudgetUi>();
-        budgetUi.ShowDialog();
+        try
+        {
+            var budgetUi = _serviceProvider.GetRequiredService<BudgetUi>();
+            budgetUi.ShowDialog();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"An error occurred while opening the Budget UI: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
     }
 
     private void categoryWiseExpenseBreakdownToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var categoryWiseExpenseBreakdownUi = _serviceProvider.GetRequiredService<CategoryWiseExpenseBreakdownUi>();
-        categoryWiseExpenseBreakdownUi.ShowDialog();
+        try
+        {
+            var categoryWiseExpenseBreakdownUi = _serviceProvider.GetRequiredService<CategoryWiseExpenseBreakdownUi>();
+            categoryWiseExpenseBreakdownUi.ShowDialog();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"An error occurred while opening the Category Wise Expense Breakdown UI: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
     }
 
     private void budgetVsActualExpenseReportToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var budgetVsActualExpenseUi = _serviceProvider.GetRequiredService<BudgetVsActualExpenseUi>();
-        budgetVsActualExpenseUi.ShowDialog();
+        try
+        {
+            var budgetVsActualExpenseUi = _serviceProvider.GetRequiredService<BudgetVsActualExpenseUi>();
+            budgetVsActualExpenseUi.ShowDialog();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"An error occurred while opening the Budget vs Actual Expense Report UI: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
     }
 
     private void expenseOverTimeReportToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var expenseOverTimeUi = _serviceProvider.GetRequiredService<ExpenseOverTimeUi>();
-        expenseOverTimeUi.ShowDialog();
+        try
+        {
+            var expenseOverTimeUi = _serviceProvider.GetRequiredService<ExpenseOverTimeUi>();
+            expenseOverTimeUi.ShowDialog();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"An error occurred while opening the Expense Over Time Report UI: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
     }
 
     private async void MainUi_Load(object sender, EventArgs e)

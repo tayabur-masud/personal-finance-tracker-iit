@@ -71,7 +71,7 @@
             groupBox1.Margin = new Padding(4);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(4);
-            groupBox1.Size = new Size(932, 391);
+            groupBox1.Size = new Size(932, 519);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Income";
@@ -191,7 +191,7 @@
             incomeHistoryGroupBox.Controls.Add(incomeListView);
             incomeHistoryGroupBox.Location = new Point(15, 413);
             incomeHistoryGroupBox.Name = "incomeHistoryGroupBox";
-            incomeHistoryGroupBox.Size = new Size(932, 194);
+            incomeHistoryGroupBox.Size = new Size(932, 322);
             incomeHistoryGroupBox.TabIndex = 1;
             incomeHistoryGroupBox.TabStop = false;
             incomeHistoryGroupBox.Text = "Income History";
@@ -205,7 +205,7 @@
             incomeListView.GridLines = true;
             incomeListView.Location = new Point(3, 27);
             incomeListView.Name = "incomeListView";
-            incomeListView.Size = new Size(926, 164);
+            incomeListView.Size = new Size(926, 292);
             incomeListView.TabIndex = 0;
             incomeListView.UseCompatibleStateImageBehavior = false;
             incomeListView.View = View.Details;
@@ -257,7 +257,7 @@
             AcceptButton = saveButton;
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(962, 619);
+            ClientSize = new Size(962, 747);
             Controls.Add(incomeHistoryGroupBox);
             Controls.Add(groupBox1);
             Margin = new Padding(2);

@@ -71,7 +71,7 @@
             groupBox1.Margin = new Padding(4);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(4);
-            groupBox1.Size = new Size(932, 391);
+            groupBox1.Size = new Size(932, 519);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Text = "Expense";
@@ -191,7 +191,7 @@
             expenseHistoryGroupBox.Controls.Add(expenseListView);
             expenseHistoryGroupBox.Location = new Point(15, 413);
             expenseHistoryGroupBox.Name = "expenseHistoryGroupBox";
-            expenseHistoryGroupBox.Size = new Size(932, 194);
+            expenseHistoryGroupBox.Size = new Size(932, 322);
             expenseHistoryGroupBox.TabIndex = 2;
             expenseHistoryGroupBox.TabStop = false;
             expenseHistoryGroupBox.Text = "Expense History";
@@ -205,7 +205,7 @@
             expenseListView.GridLines = true;
             expenseListView.Location = new Point(3, 27);
             expenseListView.Name = "expenseListView";
-            expenseListView.Size = new Size(926, 164);
+            expenseListView.Size = new Size(926, 292);
             expenseListView.TabIndex = 0;
             expenseListView.UseCompatibleStateImageBehavior = false;
             expenseListView.View = View.Details;
@@ -257,7 +257,7 @@
             AcceptButton = saveButton;
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(962, 619);
+            ClientSize = new Size(962, 747);
             Controls.Add(expenseHistoryGroupBox);
             Controls.Add(groupBox1);
             Margin = new Padding(2);
