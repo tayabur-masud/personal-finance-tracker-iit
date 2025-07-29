@@ -84,4 +84,12 @@ public class TransactionRepository : RepositoryBase<Transaction>, ITransactionRe
         var expense = await QueryWithIncludes.Where(x => x.Category.Type == (int)CategoryType.Expense).SumAsync(x => x.Amount);
         return income - expense;
     }
+
+    public async Task<IReadOnlyCollection<Transaction>> GetLast10Transactions()
+    {
+        return await QueryWithIncludes
+            .OrderByDescending(t => t.Date)
+            .Take(10)
+            .ToListAsync();
+    }
 }

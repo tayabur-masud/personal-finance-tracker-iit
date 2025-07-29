@@ -11,6 +11,7 @@ namespace PersonalFinanceTrackerIIT.UI;
 public partial class MainUi : Form
 {
     private readonly IServiceProvider _serviceProvider;
+    private string _currentToolTipText = string.Empty;
 
     public MainUi(IServiceProvider serviceProvider)
     {
@@ -79,6 +80,42 @@ public partial class MainUi : Form
         else
         {
             currentBalanceLabel.ForeColor = Color.Red;
+        }
+
+        var last10Transactions = await transactionService.GetLast10Transactions();
+
+        recentTransactionsListView.Items.Clear();
+
+        foreach (var transaction in last10Transactions)
+        {
+            var item = new ListViewItem(transaction.DateString);
+            item.SubItems.Add(transaction.Amount.ToString("#,#"));
+            item.SubItems.Add(transaction.CategoryName);
+            item.SubItems.Add(transaction.Description);
+            item.Tag = transaction;
+            recentTransactionsListView.Items.Add(item);
+        }
+    }
+
+    private void recentTransactionsListView_MouseMove(object sender, MouseEventArgs e)
+    {
+        ListViewHitTestInfo info = recentTransactionsListView.HitTest(e.X, e.Y);
+
+        if (info.Item != null && info.SubItem != null)
+        {
+            string subItemText = info.SubItem.Text;
+
+            if (_currentToolTipText != subItemText)
+            {
+                _currentToolTipText = subItemText;
+
+                recentTransactionsToolTip.Show(subItemText, recentTransactionsListView, e.Location.X + 15, e.Location.Y + 15, 2000);
+            }
+        }
+        else
+        {
+            recentTransactionsToolTip.Hide(recentTransactionsListView);
+            _currentToolTipText = string.Empty;
         }
     }
 }

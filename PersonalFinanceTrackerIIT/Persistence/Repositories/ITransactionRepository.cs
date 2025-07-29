@@ -16,4 +16,6 @@ public interface ITransactionRepository : IRepositoryBase<Transaction>
     Task<IReadOnlyCollection<Transaction>> GetExpenseBySummaryFilterAsync(ExpenseOverTimeFilterModel filter);
 
     Task<decimal> GetCurrentBalance();
+
+    Task<IReadOnlyCollection<Transaction>> GetLast10Transactions();
 }

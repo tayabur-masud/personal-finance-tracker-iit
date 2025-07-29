@@ -55,4 +55,11 @@ public class TransactionService : ITransactionService
     {
         _transactionRepository.Dispose();
     }
+
+    public async Task<IReadOnlyCollection<TransactionModel>> GetLast10Transactions()
+    {
+        var transactions = await _transactionRepository.GetLast10Transactions();
+        var transactionModels = transactions.Adapt<IReadOnlyCollection<TransactionModel>>();
+        return transactionModels;
+    }
 }
