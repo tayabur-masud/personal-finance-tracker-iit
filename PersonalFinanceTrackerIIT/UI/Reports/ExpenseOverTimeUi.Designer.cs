@@ -70,6 +70,7 @@ partial class ExpenseOverTimeUi
         // 
         // showButton
         // 
+        showButton.Anchor = AnchorStyles.Top;
         showButton.Location = new Point(632, 229);
         showButton.Name = "showButton";
         showButton.Size = new Size(112, 34);

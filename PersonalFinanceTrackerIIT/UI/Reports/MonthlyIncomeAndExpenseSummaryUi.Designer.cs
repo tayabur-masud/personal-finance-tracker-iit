@@ -63,6 +63,7 @@ partial class MonthlyIncomeAndExpenseSummaryUi
         // 
         // categoryCheckedListBox
         // 
+        categoryCheckedListBox.Anchor = AnchorStyles.Top;
         categoryCheckedListBox.FormattingEnabled = true;
         categoryCheckedListBox.Location = new Point(267, 30);
         categoryCheckedListBox.Name = "categoryCheckedListBox";
@@ -71,6 +72,7 @@ partial class MonthlyIncomeAndExpenseSummaryUi
         // 
         // showButton
         // 
+        showButton.Anchor = AnchorStyles.Top;
         showButton.Location = new Point(1084, 30);
         showButton.Name = "showButton";
         showButton.Size = new Size(112, 34);
@@ -81,6 +83,7 @@ partial class MonthlyIncomeAndExpenseSummaryUi
         // 
         // categoryLabel
         // 
+        categoryLabel.Anchor = AnchorStyles.Top;
         categoryLabel.AutoSize = true;
         categoryLabel.Location = new Point(161, 30);
         categoryLabel.Name = "categoryLabel";
@@ -90,6 +93,7 @@ partial class MonthlyIncomeAndExpenseSummaryUi
         // 
         // monthLabel
         // 
+        monthLabel.Anchor = AnchorStyles.Top;
         monthLabel.AutoSize = true;
         monthLabel.Location = new Point(636, 33);
         monthLabel.Name = "monthLabel";
@@ -99,6 +103,7 @@ partial class MonthlyIncomeAndExpenseSummaryUi
         // 
         // monthComboBox
         // 
+        monthComboBox.Anchor = AnchorStyles.Top;
         monthComboBox.FormattingEnabled = true;
         monthComboBox.Location = new Point(741, 30);
         monthComboBox.Name = "monthComboBox";
