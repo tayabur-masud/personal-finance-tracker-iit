@@ -84,8 +84,6 @@ public class ReportService : IReportService
         {
             GroupByPeriod.Daily => transactions
                                     .GroupBy(e => e.Date.ToString(Constants.DateFormat)),
-            //GroupByPeriod.Weekly => transactions
-            //                        .GroupBy(e => $"Week {ISOWeek.GetWeekOfYear(e.Date)} of {e.Date.Year}"),
             GroupByPeriod.Weekly => transactions.GroupBy(e =>
             {
                 var diff = e.Date.DayOfWeek - DayOfWeek.Monday;
@@ -102,6 +100,23 @@ public class ReportService : IReportService
             PeriodLabel = g.Key,
             TotalExpense = (double)g.Sum(x => x.Amount)
         }).ToList();
+
+        return reportData;
+    }
+
+    public async Task<IReadOnlyCollection<ExpenseOverTimeModel>> GetExpenseTrendReportByDays(int days)
+    {
+        var transactions = await _transactionRepository.GetRecentTransactionsByDay(days);
+        var reportData = new List<ExpenseOverTimeModel>();
+
+        foreach(var transaction in transactions)
+        {
+            reportData.Add(new ExpenseOverTimeModel
+            {
+                PeriodLabel = transaction.Date.ToString(Constants.DateFormat),
+                TotalExpense = (double)transaction.Amount
+            });
+        }
 
         return reportData;
     }

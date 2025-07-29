@@ -15,4 +15,6 @@ public interface ITransactionService : IDisposable
     Task<decimal> GetCurrentBalance();
 
     Task<IReadOnlyCollection<TransactionModel>> GetLast10Transactions();
+
+    Task<IReadOnlyCollection<TransactionModel>> GetRecentTransactionsByDay(int days);
 }

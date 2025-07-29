@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.WinForms;
+using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceTrackerIIT.Services;
 using PersonalFinanceTrackerIIT.UI.Budgets;
 using PersonalFinanceTrackerIIT.UI.Categories;
@@ -82,6 +85,8 @@ public partial class MainUi : Form
             currentBalanceLabel.ForeColor = Color.Red;
         }
 
+        await InitializeChart(30);
+
         var last10Transactions = await transactionService.GetLast10Transactions();
 
         recentTransactionsListView.Items.Clear();
@@ -117,5 +122,39 @@ public partial class MainUi : Form
             recentTransactionsToolTip.Hide(recentTransactionsListView);
             _currentToolTipText = string.Empty;
         }
+    }
+
+    private async Task InitializeChart(int days)
+    {
+        var reportService = _serviceProvider.GetRequiredService<IReportService>();
+
+        var reportData = await reportService.GetExpenseTrendReportByDays(days);
+        // Create the CartesianChart control
+        var cartesianChart = new CartesianChart
+        {
+            Dock = DockStyle.Fill
+        };
+
+        // Sample data for line chart
+        var lineSeries = new LineSeries<double>
+        {
+            Values = reportData.Select(x => x.TotalExpense).ToList(),
+            Name = "Total Expense Amount (BDT)"
+        };
+
+        // Assign the Series to the chart
+        cartesianChart.Series = new ISeries[] { lineSeries };
+
+        // Optional: Configure Axes Labels
+        cartesianChart.XAxes = new[]
+        {
+            new Axis
+            {
+                Labels =  reportData.Select(x=>x.PeriodLabel).ToList()
+            }
+        };
+
+        // Add chart to the Form
+        expenseTrendLineChartPanel.Controls.Add(cartesianChart);
     }
 }

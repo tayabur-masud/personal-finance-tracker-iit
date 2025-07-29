@@ -92,4 +92,17 @@ public class TransactionRepository : RepositoryBase<Transaction>, ITransactionRe
             .Take(10)
             .ToListAsync();
     }
+
+    public async Task<IReadOnlyCollection<Transaction>> GetRecentTransactionsByDay(int days)
+    {
+        
+        var toDate = DateTime.Now.Date;
+        var fromDate = toDate.AddDays(-days);
+
+        var query = QueryWithIncludes.Where(x => x.Category.Type == (int)CategoryType.Expense
+            && x.Date.Date >= fromDate.Date
+            && x.Date.Date <= toDate.Date);
+
+        return await query.OrderBy(x => x.Date).ToListAsync();
+    }
 }

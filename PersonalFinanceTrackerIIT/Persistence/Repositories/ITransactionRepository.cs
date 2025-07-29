@@ -18,4 +18,6 @@ public interface ITransactionRepository : IRepositoryBase<Transaction>
     Task<decimal> GetCurrentBalance();
 
     Task<IReadOnlyCollection<Transaction>> GetLast10Transactions();
+
+    Task<IReadOnlyCollection<Transaction>> GetRecentTransactionsByDay(int days);
 }

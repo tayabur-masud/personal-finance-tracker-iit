@@ -62,4 +62,11 @@ public class TransactionService : ITransactionService
         var transactionModels = transactions.Adapt<IReadOnlyCollection<TransactionModel>>();
         return transactionModels;
     }
+
+    public async Task<IReadOnlyCollection<TransactionModel>> GetRecentTransactionsByDay(int days)
+    {
+        var transactions = await _transactionRepository.GetRecentTransactionsByDay(days);
+        var transactionModels = transactions.Adapt<IReadOnlyCollection<TransactionModel>>();
+        return transactionModels;
+    }
 }

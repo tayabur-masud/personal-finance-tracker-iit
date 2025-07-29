@@ -51,8 +51,11 @@
             recentCategoryColumnHeader = new ColumnHeader();
             recentDescriptionColumnHeader = new ColumnHeader();
             recentTransactionsToolTip = new ToolTip(components);
+            expenseTrendGroupBox = new GroupBox();
+            expenseTrendLineChartPanel = new Panel();
             mainMenuStrip.SuspendLayout();
             recentTransactionsGroupBox.SuspendLayout();
+            expenseTrendGroupBox.SuspendLayout();
             SuspendLayout();
             // 
             // mainMenuStrip
@@ -174,10 +177,11 @@
             // 
             // recentTransactionsGroupBox
             // 
+            recentTransactionsGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             recentTransactionsGroupBox.Controls.Add(recentTransactionsListView);
             recentTransactionsGroupBox.Location = new Point(785, 64);
             recentTransactionsGroupBox.Name = "recentTransactionsGroupBox";
-            recentTransactionsGroupBox.Size = new Size(813, 326);
+            recentTransactionsGroupBox.Size = new Size(813, 467);
             recentTransactionsGroupBox.TabIndex = 4;
             recentTransactionsGroupBox.TabStop = false;
             recentTransactionsGroupBox.Text = "Recent Transactions";
@@ -190,7 +194,7 @@
             recentTransactionsListView.GridLines = true;
             recentTransactionsListView.Location = new Point(3, 27);
             recentTransactionsListView.Name = "recentTransactionsListView";
-            recentTransactionsListView.Size = new Size(807, 296);
+            recentTransactionsListView.Size = new Size(807, 437);
             recentTransactionsListView.TabIndex = 0;
             recentTransactionsListView.UseCompatibleStateImageBehavior = false;
             recentTransactionsListView.View = View.Details;
@@ -217,11 +221,31 @@
             recentDescriptionColumnHeader.Text = "Description";
             recentDescriptionColumnHeader.Width = 300;
             // 
+            // expenseTrendGroupBox
+            // 
+            expenseTrendGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            expenseTrendGroupBox.Controls.Add(expenseTrendLineChartPanel);
+            expenseTrendGroupBox.Location = new Point(12, 128);
+            expenseTrendGroupBox.Name = "expenseTrendGroupBox";
+            expenseTrendGroupBox.Size = new Size(767, 403);
+            expenseTrendGroupBox.TabIndex = 5;
+            expenseTrendGroupBox.TabStop = false;
+            expenseTrendGroupBox.Text = "Expense Trend";
+            // 
+            // expenseTrendLineChartPanel
+            // 
+            expenseTrendLineChartPanel.Dock = DockStyle.Fill;
+            expenseTrendLineChartPanel.Location = new Point(3, 27);
+            expenseTrendLineChartPanel.Name = "expenseTrendLineChartPanel";
+            expenseTrendLineChartPanel.Size = new Size(761, 373);
+            expenseTrendLineChartPanel.TabIndex = 0;
+            // 
             // MainUi
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1610, 658);
+            Controls.Add(expenseTrendGroupBox);
             Controls.Add(recentTransactionsGroupBox);
             Controls.Add(currentBalanceLabel);
             Controls.Add(label1);
@@ -236,6 +260,7 @@
             mainMenuStrip.ResumeLayout(false);
             mainMenuStrip.PerformLayout();
             recentTransactionsGroupBox.ResumeLayout(false);
+            expenseTrendGroupBox.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -263,5 +288,7 @@
         private ColumnHeader recentCategoryColumnHeader;
         private ColumnHeader recentDescriptionColumnHeader;
         private ToolTip recentTransactionsToolTip;
+        private GroupBox expenseTrendGroupBox;
+        private Panel expenseTrendLineChartPanel;
     }
 }
