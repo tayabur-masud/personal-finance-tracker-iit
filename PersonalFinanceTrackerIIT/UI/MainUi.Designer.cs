@@ -156,7 +156,7 @@
             // 
             label1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             label1.AutoSize = true;
-            label1.Location = new Point(1404, 549);
+            label1.Location = new Point(1404, 716);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
             label1.Size = new Size(194, 100);
@@ -168,7 +168,7 @@
             // 
             currentBalanceLabel.AutoSize = true;
             currentBalanceLabel.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            currentBalanceLabel.Location = new Point(50, 64);
+            currentBalanceLabel.Location = new Point(50, 97);
             currentBalanceLabel.Margin = new Padding(4, 0, 4, 0);
             currentBalanceLabel.Name = "currentBalanceLabel";
             currentBalanceLabel.Size = new Size(241, 38);
@@ -179,7 +179,7 @@
             // 
             recentTransactionsGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             recentTransactionsGroupBox.Controls.Add(recentTransactionsListView);
-            recentTransactionsGroupBox.Location = new Point(785, 64);
+            recentTransactionsGroupBox.Location = new Point(785, 97);
             recentTransactionsGroupBox.Name = "recentTransactionsGroupBox";
             recentTransactionsGroupBox.Size = new Size(813, 467);
             recentTransactionsGroupBox.TabIndex = 4;
@@ -225,7 +225,7 @@
             // 
             expenseTrendGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             expenseTrendGroupBox.Controls.Add(expenseTrendLineChartPanel);
-            expenseTrendGroupBox.Location = new Point(12, 128);
+            expenseTrendGroupBox.Location = new Point(12, 161);
             expenseTrendGroupBox.Name = "expenseTrendGroupBox";
             expenseTrendGroupBox.Size = new Size(767, 403);
             expenseTrendGroupBox.TabIndex = 5;
@@ -244,7 +244,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1610, 658);
+            ClientSize = new Size(1610, 825);
             Controls.Add(expenseTrendGroupBox);
             Controls.Add(recentTransactionsGroupBox);
             Controls.Add(currentBalanceLabel);

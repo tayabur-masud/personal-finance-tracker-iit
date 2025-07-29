@@ -7,7 +7,6 @@ using PersonalFinanceTrackerIIT.UI.Budgets;
 using PersonalFinanceTrackerIIT.UI.Categories;
 using PersonalFinanceTrackerIIT.UI.Reports;
 using PersonalFinanceTrackerIIT.UI.Transactions;
-using System.Threading.Tasks;
 
 namespace PersonalFinanceTrackerIIT.UI;
 
@@ -72,6 +71,53 @@ public partial class MainUi : Form
 
     private async void MainUi_Load(object sender, EventArgs e)
     {
+        try
+        {
+            await ShowCurrentBalance();
+
+            await LoadRecentTransactions();
+
+            await LoadExpenseTrendChart(30);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"An error occurred while loading the form: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+    }
+
+    private void recentTransactionsListView_MouseMove(object sender, MouseEventArgs e)
+    {
+        try
+        {
+            ListViewHitTestInfo info = recentTransactionsListView.HitTest(e.X, e.Y);
+
+            if (info.Item != null && info.SubItem != null)
+            {
+                string subItemText = info.SubItem.Text;
+
+                if (_currentToolTipText != subItemText)
+                {
+                    _currentToolTipText = subItemText;
+
+                    recentTransactionsToolTip.Show(subItemText, recentTransactionsListView, e.Location.X + 15, e.Location.Y + 15, 2000);
+                }
+            }
+            else
+            {
+                recentTransactionsToolTip.Hide(recentTransactionsListView);
+                _currentToolTipText = string.Empty;
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"An error occurred while processing the mouse move: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+    }
+
+    private async Task ShowCurrentBalance()
+    {
         var transactionService = _serviceProvider.GetRequiredService<ITransactionService>();
         var balance = await transactionService.GetCurrentBalance();
 
@@ -84,8 +130,11 @@ public partial class MainUi : Form
         {
             currentBalanceLabel.ForeColor = Color.Red;
         }
+    }
 
-        await InitializeChart(30);
+    private async Task LoadRecentTransactions()
+    {
+        var transactionService = _serviceProvider.GetRequiredService<ITransactionService>();
 
         var last10Transactions = await transactionService.GetLast10Transactions();
 
@@ -102,29 +151,8 @@ public partial class MainUi : Form
         }
     }
 
-    private void recentTransactionsListView_MouseMove(object sender, MouseEventArgs e)
-    {
-        ListViewHitTestInfo info = recentTransactionsListView.HitTest(e.X, e.Y);
 
-        if (info.Item != null && info.SubItem != null)
-        {
-            string subItemText = info.SubItem.Text;
-
-            if (_currentToolTipText != subItemText)
-            {
-                _currentToolTipText = subItemText;
-
-                recentTransactionsToolTip.Show(subItemText, recentTransactionsListView, e.Location.X + 15, e.Location.Y + 15, 2000);
-            }
-        }
-        else
-        {
-            recentTransactionsToolTip.Hide(recentTransactionsListView);
-            _currentToolTipText = string.Empty;
-        }
-    }
-
-    private async Task InitializeChart(int days)
+    private async Task LoadExpenseTrendChart(int days)
     {
         var reportService = _serviceProvider.GetRequiredService<IReportService>();
 
