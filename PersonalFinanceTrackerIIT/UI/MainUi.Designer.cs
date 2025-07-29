@@ -53,6 +53,7 @@
             recentTransactionsToolTip = new ToolTip(components);
             expenseTrendGroupBox = new GroupBox();
             expenseTrendLineChartPanel = new Panel();
+            refreshButton = new Button();
             mainMenuStrip.SuspendLayout();
             recentTransactionsGroupBox.SuspendLayout();
             expenseTrendGroupBox.SuspendLayout();
@@ -64,7 +65,8 @@
             mainMenuStrip.Items.AddRange(new ToolStripItem[] { transactionToolStripMenuItem, categoryToolStripMenuItem, budgetToolStripMenuItem, reportsToolStripMenuItem });
             mainMenuStrip.Location = new Point(0, 0);
             mainMenuStrip.Name = "mainMenuStrip";
-            mainMenuStrip.Size = new Size(1610, 33);
+            mainMenuStrip.Padding = new Padding(5, 2, 0, 2);
+            mainMenuStrip.Size = new Size(1288, 28);
             mainMenuStrip.TabIndex = 1;
             mainMenuStrip.Text = "menuStrip1";
             // 
@@ -72,20 +74,20 @@
             // 
             transactionToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { incomeToolStripMenuItem, expenseToolStripMenuItem });
             transactionToolStripMenuItem.Name = "transactionToolStripMenuItem";
-            transactionToolStripMenuItem.Size = new Size(116, 29);
+            transactionToolStripMenuItem.Size = new Size(98, 24);
             transactionToolStripMenuItem.Text = "Transaction";
             // 
             // incomeToolStripMenuItem
             // 
             incomeToolStripMenuItem.Name = "incomeToolStripMenuItem";
-            incomeToolStripMenuItem.Size = new Size(178, 34);
+            incomeToolStripMenuItem.Size = new Size(146, 26);
             incomeToolStripMenuItem.Text = "Income";
             incomeToolStripMenuItem.Click += incomeToolStripMenuItem_Click;
             // 
             // expenseToolStripMenuItem
             // 
             expenseToolStripMenuItem.Name = "expenseToolStripMenuItem";
-            expenseToolStripMenuItem.Size = new Size(178, 34);
+            expenseToolStripMenuItem.Size = new Size(146, 26);
             expenseToolStripMenuItem.Text = "Expense";
             expenseToolStripMenuItem.Click += expenseToolStripMenuItem_Click;
             // 
@@ -93,13 +95,13 @@
             // 
             categoryToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { categoryAddUpdateDeleteToolStripMenuItem });
             categoryToolStripMenuItem.Name = "categoryToolStripMenuItem";
-            categoryToolStripMenuItem.Size = new Size(100, 29);
+            categoryToolStripMenuItem.Size = new Size(83, 24);
             categoryToolStripMenuItem.Text = "Category";
             // 
             // categoryAddUpdateDeleteToolStripMenuItem
             // 
             categoryAddUpdateDeleteToolStripMenuItem.Name = "categoryAddUpdateDeleteToolStripMenuItem";
-            categoryAddUpdateDeleteToolStripMenuItem.Size = new Size(270, 34);
+            categoryAddUpdateDeleteToolStripMenuItem.Size = new Size(225, 26);
             categoryAddUpdateDeleteToolStripMenuItem.Text = "Add/Update/Delete";
             categoryAddUpdateDeleteToolStripMenuItem.Click += categoryAddUpdateDeleteToolStripMenuItem_Click;
             // 
@@ -107,13 +109,13 @@
             // 
             budgetToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { addUpdateDeleteToolStripMenuItem });
             budgetToolStripMenuItem.Name = "budgetToolStripMenuItem";
-            budgetToolStripMenuItem.Size = new Size(85, 29);
+            budgetToolStripMenuItem.Size = new Size(71, 24);
             budgetToolStripMenuItem.Text = "Budget";
             // 
             // addUpdateDeleteToolStripMenuItem
             // 
             addUpdateDeleteToolStripMenuItem.Name = "addUpdateDeleteToolStripMenuItem";
-            addUpdateDeleteToolStripMenuItem.Size = new Size(270, 34);
+            addUpdateDeleteToolStripMenuItem.Size = new Size(225, 26);
             addUpdateDeleteToolStripMenuItem.Text = "Add/Update/Delete";
             addUpdateDeleteToolStripMenuItem.Click += addUpdateDeleteToolStripMenuItem_Click;
             // 
@@ -121,34 +123,34 @@
             // 
             reportsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { monthlyIncomeExpenseSummaryToolStripMenuItem, categoryWiseExpenseBreakdownToolStripMenuItem, budgetVsActualExpenseReportToolStripMenuItem, expenseOverTimeReportToolStripMenuItem });
             reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
-            reportsToolStripMenuItem.Size = new Size(89, 29);
+            reportsToolStripMenuItem.Size = new Size(74, 24);
             reportsToolStripMenuItem.Text = "Reports";
             // 
             // monthlyIncomeExpenseSummaryToolStripMenuItem
             // 
             monthlyIncomeExpenseSummaryToolStripMenuItem.Name = "monthlyIncomeExpenseSummaryToolStripMenuItem";
-            monthlyIncomeExpenseSummaryToolStripMenuItem.Size = new Size(413, 34);
+            monthlyIncomeExpenseSummaryToolStripMenuItem.Size = new Size(339, 26);
             monthlyIncomeExpenseSummaryToolStripMenuItem.Text = "Monthly Income && Expense Summary";
             monthlyIncomeExpenseSummaryToolStripMenuItem.Click += monthlyIncomeExpenseSummaryToolStripMenuItem_Click;
             // 
             // categoryWiseExpenseBreakdownToolStripMenuItem
             // 
             categoryWiseExpenseBreakdownToolStripMenuItem.Name = "categoryWiseExpenseBreakdownToolStripMenuItem";
-            categoryWiseExpenseBreakdownToolStripMenuItem.Size = new Size(413, 34);
+            categoryWiseExpenseBreakdownToolStripMenuItem.Size = new Size(339, 26);
             categoryWiseExpenseBreakdownToolStripMenuItem.Text = "Category-Wise Expense Breakdown";
             categoryWiseExpenseBreakdownToolStripMenuItem.Click += categoryWiseExpenseBreakdownToolStripMenuItem_Click;
             // 
             // budgetVsActualExpenseReportToolStripMenuItem
             // 
             budgetVsActualExpenseReportToolStripMenuItem.Name = "budgetVsActualExpenseReportToolStripMenuItem";
-            budgetVsActualExpenseReportToolStripMenuItem.Size = new Size(413, 34);
+            budgetVsActualExpenseReportToolStripMenuItem.Size = new Size(339, 26);
             budgetVsActualExpenseReportToolStripMenuItem.Text = "Budget vs Actual Expense Report";
             budgetVsActualExpenseReportToolStripMenuItem.Click += budgetVsActualExpenseReportToolStripMenuItem_Click;
             // 
             // expenseOverTimeReportToolStripMenuItem
             // 
             expenseOverTimeReportToolStripMenuItem.Name = "expenseOverTimeReportToolStripMenuItem";
-            expenseOverTimeReportToolStripMenuItem.Size = new Size(413, 34);
+            expenseOverTimeReportToolStripMenuItem.Size = new Size(339, 26);
             expenseOverTimeReportToolStripMenuItem.Text = "Expense Over Time Report";
             expenseOverTimeReportToolStripMenuItem.Click += expenseOverTimeReportToolStripMenuItem_Click;
             // 
@@ -156,10 +158,10 @@
             // 
             label1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             label1.AutoSize = true;
-            label1.Location = new Point(1404, 716);
+            label1.Location = new Point(1123, 573);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(194, 100);
+            label1.Size = new Size(160, 80);
             label1.TabIndex = 2;
             label1.Text = "Developed for\r\nAdvanced OOP Course\r\nExecutive MIT\r\nIIT, University of Dhaka";
             label1.TextAlign = ContentAlignment.MiddleCenter;
@@ -168,10 +170,9 @@
             // 
             currentBalanceLabel.AutoSize = true;
             currentBalanceLabel.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            currentBalanceLabel.Location = new Point(50, 97);
-            currentBalanceLabel.Margin = new Padding(4, 0, 4, 0);
+            currentBalanceLabel.Location = new Point(12, 44);
             currentBalanceLabel.Name = "currentBalanceLabel";
-            currentBalanceLabel.Size = new Size(241, 38);
+            currentBalanceLabel.Size = new Size(196, 31);
             currentBalanceLabel.TabIndex = 3;
             currentBalanceLabel.Text = "Current Balance: ";
             // 
@@ -179,9 +180,11 @@
             // 
             recentTransactionsGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             recentTransactionsGroupBox.Controls.Add(recentTransactionsListView);
-            recentTransactionsGroupBox.Location = new Point(785, 97);
+            recentTransactionsGroupBox.Location = new Point(628, 78);
+            recentTransactionsGroupBox.Margin = new Padding(2);
             recentTransactionsGroupBox.Name = "recentTransactionsGroupBox";
-            recentTransactionsGroupBox.Size = new Size(813, 467);
+            recentTransactionsGroupBox.Padding = new Padding(2);
+            recentTransactionsGroupBox.Size = new Size(650, 374);
             recentTransactionsGroupBox.TabIndex = 4;
             recentTransactionsGroupBox.TabStop = false;
             recentTransactionsGroupBox.Text = "Recent Transactions";
@@ -192,9 +195,10 @@
             recentTransactionsListView.Dock = DockStyle.Fill;
             recentTransactionsListView.FullRowSelect = true;
             recentTransactionsListView.GridLines = true;
-            recentTransactionsListView.Location = new Point(3, 27);
+            recentTransactionsListView.Location = new Point(2, 22);
+            recentTransactionsListView.Margin = new Padding(2);
             recentTransactionsListView.Name = "recentTransactionsListView";
-            recentTransactionsListView.Size = new Size(807, 437);
+            recentTransactionsListView.Size = new Size(646, 350);
             recentTransactionsListView.TabIndex = 0;
             recentTransactionsListView.UseCompatibleStateImageBehavior = false;
             recentTransactionsListView.View = View.Details;
@@ -225,9 +229,11 @@
             // 
             expenseTrendGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             expenseTrendGroupBox.Controls.Add(expenseTrendLineChartPanel);
-            expenseTrendGroupBox.Location = new Point(12, 161);
+            expenseTrendGroupBox.Location = new Point(10, 78);
+            expenseTrendGroupBox.Margin = new Padding(2);
             expenseTrendGroupBox.Name = "expenseTrendGroupBox";
-            expenseTrendGroupBox.Size = new Size(767, 403);
+            expenseTrendGroupBox.Padding = new Padding(2);
+            expenseTrendGroupBox.Size = new Size(614, 374);
             expenseTrendGroupBox.TabIndex = 5;
             expenseTrendGroupBox.TabStop = false;
             expenseTrendGroupBox.Text = "Expense Trend";
@@ -235,16 +241,30 @@
             // expenseTrendLineChartPanel
             // 
             expenseTrendLineChartPanel.Dock = DockStyle.Fill;
-            expenseTrendLineChartPanel.Location = new Point(3, 27);
+            expenseTrendLineChartPanel.Location = new Point(2, 22);
+            expenseTrendLineChartPanel.Margin = new Padding(2);
             expenseTrendLineChartPanel.Name = "expenseTrendLineChartPanel";
-            expenseTrendLineChartPanel.Size = new Size(761, 373);
+            expenseTrendLineChartPanel.Size = new Size(610, 350);
             expenseTrendLineChartPanel.TabIndex = 0;
+            // 
+            // refreshButton
+            // 
+            refreshButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            refreshButton.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            refreshButton.Location = new Point(1125, 33);
+            refreshButton.Name = "refreshButton";
+            refreshButton.Size = new Size(153, 52);
+            refreshButton.TabIndex = 6;
+            refreshButton.Text = "Refresh";
+            refreshButton.UseVisualStyleBackColor = true;
+            refreshButton.Click += refreshButton_Click;
             // 
             // MainUi
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1610, 825);
+            ClientSize = new Size(1288, 660);
+            Controls.Add(refreshButton);
             Controls.Add(expenseTrendGroupBox);
             Controls.Add(recentTransactionsGroupBox);
             Controls.Add(currentBalanceLabel);
@@ -290,5 +310,6 @@
         private ToolTip recentTransactionsToolTip;
         private GroupBox expenseTrendGroupBox;
         private Panel expenseTrendLineChartPanel;
+        private Button refreshButton;
     }
 }

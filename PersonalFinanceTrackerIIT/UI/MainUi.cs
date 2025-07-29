@@ -151,7 +151,6 @@ public partial class MainUi : Form
         }
     }
 
-
     private async Task LoadExpenseTrendChart(int days)
     {
         var reportService = _serviceProvider.GetRequiredService<IReportService>();
@@ -184,5 +183,22 @@ public partial class MainUi : Form
 
         // Add chart to the Form
         expenseTrendLineChartPanel.Controls.Add(cartesianChart);
+    }
+
+    private async void refreshButton_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            await ShowCurrentBalance();
+
+            await LoadRecentTransactions();
+
+            await LoadExpenseTrendChart(30);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"An error occurred while refreshing the dashboard: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
     }
 }
