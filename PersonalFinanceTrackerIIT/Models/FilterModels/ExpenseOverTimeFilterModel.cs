@@ -1,4 +1,6 @@
-﻿namespace PersonalFinanceTrackerIIT.Models.FilterModels;
+﻿using PersonalFinanceTrackerIIT.Models.Enums;
+
+namespace PersonalFinanceTrackerIIT.Models.FilterModels;
 
 public class ExpenseOverTimeFilterModel
 {

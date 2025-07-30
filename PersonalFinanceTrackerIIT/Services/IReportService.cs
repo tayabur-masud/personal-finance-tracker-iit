@@ -1,5 +1,5 @@
-﻿using PersonalFinanceTrackerIIT.Models;
-using PersonalFinanceTrackerIIT.Models.FilterModels;
+﻿using PersonalFinanceTrackerIIT.Models.FilterModels;
+using PersonalFinanceTrackerIIT.Models.ReportModels;
 
 namespace PersonalFinanceTrackerIIT.Services;
 

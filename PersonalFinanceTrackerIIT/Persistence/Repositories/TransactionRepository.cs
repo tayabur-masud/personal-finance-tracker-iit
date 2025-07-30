@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using PersonalFinanceTrackerIIT.Models.Enums;
 using PersonalFinanceTrackerIIT.Models.FilterModels;
 using PersonalFinanceTrackerIIT.Persistence.Entities;
 using PersonalFinanceTrackerIIT.Utilities;

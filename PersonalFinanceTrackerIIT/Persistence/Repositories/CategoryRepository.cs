@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PersonalFinanceTrackerIIT.Models.Enums;
 using PersonalFinanceTrackerIIT.Persistence.Entities;
 
 namespace PersonalFinanceTrackerIIT.Persistence.Repositories;

@@ -1,6 +1,7 @@
 ﻿using OfficeOpenXml;
 using PersonalFinanceTrackerIIT.Models;
 using PersonalFinanceTrackerIIT.Models.FilterModels;
+using PersonalFinanceTrackerIIT.Models.ReportModels;
 using PersonalFinanceTrackerIIT.Services;
 using PersonalFinanceTrackerIIT.Utilities;
 

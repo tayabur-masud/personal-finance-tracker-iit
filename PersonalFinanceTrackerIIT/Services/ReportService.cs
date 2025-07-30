@@ -1,7 +1,7 @@
 ﻿using Mapster;
-using PersonalFinanceTrackerIIT.Models;
+using PersonalFinanceTrackerIIT.Models.Enums;
 using PersonalFinanceTrackerIIT.Models.FilterModels;
-using PersonalFinanceTrackerIIT.Persistence.Entities;
+using PersonalFinanceTrackerIIT.Models.ReportModels;
 using PersonalFinanceTrackerIIT.Persistence.Repositories;
 using PersonalFinanceTrackerIIT.Utilities;
 

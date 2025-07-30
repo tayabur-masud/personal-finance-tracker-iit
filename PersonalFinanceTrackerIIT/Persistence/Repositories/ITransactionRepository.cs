@@ -1,4 +1,5 @@
-﻿using PersonalFinanceTrackerIIT.Models.FilterModels;
+﻿using PersonalFinanceTrackerIIT.Models.Enums;
+using PersonalFinanceTrackerIIT.Models.FilterModels;
 using PersonalFinanceTrackerIIT.Persistence.Entities;
 
 namespace PersonalFinanceTrackerIIT.Persistence.Repositories;

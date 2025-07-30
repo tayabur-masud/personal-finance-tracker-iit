@@ -1,5 +1,7 @@
 ﻿using Mapster;
 using PersonalFinanceTrackerIIT.Models;
+using PersonalFinanceTrackerIIT.Models.Enums;
+using PersonalFinanceTrackerIIT.Models.ReportModels;
 using PersonalFinanceTrackerIIT.Persistence.Entities;
 
 namespace PersonalFinanceTrackerIIT.Mappings;

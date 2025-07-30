@@ -8,8 +8,6 @@ using PersonalFinanceTrackerIIT.UI.Budgets;
 using PersonalFinanceTrackerIIT.UI.Categories;
 using PersonalFinanceTrackerIIT.UI.Reports;
 using PersonalFinanceTrackerIIT.UI.Transactions;
-using SkiaSharp;
-using System.Threading.Tasks;
 
 namespace PersonalFinanceTrackerIIT.UI;
 

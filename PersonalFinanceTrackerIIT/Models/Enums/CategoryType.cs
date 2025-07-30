@@ -1,4 +1,4 @@
-﻿namespace PersonalFinanceTrackerIIT.Persistence.Entities;
+﻿namespace PersonalFinanceTrackerIIT.Models.Enums;
 
 public enum CategoryType
 {

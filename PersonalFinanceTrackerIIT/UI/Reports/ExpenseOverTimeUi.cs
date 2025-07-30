@@ -3,7 +3,9 @@ using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using LiveChartsCore.SkiaSharpView.WinForms;
 using PersonalFinanceTrackerIIT.Models;
+using PersonalFinanceTrackerIIT.Models.Enums;
 using PersonalFinanceTrackerIIT.Models.FilterModels;
+using PersonalFinanceTrackerIIT.Models.ReportModels;
 using PersonalFinanceTrackerIIT.Services;
 using SkiaSharp;
 

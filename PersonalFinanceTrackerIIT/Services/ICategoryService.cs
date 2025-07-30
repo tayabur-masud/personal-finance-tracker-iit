@@ -1,5 +1,5 @@
 ﻿using PersonalFinanceTrackerIIT.Models;
-using PersonalFinanceTrackerIIT.Persistence.Entities;
+using PersonalFinanceTrackerIIT.Models.Enums;
 
 namespace PersonalFinanceTrackerIIT.Services;
 

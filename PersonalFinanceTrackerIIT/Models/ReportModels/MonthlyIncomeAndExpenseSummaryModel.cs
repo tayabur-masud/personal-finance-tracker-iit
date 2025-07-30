@@ -1,6 +1,6 @@
 ﻿using PersonalFinanceTrackerIIT.Utilities;
 
-namespace PersonalFinanceTrackerIIT.Models;
+namespace PersonalFinanceTrackerIIT.Models.ReportModels;
 
 public class MonthlyIncomeAndExpenseSummaryModel
 {

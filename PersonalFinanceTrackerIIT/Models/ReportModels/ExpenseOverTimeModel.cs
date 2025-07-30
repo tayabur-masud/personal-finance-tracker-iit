@@ -1,4 +1,4 @@
-﻿namespace PersonalFinanceTrackerIIT.Models;
+﻿namespace PersonalFinanceTrackerIIT.Models.ReportModels;
 
 public class ExpenseOverTimeModel
 {

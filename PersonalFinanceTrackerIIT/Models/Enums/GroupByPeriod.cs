@@ -1,4 +1,4 @@
-﻿namespace PersonalFinanceTrackerIIT.Models;
+﻿namespace PersonalFinanceTrackerIIT.Models.Enums;
 
 public enum GroupByPeriod
 {
