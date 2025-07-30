@@ -299,7 +299,7 @@ public partial class MainUi : Form
             Values = reportData.Select(x => x.UtilizationPercentage).ToList(),
             Stroke = null,
             DataLabelsPaint = new SolidColorPaint(SKColors.Black),
-            Fill = new SolidColorPaint(SKColors.Cyan),
+            Fill = new SolidColorPaint(SKColors.Blue),
         };
 
         //var highUtilizationSeries = new ColumnSeries<double>()
