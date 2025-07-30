@@ -1,5 +1,4 @@
 ﻿using Mapster;
-using PersonalFinanceTrackerIIT.Models;
 using PersonalFinanceTrackerIIT.Models.Enums;
 using PersonalFinanceTrackerIIT.Models.FilterModels;
 using PersonalFinanceTrackerIIT.Models.ReportModels;
@@ -123,7 +122,16 @@ public class ReportService : IReportService
             });
         }
 
-        return reportData;
+        var summarizedOrders = reportData
+            .GroupBy(o => o.PeriodLabel)
+            .Select(g => new ExpenseOverTimeModel
+            {
+                PeriodLabel = g.Key,
+                TotalExpense = g.Sum(o => o.TotalExpense)
+            })
+            .ToList();
+
+        return summarizedOrders;
     }
 
     public async Task<IReadOnlyCollection<BudgetUtilizationReportModel>> GetBudgetUtilizationOfCurrentMonthAsync()
