@@ -43,24 +43,28 @@
             categoryWiseExpenseBreakdownToolStripMenuItem = new ToolStripMenuItem();
             budgetVsActualExpenseReportToolStripMenuItem = new ToolStripMenuItem();
             expenseOverTimeReportToolStripMenuItem = new ToolStripMenuItem();
-            label1 = new Label();
             currentBalanceLabel = new Label();
-            recentTransactionsGroupBox = new GroupBox();
-            recentTransactionsListView = new ListView();
-            recentDateColumnHeader = new ColumnHeader();
-            recentAmountColumnHeader = new ColumnHeader();
-            recentCategoryColumnHeader = new ColumnHeader();
-            recentDescriptionColumnHeader = new ColumnHeader();
             recentTransactionsToolTip = new ToolTip(components);
             expenseTrendGroupBox = new GroupBox();
             expenseTrendLineChartPanel = new Panel();
             refreshButton = new Button();
             budgetUtilizationGroupBox = new GroupBox();
             budgetUtilizationBarChartPanel = new Panel();
+            mainTableLayoutPanel = new TableLayoutPanel();
+            recentTransactionsGroupBox = new GroupBox();
+            recentTransactionsListView = new ListView();
+            recentDateColumnHeader = new ColumnHeader();
+            recentAmountColumnHeader = new ColumnHeader();
+            recentCategoryColumnHeader = new ColumnHeader();
+            recentDescriptionColumnHeader = new ColumnHeader();
+            label1 = new Label();
+            pictureBox1 = new PictureBox();
             mainMenuStrip.SuspendLayout();
-            recentTransactionsGroupBox.SuspendLayout();
             expenseTrendGroupBox.SuspendLayout();
             budgetUtilizationGroupBox.SuspendLayout();
+            mainTableLayoutPanel.SuspendLayout();
+            recentTransactionsGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // mainMenuStrip
@@ -157,18 +161,6 @@
             expenseOverTimeReportToolStripMenuItem.Text = "Expense Over Time Report";
             expenseOverTimeReportToolStripMenuItem.Click += expenseOverTimeReportToolStripMenuItem_Click;
             // 
-            // label1
-            // 
-            label1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            label1.AutoSize = true;
-            label1.Location = new Point(1404, 941);
-            label1.Margin = new Padding(2, 0, 2, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(194, 100);
-            label1.TabIndex = 2;
-            label1.Text = "Developed for\r\nAdvanced OOP Course\r\nExecutive MIT\r\nIIT, University of Dhaka";
-            label1.TextAlign = ContentAlignment.MiddleCenter;
-            // 
             // currentBalanceLabel
             // 
             currentBalanceLabel.AutoSize = true;
@@ -180,18 +172,94 @@
             currentBalanceLabel.TabIndex = 3;
             currentBalanceLabel.Text = "Current Balance: ";
             // 
+            // expenseTrendGroupBox
+            // 
+            expenseTrendGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            expenseTrendGroupBox.Controls.Add(expenseTrendLineChartPanel);
+            expenseTrendGroupBox.Location = new Point(2, 2);
+            expenseTrendGroupBox.Margin = new Padding(2);
+            expenseTrendGroupBox.Name = "expenseTrendGroupBox";
+            expenseTrendGroupBox.Padding = new Padding(2);
+            expenseTrendGroupBox.Size = new Size(787, 389);
+            expenseTrendGroupBox.TabIndex = 5;
+            expenseTrendGroupBox.TabStop = false;
+            expenseTrendGroupBox.Text = "Expense Trend (30 days)";
+            // 
+            // expenseTrendLineChartPanel
+            // 
+            expenseTrendLineChartPanel.Dock = DockStyle.Fill;
+            expenseTrendLineChartPanel.Location = new Point(2, 26);
+            expenseTrendLineChartPanel.Margin = new Padding(2);
+            expenseTrendLineChartPanel.Name = "expenseTrendLineChartPanel";
+            expenseTrendLineChartPanel.Size = new Size(783, 361);
+            expenseTrendLineChartPanel.TabIndex = 0;
+            // 
+            // refreshButton
+            // 
+            refreshButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            refreshButton.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            refreshButton.Location = new Point(1406, 41);
+            refreshButton.Margin = new Padding(4);
+            refreshButton.Name = "refreshButton";
+            refreshButton.Size = new Size(191, 65);
+            refreshButton.TabIndex = 6;
+            refreshButton.Text = "Refresh";
+            refreshButton.UseVisualStyleBackColor = true;
+            refreshButton.Click += refreshButton_Click;
+            // 
+            // budgetUtilizationGroupBox
+            // 
+            budgetUtilizationGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            budgetUtilizationGroupBox.Controls.Add(budgetUtilizationBarChartPanel);
+            budgetUtilizationGroupBox.Location = new Point(2, 395);
+            budgetUtilizationGroupBox.Margin = new Padding(2);
+            budgetUtilizationGroupBox.Name = "budgetUtilizationGroupBox";
+            budgetUtilizationGroupBox.Padding = new Padding(2);
+            budgetUtilizationGroupBox.Size = new Size(787, 390);
+            budgetUtilizationGroupBox.TabIndex = 6;
+            budgetUtilizationGroupBox.TabStop = false;
+            budgetUtilizationGroupBox.Text = "Budget Utilization (Current Month)";
+            // 
+            // budgetUtilizationBarChartPanel
+            // 
+            budgetUtilizationBarChartPanel.Dock = DockStyle.Fill;
+            budgetUtilizationBarChartPanel.Location = new Point(2, 26);
+            budgetUtilizationBarChartPanel.Margin = new Padding(2);
+            budgetUtilizationBarChartPanel.Name = "budgetUtilizationBarChartPanel";
+            budgetUtilizationBarChartPanel.Size = new Size(783, 362);
+            budgetUtilizationBarChartPanel.TabIndex = 0;
+            // 
+            // mainTableLayoutPanel
+            // 
+            mainTableLayoutPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            mainTableLayoutPanel.ColumnCount = 2;
+            mainTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            mainTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            mainTableLayoutPanel.Controls.Add(budgetUtilizationGroupBox, 0, 1);
+            mainTableLayoutPanel.Controls.Add(recentTransactionsGroupBox, 1, 0);
+            mainTableLayoutPanel.Controls.Add(expenseTrendGroupBox, 0, 0);
+            mainTableLayoutPanel.Controls.Add(label1, 1, 1);
+            mainTableLayoutPanel.Location = new Point(15, 113);
+            mainTableLayoutPanel.Name = "mainTableLayoutPanel";
+            mainTableLayoutPanel.RowCount = 2;
+            mainTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            mainTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            mainTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            mainTableLayoutPanel.Size = new Size(1582, 787);
+            mainTableLayoutPanel.TabIndex = 7;
+            // 
             // recentTransactionsGroupBox
             // 
-            recentTransactionsGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            recentTransactionsGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             recentTransactionsGroupBox.Controls.Add(recentTransactionsListView);
-            recentTransactionsGroupBox.Location = new Point(785, 98);
+            recentTransactionsGroupBox.Location = new Point(793, 2);
             recentTransactionsGroupBox.Margin = new Padding(2);
             recentTransactionsGroupBox.Name = "recentTransactionsGroupBox";
             recentTransactionsGroupBox.Padding = new Padding(2);
-            recentTransactionsGroupBox.Size = new Size(812, 381);
+            recentTransactionsGroupBox.Size = new Size(787, 389);
             recentTransactionsGroupBox.TabIndex = 4;
             recentTransactionsGroupBox.TabStop = false;
-            recentTransactionsGroupBox.Text = "Recent Transactions";
+            recentTransactionsGroupBox.Text = "Recent 10 Transactions";
             // 
             // recentTransactionsListView
             // 
@@ -202,7 +270,7 @@
             recentTransactionsListView.Location = new Point(2, 26);
             recentTransactionsListView.Margin = new Padding(2);
             recentTransactionsListView.Name = "recentTransactionsListView";
-            recentTransactionsListView.Size = new Size(808, 353);
+            recentTransactionsListView.Size = new Size(783, 361);
             recentTransactionsListView.TabIndex = 0;
             recentTransactionsListView.UseCompatibleStateImageBehavior = false;
             recentTransactionsListView.View = View.Details;
@@ -229,74 +297,38 @@
             recentDescriptionColumnHeader.Text = "Description";
             recentDescriptionColumnHeader.Width = 300;
             // 
-            // expenseTrendGroupBox
+            // label1
             // 
-            expenseTrendGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            expenseTrendGroupBox.Controls.Add(expenseTrendLineChartPanel);
-            expenseTrendGroupBox.Location = new Point(12, 98);
-            expenseTrendGroupBox.Margin = new Padding(2);
-            expenseTrendGroupBox.Name = "expenseTrendGroupBox";
-            expenseTrendGroupBox.Padding = new Padding(2);
-            expenseTrendGroupBox.Size = new Size(768, 381);
-            expenseTrendGroupBox.TabIndex = 5;
-            expenseTrendGroupBox.TabStop = false;
-            expenseTrendGroupBox.Text = "Expense Trend";
+            label1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            label1.AutoSize = true;
+            label1.Location = new Point(1386, 687);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(194, 100);
+            label1.TabIndex = 2;
+            label1.Text = "Developed for\r\nAdvanced OOP Course\r\nExecutive MIT\r\nIIT, University of Dhaka";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // expenseTrendLineChartPanel
+            // pictureBox1
             // 
-            expenseTrendLineChartPanel.Dock = DockStyle.Fill;
-            expenseTrendLineChartPanel.Location = new Point(2, 26);
-            expenseTrendLineChartPanel.Margin = new Padding(2);
-            expenseTrendLineChartPanel.Name = "expenseTrendLineChartPanel";
-            expenseTrendLineChartPanel.Size = new Size(764, 353);
-            expenseTrendLineChartPanel.TabIndex = 0;
-            // 
-            // refreshButton
-            // 
-            refreshButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            refreshButton.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            refreshButton.Location = new Point(1406, 41);
-            refreshButton.Margin = new Padding(4);
-            refreshButton.Name = "refreshButton";
-            refreshButton.Size = new Size(191, 65);
-            refreshButton.TabIndex = 6;
-            refreshButton.Text = "Refresh";
-            refreshButton.UseVisualStyleBackColor = true;
-            refreshButton.Click += refreshButton_Click;
-            // 
-            // budgetUtilizationGroupBox
-            // 
-            budgetUtilizationGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            budgetUtilizationGroupBox.Controls.Add(budgetUtilizationBarChartPanel);
-            budgetUtilizationGroupBox.Location = new Point(12, 483);
-            budgetUtilizationGroupBox.Margin = new Padding(2);
-            budgetUtilizationGroupBox.Name = "budgetUtilizationGroupBox";
-            budgetUtilizationGroupBox.Padding = new Padding(2);
-            budgetUtilizationGroupBox.Size = new Size(768, 460);
-            budgetUtilizationGroupBox.TabIndex = 6;
-            budgetUtilizationGroupBox.TabStop = false;
-            budgetUtilizationGroupBox.Text = "Budget Utilization";
-            // 
-            // budgetUtilizationBarChartPanel
-            // 
-            budgetUtilizationBarChartPanel.Dock = DockStyle.Fill;
-            budgetUtilizationBarChartPanel.Location = new Point(2, 26);
-            budgetUtilizationBarChartPanel.Margin = new Padding(2);
-            budgetUtilizationBarChartPanel.Name = "budgetUtilizationBarChartPanel";
-            budgetUtilizationBarChartPanel.Size = new Size(764, 432);
-            budgetUtilizationBarChartPanel.TabIndex = 0;
+            pictureBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(1406, 922);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(191, 75);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 8;
+            pictureBox1.TabStop = false;
             // 
             // MainUi
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1610, 1050);
-            Controls.Add(budgetUtilizationGroupBox);
+            ClientSize = new Size(1610, 1002);
+            Controls.Add(pictureBox1);
+            Controls.Add(mainTableLayoutPanel);
             Controls.Add(refreshButton);
-            Controls.Add(expenseTrendGroupBox);
-            Controls.Add(recentTransactionsGroupBox);
             Controls.Add(currentBalanceLabel);
-            Controls.Add(label1);
             Controls.Add(mainMenuStrip);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = mainMenuStrip;
@@ -308,9 +340,12 @@
             Load += MainUi_Load;
             mainMenuStrip.ResumeLayout(false);
             mainMenuStrip.PerformLayout();
-            recentTransactionsGroupBox.ResumeLayout(false);
             expenseTrendGroupBox.ResumeLayout(false);
             budgetUtilizationGroupBox.ResumeLayout(false);
+            mainTableLayoutPanel.ResumeLayout(false);
+            mainTableLayoutPanel.PerformLayout();
+            recentTransactionsGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -323,7 +358,6 @@
         private ToolStripMenuItem categoryToolStripMenuItem;
         private ToolStripMenuItem budgetToolStripMenuItem;
         private ToolStripMenuItem reportsToolStripMenuItem;
-        private Label label1;
         private ToolStripMenuItem categoryAddUpdateDeleteToolStripMenuItem;
         private ToolStripMenuItem monthlyIncomeExpenseSummaryToolStripMenuItem;
         private ToolStripMenuItem budgetAddUpdateDeleteToolStripMenuItem;
@@ -331,17 +365,20 @@
         private ToolStripMenuItem budgetVsActualExpenseReportToolStripMenuItem;
         private ToolStripMenuItem expenseOverTimeReportToolStripMenuItem;
         private Label currentBalanceLabel;
-        private GroupBox recentTransactionsGroupBox;
-        private ListView recentTransactionsListView;
-        private ColumnHeader recentDateColumnHeader;
-        private ColumnHeader recentAmountColumnHeader;
-        private ColumnHeader recentCategoryColumnHeader;
-        private ColumnHeader recentDescriptionColumnHeader;
         private ToolTip recentTransactionsToolTip;
         private GroupBox expenseTrendGroupBox;
         private Panel expenseTrendLineChartPanel;
         private Button refreshButton;
         private GroupBox budgetUtilizationGroupBox;
         private Panel budgetUtilizationBarChartPanel;
+        private TableLayoutPanel mainTableLayoutPanel;
+        private GroupBox recentTransactionsGroupBox;
+        private ListView recentTransactionsListView;
+        private ColumnHeader recentDateColumnHeader;
+        private ColumnHeader recentAmountColumnHeader;
+        private ColumnHeader recentCategoryColumnHeader;
+        private ColumnHeader recentDescriptionColumnHeader;
+        private Label label1;
+        private PictureBox pictureBox1;
     }
 }

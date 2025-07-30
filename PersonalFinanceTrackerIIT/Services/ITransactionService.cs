@@ -1,10 +1,11 @@
 ﻿using PersonalFinanceTrackerIIT.Models;
+using PersonalFinanceTrackerIIT.Models.Enums;
 
 namespace PersonalFinanceTrackerIIT.Services;
 
 public interface ITransactionService : IDisposable
 {
-    Task AddOrUpdateTransaction(TransactionModel model);
+    Task AddOrUpdateTransaction(TransactionModel model, CategoryType categoryType);
 
     Task DeleteTransaction(int id);
 

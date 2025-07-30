@@ -14,4 +14,6 @@ public interface IReportService : IDisposable
     Task<IReadOnlyCollection<ExpenseOverTimeModel>> GetExpenseOverTimeReport(ExpenseOverTimeFilterModel filterModel);
 
     Task<IReadOnlyCollection<ExpenseOverTimeModel>> GetExpenseTrendReportByDays(int days);
+
+    Task<IReadOnlyCollection<BudgetUtilizationReportModel>> GetBudgetUtilizationOfCurrentMonthAsync();
 }

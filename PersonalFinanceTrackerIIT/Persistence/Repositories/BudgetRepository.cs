@@ -13,11 +13,11 @@ public class BudgetRepository : RepositoryBase<Budget>, IBudgetRepository
 
     public async Task<IReadOnlyCollection<Budget>> GetByMonthYear(int month, int year)
     {
-        return await QueryWithIncludes.Where(x => x.Month == month && x.Year == year).ToListAsync();
+        return await QueryWithIncludes.AsNoTracking().Where(x => x.Month == month && x.Year == year).ToListAsync();
     }
 
     public async Task<Budget> GetByMonthYearCategory(int month, int year, int categoryId)
     {
-        return await QueryWithIncludes.FirstOrDefaultAsync(x => x.Month == month && x.Year == year && x.CategoryId == categoryId);
+        return await QueryWithIncludes.AsNoTracking().FirstOrDefaultAsync(x => x.Month == month && x.Year == year && x.CategoryId == categoryId);
     }
 }

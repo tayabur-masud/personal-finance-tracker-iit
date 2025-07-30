@@ -1,13 +1,22 @@
 ﻿using LiveChartsCore;
+using LiveChartsCore.Defaults;
+using LiveChartsCore.Kernel;
 using LiveChartsCore.Measure;
 using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Drawing;
+using LiveChartsCore.SkiaSharpView.Drawing.Geometries;
+using LiveChartsCore.SkiaSharpView.Painting;
 using LiveChartsCore.SkiaSharpView.WinForms;
 using Microsoft.Extensions.DependencyInjection;
+using PersonalFinanceTrackerIIT.Models.Enums;
 using PersonalFinanceTrackerIIT.Services;
 using PersonalFinanceTrackerIIT.UI.Budgets;
 using PersonalFinanceTrackerIIT.UI.Categories;
 using PersonalFinanceTrackerIIT.UI.Reports;
 using PersonalFinanceTrackerIIT.UI.Transactions;
+using SkiaSharp;
+using System.Windows.Forms;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PersonalFinanceTrackerIIT.UI;
 
@@ -144,7 +153,7 @@ public partial class MainUi : Form
 
             await LoadExpenseTrendChart(30);
 
-            InitializeProgressBarChart();
+            await InitializeProgressBarChart();
         }
         catch (Exception ex)
         {
@@ -193,7 +202,7 @@ public partial class MainUi : Form
 
             await LoadExpenseTrendChart(30);
 
-            InitializeProgressBarChart();
+            await InitializeProgressBarChart();
         }
         catch (Exception ex)
         {
@@ -263,65 +272,115 @@ public partial class MainUi : Form
         {
             new Axis
             {
-                Labels =  reportData.Select(x=>x.PeriodLabel).ToList()
+                Labels =  reportData.Select(x=>x.PeriodLabel).ToList(),
+                LabelsRotation = 45,
             }
         };
+
+        cartesianChart.ZoomMode = ZoomAndPanMode.Both;
 
         // Add chart to the Form
         expenseTrendLineChartPanel.Controls.Add(cartesianChart);
     }
 
-    private void InitializeProgressBarChart()
+    private async Task InitializeProgressBarChart()
     {
+        var reportService = _serviceProvider.GetRequiredService<IReportService>();
+
+        var reportData = await reportService.GetBudgetUtilizationOfCurrentMonthAsync();
+
+        var labels = reportData.Select(x => x.Category).ToList();
+
+        var colors = reportData.Select(x => GetColorForUtilization(x.UtilizationPercentage)).ToArray();
+
+        var utilizationSeries = new ColumnSeries<double>()
+        {
+            Name = "Utilization (%)",
+            Values = reportData.Select(x => x.UtilizationPercentage).ToList(),
+            Stroke = null,
+            DataLabelsPaint = new SolidColorPaint(SKColors.Black),
+            Fill = new SolidColorPaint(SKColors.Cyan),
+        };
+
+        //var highUtilizationSeries = new ColumnSeries<double>()
+        //{
+        //    Name = "High (≥90%)",
+        //    Values = reportData.Select(x => x.UtilizationPercentage >= 90 ? x.UtilizationPercentage : double.NaN).ToList(),
+        //    Fill = new SolidColorPaint(SKColors.Red),
+        //    Stroke = null,
+        //    DataLabelsPaint = new SolidColorPaint(SKColors.Black),
+        //};
+
+        //var mediumHighUtilizationSeries = new ColumnSeries<double>()
+        //{
+        //    Name = "Medium-High (70-89%)",
+        //    Values = reportData.Select(x => x.UtilizationPercentage >= 70 && x.UtilizationPercentage < 90 ? x.UtilizationPercentage : double.NaN).ToList(),
+        //    Fill = new SolidColorPaint(SKColors.Orange),
+        //    Stroke = null,
+        //    DataLabelsPaint = new SolidColorPaint(SKColors.Black),
+        //};
+
+        //var mediumUtilizationSeries = new ColumnSeries<double>()
+        //{
+        //    Name = "Medium (50-69%)",
+        //    Values = reportData.Select(x => x.UtilizationPercentage >= 50 && x.UtilizationPercentage < 70 ? x.UtilizationPercentage : double.NaN).ToList(),
+        //    Fill = new SolidColorPaint(SKColors.Yellow),
+        //    Stroke = null,
+        //    DataLabelsPaint = new SolidColorPaint(SKColors.Black),
+        //};
+
+        //var lowUtilizationSeries = new ColumnSeries<double>()
+        //{
+        //    Name = "Low (<50%)",
+        //    Values = reportData.Select(x => x.UtilizationPercentage < 50 ? x.UtilizationPercentage : double.NaN).ToList(),
+        //    Fill = new SolidColorPaint(SKColors.Green),
+        //    Stroke = null,
+        //    DataLabelsPaint = new SolidColorPaint(SKColors.Black),
+        //};
+
         var cartesianChart = new CartesianChart
         {
-            Dock = DockStyle.Fill
+            Series = new ISeries[] { utilizationSeries },
+            //Series = new ISeries[] { highUtilizationSeries, mediumHighUtilizationSeries, mediumUtilizationSeries, lowUtilizationSeries },
+            XAxes = new[]
+            {
+                new Axis
+                {
+                    Labels = labels,
+                    Name = "Category",
+                    UnitWidth = 1,
+                    MinStep = 1,
+                    LabelsRotation = 45,
+                }
+            },
+            YAxes = new[]
+            {
+                new Axis
+                {
+                    Name = "Utilization (%)",
+                    LabelsPaint = new SolidColorPaint(SKColors.Black),
+
+                }
+            },
+            LegendPosition = LegendPosition.Hidden,
+            Dock = DockStyle.Fill,
+            ZoomMode = ZoomAndPanMode.Both,
         };
 
-        var taskProgress = new double[] { 70, 45, 85, 30 };
-
-        var seriesList = new List<ISeries>();
-
-        for (int i = 0; i < taskProgress.Length; i++)
-        {
-            var progressBar = new RowSeries<double>
-            {
-                Values = new double[] { taskProgress[i] },
-                MaxBarWidth = 30,
-                Name = $"Task {i + 1}",
-                DataLabelsSize = 14,
-                DataLabelsPosition = LiveChartsCore.Measure.DataLabelsPosition.Middle,
-                DataLabelsFormatter = value => $"{value}%" // Formatter is the key!
-            };
-
-            seriesList.Add(progressBar);
-        }
-
-        cartesianChart.Series = seriesList;
-
-        cartesianChart.XAxes = new[]
-        {
-            new Axis
-            {
-                MinLimit = 0,
-                MaxLimit = 100,
-                Name = "Progress (%)"
-            }
-        };
-
-        cartesianChart.YAxes = new[]
-        {
-            new Axis
-            {
-                Labels = new[] { "Task 1", "Task 2", "Task 3", "Task 4" }
-            }
-        };
-
-        // Tooltip will automatically show the series name and value on hover.
-        // You can position it as needed:
-        cartesianChart.TooltipPosition = TooltipPosition.Right;
-
-        // Add Chart to Form
+        budgetUtilizationBarChartPanel.Controls.Clear();
         budgetUtilizationBarChartPanel.Controls.Add(cartesianChart);
+    }
+
+    // Helper method to determine color based on utilization percentage
+    private SolidColorPaint GetColorForUtilization(double utilization)
+    {
+        if (utilization >= 90)
+            return new SolidColorPaint(SKColors.Red);
+        else if (utilization >= 70)
+            return new SolidColorPaint(SKColors.Orange);
+        else if (utilization >= 50)
+            return new SolidColorPaint(SKColors.Yellow);
+        else
+            return new SolidColorPaint(SKColors.Green);
     }
 }

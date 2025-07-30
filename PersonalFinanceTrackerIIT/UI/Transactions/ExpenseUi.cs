@@ -62,7 +62,7 @@ public partial class ExpenseUi : Form
 
             transaction.Id = selectedTransactionId;
 
-            await _transactionService.AddOrUpdateTransaction(transaction);
+            await _transactionService.AddOrUpdateTransaction(transaction, CategoryType.Expense);
 
             MessageBox.Show("Expense saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -71,6 +71,11 @@ public partial class ExpenseUi : Form
             ResetInput();
         }
         catch (ArgumentException ex)
+        {
+            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+        catch (InvalidOperationException ex)
         {
             MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;

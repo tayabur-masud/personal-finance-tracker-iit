@@ -28,7 +28,7 @@ public partial class ExpenseOverTimeUi : Form
     {
         try
         {
-            var _categories = await _categoryService.GetCategories();
+            var _categories = await _categoryService.GetCategoriesByType(CategoryType.Expense);
             categoryCheckedListBox.Items.Clear();
             categoryCheckedListBox.DisplayMember = nameof(CategoryModel.Name);
             categoryCheckedListBox.ValueMember = nameof(CategoryModel.Id);
@@ -120,7 +120,7 @@ public partial class ExpenseOverTimeUi : Form
     {
         var labels = reportData.Select(x => x.PeriodLabel).ToList();
 
-        var actualSeries = new ColumnSeries<double>()
+        var expenseSeries = new ColumnSeries<double>()
         {
             Name = "Total Expense",
             Values = reportData.Select(x => x.TotalExpense).ToList(),
@@ -143,7 +143,7 @@ public partial class ExpenseOverTimeUi : Form
 
         var cartesianChart = new CartesianChart
         {
-            Series = new ISeries[] { actualSeries },
+            Series = new ISeries[] { expenseSeries },
             XAxes = new[]
             {
                 new Axis

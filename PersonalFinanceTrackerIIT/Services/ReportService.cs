@@ -1,4 +1,5 @@
 ﻿using Mapster;
+using PersonalFinanceTrackerIIT.Models;
 using PersonalFinanceTrackerIIT.Models.Enums;
 using PersonalFinanceTrackerIIT.Models.FilterModels;
 using PersonalFinanceTrackerIIT.Models.ReportModels;
@@ -14,7 +15,7 @@ public class ReportService : IReportService
     private readonly IBudgetRepository _budgetRepository;
 
     public ReportService(
-        ICategoryRepository categoryRepository, 
+        ICategoryRepository categoryRepository,
         ITransactionRepository transactionRepository,
         IBudgetRepository budgetRepository)
     {
@@ -27,7 +28,7 @@ public class ReportService : IReportService
     {
         var transactions = await _transactionRepository.GetTransactionsBySummaryFilterAsync(filterModel);
         var reportData = transactions.Adapt<IReadOnlyCollection<MonthlyIncomeAndExpenseSummaryModel>>();
-        return reportData;
+        return reportData.OrderBy(x => x.Date).ToList();
     }
 
     public async Task<IReadOnlyCollection<CategoryWiseExpenseBreakdownModel>> GetCategoryWiseExpenseBreakdownAsync(string monthId)
@@ -46,9 +47,13 @@ public class ReportService : IReportService
                 TotalExpense = transactions.Sum(x => x.Amount),
                 TransactionCount = transactions.Count,
             };
-            reportData.Add(data);
+
+            if (data.TotalExpense > 0)
+            {
+                reportData.Add(data);
+            }
         }
-        
+
         return reportData;
     }
 
@@ -109,13 +114,38 @@ public class ReportService : IReportService
         var transactions = await _transactionRepository.GetRecentTransactionsByDay(days);
         var reportData = new List<ExpenseOverTimeModel>();
 
-        foreach(var transaction in transactions)
+        foreach (var transaction in transactions)
         {
             reportData.Add(new ExpenseOverTimeModel
             {
                 PeriodLabel = transaction.Date.ToString(Constants.DateFormat),
                 TotalExpense = (double)transaction.Amount
             });
+        }
+
+        return reportData;
+    }
+
+    public async Task<IReadOnlyCollection<BudgetUtilizationReportModel>> GetBudgetUtilizationOfCurrentMonthAsync()
+    {
+        var reportData = new List<BudgetUtilizationReportModel>();
+        var categories = await _categoryRepository.GetByType(CategoryType.Expense);
+        foreach (var category in categories)
+        {
+            var transactions = await _transactionRepository.GetByMonthYearCategory(DateTime.Now.Month, DateTime.Now.Year, category.Id);
+            var budget = await _budgetRepository.GetByMonthYearCategory(DateTime.Now.Month, DateTime.Now.Year, category.Id);
+
+            var actualExpense = transactions is not null ? transactions.Sum(x => x.Amount) : 0;
+
+            if (actualExpense > 0)
+            {
+                var data = new BudgetUtilizationReportModel
+                {
+                    Category = category.Name,
+                    UtilizationPercentage = budget is null ? 0 : Math.Round((double)(actualExpense/budget.Amount) * 100, 2),
+                };
+                reportData.Add(data);
+            }
         }
 
         return reportData;

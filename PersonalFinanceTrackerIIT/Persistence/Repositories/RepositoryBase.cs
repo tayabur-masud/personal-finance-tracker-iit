@@ -20,38 +20,54 @@ public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : BaseEntit
 
     public async Task<T> Get(int id)
     {
-        return await Query.FirstOrDefaultAsync(x => x.Id == id);
+        return await Query.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
     }
 
     public async Task<T> GetWithIncludes(int id)
     {
-        return await QueryWithIncludes.FirstOrDefaultAsync(x => x.Id == id);
+        return await QueryWithIncludes.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
     }
 
     public async Task<IReadOnlyCollection<T>> GetList(IReadOnlyCollection<int> idList)
     {
-        return await Query.Where(x => idList.Contains(x.Id)).ToListAsync();
+        return await Query.AsNoTracking().Where(x => idList.Contains(x.Id)).ToListAsync();
     }
 
     public async Task<IReadOnlyCollection<T>> GetAll()
     {
-        return await QueryWithIncludes.ToListAsync();
+        return await QueryWithIncludes.AsNoTracking().ToListAsync();
     }
 
     public async Task<T> Add(T entity)
     {
-        entity.CreatedOn = DateTime.UtcNow;
+        entity.CreatedOn = DateTime.Now;
         await Collections.AddAsync(entity);
         await _context.SaveChangesAsync();
+        _context.Entry(entity).State = EntityState.Detached;
         return entity;
     }
 
     public async Task<T> Update(T entity)
     {
-        entity.LastModifiedOn = DateTime.UtcNow;
-        Collections.Update(entity);
+        entity.LastModifiedOn = DateTime.Now;
+
+        var trackedEntity = _context.ChangeTracker.Entries<T>()
+            .FirstOrDefault(e => e.Entity.Equals(entity));
+
+        if (trackedEntity == null)
+        {
+            Collections.Attach(entity);
+            _context.Entry(entity).State = EntityState.Modified;
+        }
+        else
+        {
+            trackedEntity.CurrentValues.SetValues(entity);
+        }
+
         await _context.SaveChangesAsync();
-        _context.Entry(entity).State = EntityState.Detached; // Detach to avoid tracking issues
+
+        _context.Entry(entity).State = EntityState.Detached;
+
         return entity;
     }
 

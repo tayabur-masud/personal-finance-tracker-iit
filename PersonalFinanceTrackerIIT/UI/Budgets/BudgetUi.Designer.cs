@@ -149,7 +149,7 @@ partial class BudgetUi
         budgetListGroupBox.Controls.Add(budgetListView);
         budgetListGroupBox.Location = new Point(13, 282);
         budgetListGroupBox.Name = "budgetListGroupBox";
-        budgetListGroupBox.Size = new Size(875, 283);
+        budgetListGroupBox.Size = new Size(875, 533);
         budgetListGroupBox.TabIndex = 1;
         budgetListGroupBox.TabStop = false;
         budgetListGroupBox.Text = "Budget List";
@@ -157,12 +157,13 @@ partial class BudgetUi
         // budgetListView
         // 
         budgetListView.Columns.AddRange(new ColumnHeader[] { monthColumnHeader, categoryColumnHeader, amountColumnHeader });
+        budgetListView.ContextMenuStrip = budgetContextMenuStrip;
         budgetListView.Dock = DockStyle.Fill;
         budgetListView.FullRowSelect = true;
         budgetListView.GridLines = true;
         budgetListView.Location = new Point(3, 27);
         budgetListView.Name = "budgetListView";
-        budgetListView.Size = new Size(869, 253);
+        budgetListView.Size = new Size(869, 503);
         budgetListView.TabIndex = 0;
         budgetListView.UseCompatibleStateImageBehavior = false;
         budgetListView.View = View.Details;
@@ -209,7 +210,7 @@ partial class BudgetUi
         AcceptButton = saveButton;
         AutoScaleDimensions = new SizeF(10F, 25F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(900, 579);
+        ClientSize = new Size(900, 829);
         Controls.Add(budgetListGroupBox);
         Controls.Add(budgetFormGroupBox);
         Icon = (Icon)resources.GetObject("$this.Icon");

@@ -9,15 +9,29 @@ namespace PersonalFinanceTrackerIIT.Services;
 public class TransactionService : ITransactionService
 {
     private readonly ITransactionRepository _transactionRepository;
+    private readonly IBudgetRepository _budgetRepository;
 
-    public TransactionService(ITransactionRepository transactionRepository)
+    public TransactionService(
+        ITransactionRepository transactionRepository,
+        IBudgetRepository budgetRepository)
     {
         _transactionRepository = transactionRepository;
+        _budgetRepository=budgetRepository;
     }
 
-    public async Task AddOrUpdateTransaction(TransactionModel model)
+    public async Task AddOrUpdateTransaction(TransactionModel model, CategoryType categoryType)
     {
         var transaction = model.Adapt<Transaction>();
+
+        if(categoryType == CategoryType.Expense)
+        {
+            var existingBudget = await _budgetRepository.GetByMonthYearCategory(transaction.Date.Month, transaction.Date.Year, transaction.CategoryId);
+
+            if (existingBudget is null )
+            {
+                throw new InvalidOperationException("Budget is not set for the specified category and month. Please set the budget first.");
+            }
+        }
 
         if (transaction.Id > 0)
         {
@@ -52,11 +66,6 @@ public class TransactionService : ITransactionService
         return await _transactionRepository.GetCurrentBalance();
     }
 
-    public void Dispose()
-    {
-        _transactionRepository.Dispose();
-    }
-
     public async Task<IReadOnlyCollection<TransactionModel>> GetLast10Transactions()
     {
         var transactions = await _transactionRepository.GetLast10Transactions();
@@ -69,5 +78,11 @@ public class TransactionService : ITransactionService
         var transactions = await _transactionRepository.GetRecentTransactionsByDay(days);
         var transactionModels = transactions.Adapt<IReadOnlyCollection<TransactionModel>>();
         return transactionModels;
+    }
+
+    public void Dispose()
+    {
+        _transactionRepository.Dispose();
+        _budgetRepository.Dispose();
     }
 }

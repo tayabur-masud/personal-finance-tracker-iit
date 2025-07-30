@@ -20,7 +20,7 @@ public class BudgetService : IBudgetService
 
         var existingBudget = await _budgetRepository.GetByMonthYearCategory(budget.Month, budget.Year, budget.CategoryId);
 
-        if (existingBudget is not null)
+        if (existingBudget is not null && existingBudget.Id != budget.Id)
         {
             throw new InvalidOperationException("Budget for the specified month and category already exists.");
         }
@@ -53,7 +53,7 @@ public class BudgetService : IBudgetService
         var budgets = await _budgetRepository.GetByMonthYear(month, year);
 
         var budgetModels = budgets.Adapt<IReadOnlyCollection<BudgetModel>>();
-        return budgetModels;
+        return budgetModels.OrderBy(x => x.CategoryName).ToList();
     }
 
     public void Dispose()

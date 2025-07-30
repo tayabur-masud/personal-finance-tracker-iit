@@ -266,6 +266,7 @@
             Name = "IncomeUi";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Income";
+            WindowState = FormWindowState.Maximized;
             FormClosed += IncomeUi_FormClosed;
             Load += IncomeUi_Load;
             groupBox1.ResumeLayout(false);

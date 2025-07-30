@@ -44,7 +44,7 @@ public class CategoryService : ICategoryService
     {
         var categories = await _categoryRepository.GetAll();
         var categoryModels = categories.Adapt<IReadOnlyCollection<CategoryModel>>();
-        return categoryModels;
+        return categoryModels.OrderBy(x => x.Name).ToList();
     }
 
     public async Task<IReadOnlyCollection<CategoryModel>> GetCategoriesByType(CategoryType type)

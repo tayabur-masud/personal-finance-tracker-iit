@@ -266,6 +266,7 @@
             Name = "ExpenseUi";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Expense";
+            WindowState = FormWindowState.Maximized;
             FormClosing += ExpenseUi_FormClosing;
             Load += ExpenseUi_Load;
             groupBox1.ResumeLayout(false);

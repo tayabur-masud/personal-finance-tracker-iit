@@ -110,10 +110,10 @@ partial class CategoryUi
         categoryListView.ContextMenuStrip = categoryContextMenuStrip;
         categoryListView.FullRowSelect = true;
         categoryListView.GridLines = true;
-        categoryListView.Location = new Point(20, 339);
+        categoryListView.Location = new Point(11, 339);
         categoryListView.Margin = new Padding(2);
         categoryListView.Name = "categoryListView";
-        categoryListView.Size = new Size(992, 293);
+        categoryListView.Size = new Size(1002, 483);
         categoryListView.TabIndex = 5;
         categoryListView.UseCompatibleStateImageBehavior = false;
         categoryListView.View = View.Details;
@@ -197,7 +197,7 @@ partial class CategoryUi
         AcceptButton = saveButton;
         AutoScaleDimensions = new SizeF(10F, 25F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(1024, 748);
+        ClientSize = new Size(1024, 833);
         Controls.Add(expenseRadioButton);
         Controls.Add(incomeRadioButton);
         Controls.Add(resetButton);

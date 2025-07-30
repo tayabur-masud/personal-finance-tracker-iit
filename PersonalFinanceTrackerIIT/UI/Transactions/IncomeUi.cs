@@ -62,7 +62,7 @@ public partial class IncomeUi : Form
 
             transaction.Id = selectedTransactionId;
 
-            await _transactionService.AddOrUpdateTransaction(transaction);
+            await _transactionService.AddOrUpdateTransaction(transaction, CategoryType.Income);
 
             MessageBox.Show("Income saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

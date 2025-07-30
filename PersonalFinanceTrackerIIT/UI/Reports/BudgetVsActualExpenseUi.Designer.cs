@@ -74,6 +74,7 @@ partial class BudgetVsActualExpenseUi
         Name = "BudgetVsActualExpenseUi";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Budget vs Actual Expense Report";
+        WindowState = FormWindowState.Maximized;
         Load += BudgetVsActualExpenseUi_Load;
         ResumeLayout(false);
         PerformLayout();
