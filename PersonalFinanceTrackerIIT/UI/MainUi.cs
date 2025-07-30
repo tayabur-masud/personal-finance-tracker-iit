@@ -1,22 +1,15 @@
 ﻿using LiveChartsCore;
-using LiveChartsCore.Defaults;
-using LiveChartsCore.Kernel;
 using LiveChartsCore.Measure;
 using LiveChartsCore.SkiaSharpView;
-using LiveChartsCore.SkiaSharpView.Drawing;
-using LiveChartsCore.SkiaSharpView.Drawing.Geometries;
 using LiveChartsCore.SkiaSharpView.Painting;
 using LiveChartsCore.SkiaSharpView.WinForms;
 using Microsoft.Extensions.DependencyInjection;
-using PersonalFinanceTrackerIIT.Models.Enums;
 using PersonalFinanceTrackerIIT.Services;
 using PersonalFinanceTrackerIIT.UI.Budgets;
 using PersonalFinanceTrackerIIT.UI.Categories;
 using PersonalFinanceTrackerIIT.UI.Reports;
 using PersonalFinanceTrackerIIT.UI.Transactions;
 using SkiaSharp;
-using System.Windows.Forms;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PersonalFinanceTrackerIIT.UI;
 
@@ -251,23 +244,19 @@ public partial class MainUi : Form
         var reportService = _serviceProvider.GetRequiredService<IReportService>();
 
         var reportData = await reportService.GetExpenseTrendReportByDays(days);
-        // Create the CartesianChart control
         var cartesianChart = new CartesianChart
         {
             Dock = DockStyle.Fill
         };
 
-        // Sample data for line chart
         var lineSeries = new LineSeries<double>
         {
             Values = reportData.Select(x => x.TotalExpense).ToList(),
             Name = "Total Expense Amount (BDT)"
         };
 
-        // Assign the Series to the chart
         cartesianChart.Series = new ISeries[] { lineSeries };
 
-        // Optional: Configure Axes Labels
         cartesianChart.XAxes = new[]
         {
             new Axis
@@ -279,7 +268,6 @@ public partial class MainUi : Form
 
         cartesianChart.ZoomMode = ZoomAndPanMode.Both;
 
-        // Add chart to the Form
         expenseTrendLineChartPanel.Controls.Add(cartesianChart);
     }
 
@@ -291,8 +279,6 @@ public partial class MainUi : Form
 
         var labels = reportData.Select(x => x.Category).ToList();
 
-        var colors = reportData.Select(x => GetColorForUtilization(x.UtilizationPercentage)).ToArray();
-
         var utilizationSeries = new ColumnSeries<double>()
         {
             Name = "Utilization (%)",
@@ -302,46 +288,9 @@ public partial class MainUi : Form
             Fill = new SolidColorPaint(SKColors.Blue),
         };
 
-        //var highUtilizationSeries = new ColumnSeries<double>()
-        //{
-        //    Name = "High (≥90%)",
-        //    Values = reportData.Select(x => x.UtilizationPercentage >= 90 ? x.UtilizationPercentage : double.NaN).ToList(),
-        //    Fill = new SolidColorPaint(SKColors.Red),
-        //    Stroke = null,
-        //    DataLabelsPaint = new SolidColorPaint(SKColors.Black),
-        //};
-
-        //var mediumHighUtilizationSeries = new ColumnSeries<double>()
-        //{
-        //    Name = "Medium-High (70-89%)",
-        //    Values = reportData.Select(x => x.UtilizationPercentage >= 70 && x.UtilizationPercentage < 90 ? x.UtilizationPercentage : double.NaN).ToList(),
-        //    Fill = new SolidColorPaint(SKColors.Orange),
-        //    Stroke = null,
-        //    DataLabelsPaint = new SolidColorPaint(SKColors.Black),
-        //};
-
-        //var mediumUtilizationSeries = new ColumnSeries<double>()
-        //{
-        //    Name = "Medium (50-69%)",
-        //    Values = reportData.Select(x => x.UtilizationPercentage >= 50 && x.UtilizationPercentage < 70 ? x.UtilizationPercentage : double.NaN).ToList(),
-        //    Fill = new SolidColorPaint(SKColors.Yellow),
-        //    Stroke = null,
-        //    DataLabelsPaint = new SolidColorPaint(SKColors.Black),
-        //};
-
-        //var lowUtilizationSeries = new ColumnSeries<double>()
-        //{
-        //    Name = "Low (<50%)",
-        //    Values = reportData.Select(x => x.UtilizationPercentage < 50 ? x.UtilizationPercentage : double.NaN).ToList(),
-        //    Fill = new SolidColorPaint(SKColors.Green),
-        //    Stroke = null,
-        //    DataLabelsPaint = new SolidColorPaint(SKColors.Black),
-        //};
-
         var cartesianChart = new CartesianChart
         {
             Series = new ISeries[] { utilizationSeries },
-            //Series = new ISeries[] { highUtilizationSeries, mediumHighUtilizationSeries, mediumUtilizationSeries, lowUtilizationSeries },
             XAxes = new[]
             {
                 new Axis
@@ -369,18 +318,5 @@ public partial class MainUi : Form
 
         budgetUtilizationBarChartPanel.Controls.Clear();
         budgetUtilizationBarChartPanel.Controls.Add(cartesianChart);
-    }
-
-    // Helper method to determine color based on utilization percentage
-    private SolidColorPaint GetColorForUtilization(double utilization)
-    {
-        if (utilization >= 90)
-            return new SolidColorPaint(SKColors.Red);
-        else if (utilization >= 70)
-            return new SolidColorPaint(SKColors.Orange);
-        else if (utilization >= 50)
-            return new SolidColorPaint(SKColors.Yellow);
-        else
-            return new SolidColorPaint(SKColors.Green);
     }
 }
